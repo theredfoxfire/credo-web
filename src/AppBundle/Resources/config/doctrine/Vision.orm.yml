@@ -1,0 +1,15 @@
+AppBundle\Entity\Vision:
+ type: entity
+ table: vision
+ repositoryClass: AppBundle\Repository\VisionRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  title:
+   type: string
+  vision:
+   type: text
+  largeImage:
+   type: string

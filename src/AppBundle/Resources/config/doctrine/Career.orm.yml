@@ -1,0 +1,15 @@
+AppBundle\Entity\Career:
+ type: entity
+ table: career
+ repositoryClass: AppBundle\Repository\CareerRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  title:
+   type: string
+  decsription:
+   type: text
+  largeImage:
+   type: string

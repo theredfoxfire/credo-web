@@ -1,0 +1,17 @@
+AppBundle\Entity\History:
+ type: entity
+ table: history
+ repositoryClass: AppBundle\Repository\HistoryRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  title:
+   type: string
+  story:
+   type: text
+  largeImage:
+   type: string
+  smallImage:
+   type: string

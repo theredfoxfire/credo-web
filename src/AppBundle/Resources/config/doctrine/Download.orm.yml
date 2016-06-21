@@ -1,0 +1,19 @@
+AppBundle\Entity\Download:
+ type: entity
+ table: download
+ repositoryClass: AppBundle\Repository\DownloadRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  title:
+   type: string
+  subtitle:
+   type: string
+  description:
+   type: text
+  file:
+   type: string
+  smallImage:
+   type: string

@@ -1,0 +1,15 @@
+AppBundle\Entity\Mission:
+ type: entity
+ table: mission
+ repositoryClass: AppBundle\Repository\MissionRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  title:
+   type: string
+  mission:
+   type: text
+  largeImage:
+   type: string

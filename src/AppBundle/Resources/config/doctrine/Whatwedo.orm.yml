@@ -1,0 +1,15 @@
+AppBundle\Entity\Whatwedo:
+ type: entity
+ table: whatwedo
+ repositoryClass: AppBundle\Repository\WhatwedoRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  title:
+   type: string
+  whatwedo:
+   type: text
+  largeImage:
+   type: string
