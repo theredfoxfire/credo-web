@@ -1,0 +1,24 @@
+contactus_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Contactus:index" }
+    methods:  GET
+
+contactus_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Contactus:show" }
+    methods:  GET
+
+contactus_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Contactus:new" }
+    methods:  [GET, POST]
+
+contactus_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Contactus:edit" }
+    methods:  [GET, POST]
+
+contactus_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Contactus:delete" }
+    methods:  DELETE

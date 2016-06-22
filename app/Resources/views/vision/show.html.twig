@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Vision</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vision.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ vision.title }}</td>
+            </tr>
+            <tr>
+                <th>Vision</th>
+                <td>{{ vision.vision }}</td>
+            </tr>
+            <tr>
+                <th>Largeimage</th>
+                <td>{{ vision.largeImage }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('vision_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('vision_edit', { 'id': vision.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

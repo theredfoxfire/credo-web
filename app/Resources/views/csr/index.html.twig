@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Csr list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Organitation</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Facisimile</th>
+                <th>Largeimage</th>
+                <th>Mediumimage</th>
+                <th>Smallimage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for csr in csrs %}
+            <tr>
+                <td><a href="{{ path('csr_show', { 'id': csr.id }) }}">{{ csr.id }}</a></td>
+                <td>{{ csr.title }}</td>
+                <td>{{ csr.description }}</td>
+                <td>{{ csr.organitation }}</td>
+                <td>{{ csr.address }}</td>
+                <td>{{ csr.phone }}</td>
+                <td>{{ csr.facisimile }}</td>
+                <td>{{ csr.largeImage }}</td>
+                <td>{{ csr.mediumImage }}</td>
+                <td>{{ csr.smallImage }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('csr_show', { 'id': csr.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('csr_edit', { 'id': csr.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('csr_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

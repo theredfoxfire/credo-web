@@ -1,0 +1,17 @@
+AppBundle\Entity\Messages:
+ type: entity
+ table: messages
+ repositoryClass: AppBundle\Repository\MessagesRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  name:
+   type: string
+  description:
+   type: string
+  profileImage:
+   type: string
+  messages:
+   type: text

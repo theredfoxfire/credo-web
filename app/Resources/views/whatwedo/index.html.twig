@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Whatwedo list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Whatwedo</th>
+                <th>Largeimage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for whatwedo in whatwedos %}
+            <tr>
+                <td><a href="{{ path('whatwedo_show', { 'id': whatwedo.id }) }}">{{ whatwedo.id }}</a></td>
+                <td>{{ whatwedo.title }}</td>
+                <td>{{ whatwedo.whatwedo }}</td>
+                <td>{{ whatwedo.largeImage }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('whatwedo_show', { 'id': whatwedo.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('whatwedo_edit', { 'id': whatwedo.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('whatwedo_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

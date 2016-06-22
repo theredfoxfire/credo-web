@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Branches list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Branchename</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Facisimile</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for branch in branches %}
+            <tr>
+                <td><a href="{{ path('branches_show', { 'id': branch.id }) }}">{{ branch.id }}</a></td>
+                <td>{{ branch.brancheName }}</td>
+                <td>{{ branch.address }}</td>
+                <td>{{ branch.phone }}</td>
+                <td>{{ branch.facisimile }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('branches_show', { 'id': branch.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('branches_edit', { 'id': branch.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('branches_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,27 @@
+AppBundle\Entity\Csr:
+ type: entity
+ table: csr
+ repositoryClass: AppBundle\Repository\CsrRepository
+ id:
+  id:
+   type: integer
+   generator: { strategy: AUTO }
+ fields:
+  title:
+   type: string
+  description:
+   type: text
+  organitation:
+   type: string
+  address:
+   type: text
+  phone:
+   type: string
+  facisimile:
+   type: string
+  largeImage:
+   type: string
+  mediumImage:
+   type: string
+  smallImage:
+   type: string

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Messages list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Profileimage</th>
+                <th>Messages</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td><a href="{{ path('messages_show', { 'id': message.id }) }}">{{ message.id }}</a></td>
+                <td>{{ message.name }}</td>
+                <td>{{ message.description }}</td>
+                <td>{{ message.profileImage }}</td>
+                <td>{{ message.messages }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('messages_show', { 'id': message.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('messages_edit', { 'id': message.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('messages_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

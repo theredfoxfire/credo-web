@@ -1,0 +1,24 @@
+whoweare_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Whoweare:index" }
+    methods:  GET
+
+whoweare_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Whoweare:show" }
+    methods:  GET
+
+whoweare_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Whoweare:new" }
+    methods:  [GET, POST]
+
+whoweare_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Whoweare:edit" }
+    methods:  [GET, POST]
+
+whoweare_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Whoweare:delete" }
+    methods:  DELETE

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>News list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Story</th>
+                <th>Largeimage</th>
+                <th>Smallimage</th>
+                <th>Datetime</th>
+                <th>By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for news in news %}
+            <tr>
+                <td><a href="{{ path('news_show', { 'id': news.id }) }}">{{ news.id }}</a></td>
+                <td>{{ news.title }}</td>
+                <td>{{ news.subtitle }}</td>
+                <td>{{ news.story }}</td>
+                <td>{{ news.largeImage }}</td>
+                <td>{{ news.smallImage }}</td>
+                <td>{% if news.dateTime %}{{ news.dateTime|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ news.by }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('news_show', { 'id': news.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('news_edit', { 'id': news.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('news_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

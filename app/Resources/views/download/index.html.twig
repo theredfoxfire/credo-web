@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Download list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Subtitle</th>
+                <th>Description</th>
+                <th>File</th>
+                <th>Smallimage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for download in downloads %}
+            <tr>
+                <td><a href="{{ path('download_show', { 'id': download.id }) }}">{{ download.id }}</a></td>
+                <td>{{ download.title }}</td>
+                <td>{{ download.subtitle }}</td>
+                <td>{{ download.description }}</td>
+                <td>{{ download.file }}</td>
+                <td>{{ download.smallImage }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('download_show', { 'id': download.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('download_edit', { 'id': download.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('download_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

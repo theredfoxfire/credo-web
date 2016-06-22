@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Overview list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Story</th>
+                <th>Largeimage</th>
+                <th>Smallimage</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for overview in overviews %}
+            <tr>
+                <td><a href="{{ path('overview_show', { 'id': overview.id }) }}">{{ overview.id }}</a></td>
+                <td>{{ overview.title }}</td>
+                <td>{{ overview.story }}</td>
+                <td>{{ overview.largeImage }}</td>
+                <td>{{ overview.smallImage }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('overview_show', { 'id': overview.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('overview_edit', { 'id': overview.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('overview_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

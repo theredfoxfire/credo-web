@@ -1,0 +1,24 @@
+branches_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Branches:index" }
+    methods:  GET
+
+branches_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Branches:show" }
+    methods:  GET
+
+branches_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Branches:new" }
+    methods:  [GET, POST]
+
+branches_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Branches:edit" }
+    methods:  [GET, POST]
+
+branches_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Branches:delete" }
+    methods:  DELETE

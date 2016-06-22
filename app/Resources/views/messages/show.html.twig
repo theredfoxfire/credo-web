@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Messages</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ message.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ message.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ message.description }}</td>
+            </tr>
+            <tr>
+                <th>Profileimage</th>
+                <td>{{ message.profileImage }}</td>
+            </tr>
+            <tr>
+                <th>Messages</th>
+                <td>{{ message.messages }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('messages_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('messages_edit', { 'id': message.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

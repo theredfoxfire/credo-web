@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Unites</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ unite.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ unite.title }}</td>
+            </tr>
+            <tr>
+                <th>Story</th>
+                <td>{{ unite.story }}</td>
+            </tr>
+            <tr>
+                <th>Largeimage</th>
+                <td>{{ unite.largeImage }}</td>
+            </tr>
+            <tr>
+                <th>Smallimage</th>
+                <td>{{ unite.smallImage }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('unites_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('unites_edit', { 'id': unite.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

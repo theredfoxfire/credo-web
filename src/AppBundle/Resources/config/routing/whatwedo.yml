@@ -1,0 +1,24 @@
+whatwedo_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Whatwedo:index" }
+    methods:  GET
+
+whatwedo_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Whatwedo:show" }
+    methods:  GET
+
+whatwedo_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Whatwedo:new" }
+    methods:  [GET, POST]
+
+whatwedo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Whatwedo:edit" }
+    methods:  [GET, POST]
+
+whatwedo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Whatwedo:delete" }
+    methods:  DELETE
