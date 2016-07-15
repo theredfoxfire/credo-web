@@ -1,24 +1,24 @@
 whatwedo_index:
-    path:     /
+    path:     /whatwedo/
     defaults: { _controller: "AppBundle:Whatwedo:index" }
     methods:  GET
 
 whatwedo_show:
-    path:     /{id}/show
+    path:     /whatwedo/{id}/show
     defaults: { _controller: "AppBundle:Whatwedo:show" }
     methods:  GET
 
 whatwedo_new:
-    path:     /new
+    path:     /admin/whatwedo/new
     defaults: { _controller: "AppBundle:Whatwedo:new" }
     methods:  [GET, POST]
 
 whatwedo_edit:
-    path:     /{id}/edit
+    path:     /admin/whatwedo/{id}/edit
     defaults: { _controller: "AppBundle:Whatwedo:edit" }
     methods:  [GET, POST]
 
 whatwedo_delete:
-    path:     /{id}/delete
+    path:     /admin/whatwedo/{id}/delete
     defaults: { _controller: "AppBundle:Whatwedo:delete" }
     methods:  DELETE

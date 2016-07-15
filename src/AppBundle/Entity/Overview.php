@@ -139,4 +139,3 @@ class Overview
         return $this->smallImage;
     }
 }
-

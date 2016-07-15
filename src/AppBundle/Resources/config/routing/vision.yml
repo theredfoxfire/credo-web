@@ -1,24 +1,24 @@
 vision_index:
-    path:     /
+    path:     /vision/
     defaults: { _controller: "AppBundle:Vision:index" }
     methods:  GET
 
 vision_show:
-    path:     /{id}/show
+    path:     /vision/{id}/show
     defaults: { _controller: "AppBundle:Vision:show" }
     methods:  GET
 
 vision_new:
-    path:     /new
+    path:     /admin/vision/new
     defaults: { _controller: "AppBundle:Vision:new" }
     methods:  [GET, POST]
 
 vision_edit:
-    path:     /{id}/edit
+    path:     /admin/vision/{id}/edit
     defaults: { _controller: "AppBundle:Vision:edit" }
     methods:  [GET, POST]
 
 vision_delete:
-    path:     /{id}/delete
+    path:     /admin/vision/{id}/delete
     defaults: { _controller: "AppBundle:Vision:delete" }
     methods:  DELETE

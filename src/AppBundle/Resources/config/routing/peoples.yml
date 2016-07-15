@@ -1,24 +1,24 @@
 peoples_index:
-    path:     /
+    path:     /peoples/
     defaults: { _controller: "AppBundle:Peoples:index" }
     methods:  GET
 
 peoples_show:
-    path:     /{id}/show
+    path:     /peoples/{id}/show
     defaults: { _controller: "AppBundle:Peoples:show" }
     methods:  GET
 
 peoples_new:
-    path:     /new
+    path:     /admin/peoples/new
     defaults: { _controller: "AppBundle:Peoples:new" }
     methods:  [GET, POST]
 
 peoples_edit:
-    path:     /{id}/edit
+    path:     /admin/peoples/{id}/edit
     defaults: { _controller: "AppBundle:Peoples:edit" }
     methods:  [GET, POST]
 
 peoples_delete:
-    path:     /{id}/delete
+    path:     /admin/peoples/{id}/delete
     defaults: { _controller: "AppBundle:Peoples:delete" }
     methods:  DELETE

@@ -139,4 +139,3 @@ class Unites
         return $this->smallImage;
     }
 }
-

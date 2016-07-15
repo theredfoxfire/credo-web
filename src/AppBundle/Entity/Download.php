@@ -168,4 +168,3 @@ class Download
         return $this->smallImage;
     }
 }
-

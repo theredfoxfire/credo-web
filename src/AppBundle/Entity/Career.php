@@ -110,4 +110,3 @@ class Career
         return $this->largeImage;
     }
 }
-

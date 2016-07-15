@@ -139,4 +139,3 @@ class Branches
         return $this->facisimile;
     }
 }
-

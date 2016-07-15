@@ -110,4 +110,3 @@ class Whoweare
         return $this->largeImage;
     }
 }
-

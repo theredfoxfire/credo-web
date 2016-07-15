@@ -139,4 +139,3 @@ class Messages
         return $this->messages;
     }
 }
-

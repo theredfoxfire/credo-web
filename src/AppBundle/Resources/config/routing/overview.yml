@@ -1,24 +1,24 @@
 overview_index:
-    path:     /
+    path:     /overview/
     defaults: { _controller: "AppBundle:Overview:index" }
     methods:  GET
 
 overview_show:
-    path:     /{id}/show
+    path:     /overview/{id}/show
     defaults: { _controller: "AppBundle:Overview:show" }
     methods:  GET
 
 overview_new:
-    path:     /new
+    path:     /admin/overview/new
     defaults: { _controller: "AppBundle:Overview:new" }
     methods:  [GET, POST]
 
 overview_edit:
-    path:     /{id}/edit
+    path:     /admin/overview/{id}/edit
     defaults: { _controller: "AppBundle:Overview:edit" }
     methods:  [GET, POST]
 
 overview_delete:
-    path:     /{id}/delete
+    path:     /admin/overview/{id}/delete
     defaults: { _controller: "AppBundle:Overview:delete" }
     methods:  DELETE

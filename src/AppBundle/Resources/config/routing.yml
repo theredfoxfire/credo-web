@@ -1,45 +1,45 @@
 app_branches:
     resource: "@AppBundle/Resources/config/routing/branches.yml"
-    prefix:   /branches
+    prefix:   /
 app_career:
     resource: "@AppBundle/Resources/config/routing/career.yml"
-    prefix:   /career
+    prefix:   /
 app_contactus:
     resource: "@AppBundle/Resources/config/routing/contactus.yml"
-    prefix:   /contactus
+    prefix:   /
 app_csr:
     resource: "@AppBundle/Resources/config/routing/csr.yml"
-    prefix:   /csr
+    prefix:   /
 app_download:
     resource: "@AppBundle/Resources/config/routing/download.yml"
-    prefix:   /download
+    prefix:   /
 app_history:
     resource: "@AppBundle/Resources/config/routing/history.yml"
-    prefix:   /history
+    prefix:   /
 app_messages:
     resource: "@AppBundle/Resources/config/routing/messages.yml"
-    prefix:   /messages
+    prefix:   /
 app_mission:
     resource: "@AppBundle/Resources/config/routing/mission.yml"
-    prefix:   /mission
+    prefix:   /
 app_news:
     resource: "@AppBundle/Resources/config/routing/news.yml"
-    prefix:   /news
+    prefix:   /
 app_overview:
     resource: "@AppBundle/Resources/config/routing/overview.yml"
-    prefix:   /overview
+    prefix:   /
 app_peoples:
     resource: "@AppBundle/Resources/config/routing/peoples.yml"
-    prefix:   /peoples
+    prefix:   /
 app_unites:
     resource: "@AppBundle/Resources/config/routing/unites.yml"
-    prefix:   /unites
+    prefix:   /
 app_vision:
     resource: "@AppBundle/Resources/config/routing/vision.yml"
-    prefix:   /vision
+    prefix:   /
 app_whatwedo:
     resource: "@AppBundle/Resources/config/routing/whatwedo.yml"
-    prefix:   /whatwedo
+    prefix:   /
 app_whoweare:
     resource: "@AppBundle/Resources/config/routing/whoweare.yml"
-    prefix:   /whoweare
+    prefix:   /

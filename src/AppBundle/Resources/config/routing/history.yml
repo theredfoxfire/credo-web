@@ -1,24 +1,24 @@
 history_index:
-    path:     /
+    path:     /history/
     defaults: { _controller: "AppBundle:History:index" }
     methods:  GET
 
 history_show:
-    path:     /{id}/show
+    path:     /history/{id}/show
     defaults: { _controller: "AppBundle:History:show" }
     methods:  GET
 
 history_new:
-    path:     /new
+    path:     /admin/history/new
     defaults: { _controller: "AppBundle:History:new" }
     methods:  [GET, POST]
 
 history_edit:
-    path:     /{id}/edit
+    path:     /admin/history/{id}/edit
     defaults: { _controller: "AppBundle:History:edit" }
     methods:  [GET, POST]
 
 history_delete:
-    path:     /{id}/delete
+    path:     /admin/history/{id}/delete
     defaults: { _controller: "AppBundle:History:delete" }
     methods:  DELETE

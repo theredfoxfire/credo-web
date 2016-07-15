@@ -1,24 +1,24 @@
 unites_index:
-    path:     /
+    path:     /unites/
     defaults: { _controller: "AppBundle:Unites:index" }
     methods:  GET
 
 unites_show:
-    path:     /{id}/show
+    path:     /unites/{id}/show
     defaults: { _controller: "AppBundle:Unites:show" }
     methods:  GET
 
 unites_new:
-    path:     /new
+    path:     /admin/unites/new
     defaults: { _controller: "AppBundle:Unites:new" }
     methods:  [GET, POST]
 
 unites_edit:
-    path:     /{id}/edit
+    path:     /admin/unites/{id}/edit
     defaults: { _controller: "AppBundle:Unites:edit" }
     methods:  [GET, POST]
 
 unites_delete:
-    path:     /{id}/delete
+    path:     /admin/unites/{id}/delete
     defaults: { _controller: "AppBundle:Unites:delete" }
     methods:  DELETE

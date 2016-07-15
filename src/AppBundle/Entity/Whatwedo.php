@@ -110,4 +110,3 @@ class Whatwedo
         return $this->largeImage;
     }
 }
-

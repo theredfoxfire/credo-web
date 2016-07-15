@@ -139,4 +139,3 @@ class Contactus
         return $this->smallImage;
     }
 }
-

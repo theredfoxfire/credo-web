@@ -284,4 +284,3 @@ class Csr
         return $this->smallImage;
     }
 }
-

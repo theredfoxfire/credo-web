@@ -1,24 +1,24 @@
 news_index:
-    path:     /
+    path:     /news/
     defaults: { _controller: "AppBundle:News:index" }
     methods:  GET
 
 news_show:
-    path:     /{id}/show
+    path:     /news/{id}/show
     defaults: { _controller: "AppBundle:News:show" }
     methods:  GET
 
 news_new:
-    path:     /new
+    path:     /admin/news/new
     defaults: { _controller: "AppBundle:News:new" }
     methods:  [GET, POST]
 
 news_edit:
-    path:     /{id}/edit
+    path:     /admin/news/{id}/edit
     defaults: { _controller: "AppBundle:News:edit" }
     methods:  [GET, POST]
 
 news_delete:
-    path:     /{id}/delete
+    path:     /admin/news/{id}/delete
     defaults: { _controller: "AppBundle:News:delete" }
     methods:  DELETE

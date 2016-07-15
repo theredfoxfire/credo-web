@@ -110,4 +110,3 @@ class Peoples
         return $this->profileImage;
     }
 }
-

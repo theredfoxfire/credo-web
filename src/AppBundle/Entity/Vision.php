@@ -110,4 +110,3 @@ class Vision
         return $this->largeImage;
     }
 }
-

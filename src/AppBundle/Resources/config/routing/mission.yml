@@ -1,24 +1,24 @@
 mission_index:
-    path:     /
+    path:     /mission/
     defaults: { _controller: "AppBundle:Mission:index" }
     methods:  GET
 
 mission_show:
-    path:     /{id}/show
+    path:     /mission/{id}/show
     defaults: { _controller: "AppBundle:Mission:show" }
     methods:  GET
 
 mission_new:
-    path:     /new
+    path:     /admin/mission/new
     defaults: { _controller: "AppBundle:Mission:new" }
     methods:  [GET, POST]
 
 mission_edit:
-    path:     /{id}/edit
+    path:     /admin/mission/{id}/edit
     defaults: { _controller: "AppBundle:Mission:edit" }
     methods:  [GET, POST]
 
 mission_delete:
-    path:     /{id}/delete
+    path:     /admin/mission/{id}/delete
     defaults: { _controller: "AppBundle:Mission:delete" }
     methods:  DELETE

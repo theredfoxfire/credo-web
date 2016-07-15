@@ -110,4 +110,3 @@ class Mission
         return $this->largeImage;
     }
 }
-

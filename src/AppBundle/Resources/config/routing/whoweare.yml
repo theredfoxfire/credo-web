@@ -1,24 +1,24 @@
 whoweare_index:
-    path:     /
+    path:     /whoweare/
     defaults: { _controller: "AppBundle:Whoweare:index" }
     methods:  GET
 
 whoweare_show:
-    path:     /{id}/show
+    path:     /whoweare/{id}/show
     defaults: { _controller: "AppBundle:Whoweare:show" }
     methods:  GET
 
 whoweare_new:
-    path:     /new
+    path:     /admin/whoweare/new
     defaults: { _controller: "AppBundle:Whoweare:new" }
     methods:  [GET, POST]
 
 whoweare_edit:
-    path:     /{id}/edit
+    path:     /admin/whoweare/{id}/edit
     defaults: { _controller: "AppBundle:Whoweare:edit" }
     methods:  [GET, POST]
 
 whoweare_delete:
-    path:     /{id}/delete
+    path:     /admin/whoweare/{id}/delete
     defaults: { _controller: "AppBundle:Whoweare:delete" }
     methods:  DELETE

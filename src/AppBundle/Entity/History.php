@@ -139,4 +139,3 @@ class History
         return $this->smallImage;
     }
 }
-
