@@ -35,11 +35,40 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li>
+                <a href="{{ path('unites_index') }}">Bussines Units</a>
+              </li>
+              <li><a href="{{ path('career_index') }}">Carier</a></li>
+              <li><a href="{{ path('contactus_index') }}">Contact Us</a></li>
+              <li><a href="{{ path('csr_index') }}">CSR</a></li>
+              <li><a href="{{ path('download_index') }}">Downloads</a></li>
+              <li><a href="{{ path('history_index') }}">History</a></li>
+              <li><a href="{{ path('messages_index') }}">Messages</a></li>
+              <li><a href="{{ path('mission_index') }}">Mission</a></li>
+              <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Others...</a>
+                <ul class="dropdown-menu">
+                  <li><a href="{{ path('overview_index') }}">Overview</a></li>
+                  <li>
+                    <a href="{{ path('news_index') }}">News & Media</a>
+                  </li>
+                  <li>
+                    <a href="{{ path('peoples_index') }}">Peoples</a>
+                  </li>
+                  <li>
+                    <a href="{{ path('vision_index') }}">Vision</a>
+                  </li>
+                  <li>
+                    <a href="{{ path('whatwedo_index') }}">What We Do</a>
+                  </li>
+                  <li>
+                    <a href="{{ path('whoweare_index') }}">Who We Are</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="../navbar-static-top/">LOGOUT</a></li>
+              <li><a href="{{ path('security_logout') }}">LOGOUT</a></li>
             </ul>
           </div>
         </div>
