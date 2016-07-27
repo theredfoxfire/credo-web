@@ -34,7 +34,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="{{ path('adminHomepage') }}">Home</a></li>
               <li>
                 <a href="{{ path('unites_index') }}">Bussines Units</a>
               </li>
@@ -73,7 +73,10 @@
           </div>
         </div>
       </nav>
+      <div class="container">
+        <br /><br /><br />
         {% block body %}{% endblock %}
+      </div>
         <footer class="footer">
           <div class="developer">
               <div class="container">ALL RIGHTS RESERVED - CREDO GROUP©{{ "now"|date("Y") }}</div>
@@ -119,5 +122,7 @@
                 })
             });
         </script>
+        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+        <script>tinymce.init({ selector:'textarea' });</script>
     </body>
 </html>

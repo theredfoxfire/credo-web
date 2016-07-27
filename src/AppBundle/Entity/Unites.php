@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Unites
@@ -24,6 +25,9 @@ class Unites
 
     /**
      * @var string
+     * @Assert\Image(
+     * )
+     *
      */
     private $largeImage;
 
