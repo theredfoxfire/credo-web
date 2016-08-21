@@ -92,69 +92,41 @@
             <div class="col-md-12">
                 <h1>NEWS AND MEDIA</h1>
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="media">
-                            <div class="media-top">
-                                <a href="#">
-                                    <figure><img src="{{ asset('credo/img/news1.jpeg') }}" class="img-responsive"></figure>
-                                </a>
+                    {% for new in news %}
+                        <div class="col-md-4">
+                            <div class="media">
+                                <div class="media-top">
+                                    <a href="#">
+                                        <figure><img src="{{ asset('uploads/news/') }}{{ new.largeImage }}" class="img-responsive"></figure>
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ new.title | raw }}</h4>
+                                    <p>{{ new.subtitle | raw }}</p>
+                                </div>
                             </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">LOREM IPSUM DOLOR</h4>
-                                <p>Lorem ipsum dolor sit amet elit</p>
-                            </div>
-                        </div>
-                        <div class="readmore">
-                            <a href="#">SEE MORE <i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="media">
-                            <div class="media-top">
-                                <a href="#">
-                                    <figure><img src="{{ asset('credo/img/news2.jpeg') }}" class="img-responsive"></figure>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">LOREM IPSUM DOLOR</h4>
-                                <p>Lorem ipsum dolor sit amet elit</p>
+                            <div class="readmore">
+                                <a href="{{ path('news_show_public', { 'id': new.id }) }}">SEE MORE <i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
                             </div>
                         </div>
-                        <div class="readmore">
-                            <a href="#">SEE MORE <i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="media">
-                            <div class="media-top">
-                                <a href="#">
-                                    <figure><img src="{{ asset('credo/img/news3.jpeg') }}" class="img-responsive"></figure>
-                                </a>
-                            </div>
-                            <div class="media-body">
-                                <h4 class="media-heading">LOREM IPSUM DOLOR</h4>
-                                <p>Lorem ipsum dolor sit amet elit</p>
-                            </div>
-                        </div>
-                        <div class="readmore">
-                            <a href="#">SEE MORE <i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </section>
 </div>
 <!-- /.container -->
-<section id="career">
+<section id="career-home">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-center">WHAT ARE YOU WAITING FOR?</h1>
                 <div class="career-button-wrapper">
-                    <button class="career-button" type="button">
-                    Career
-                    </button>
+                    <a href="{{ path('career_new') }}">
+                        <button class="career-button" type="button">
+                        Career
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

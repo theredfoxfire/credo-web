@@ -15,9 +15,8 @@ AppBundle\Entity\News:
    type: text
   largeImage:
    type: string
-  smallImage:
-   type: string
+   nullable: true
   dateTime:
-   type: date
-  by:
+   type: datetime
+  postedBy:
    type: string

@@ -8,8 +8,13 @@ career_show:
     defaults: { _controller: "AppBundle:Career:show" }
     methods:  GET
 
+career_sucess:
+    path:     /career/success
+    defaults: { _controller: "AppBundle:Career:sucess" }
+    methods:  GET
+
 career_new:
-    path:     /admin/career/new
+    path:     /career/new
     defaults: { _controller: "AppBundle:Career:new" }
     methods:  [GET, POST]
 

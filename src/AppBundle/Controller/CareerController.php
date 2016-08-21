@@ -18,15 +18,39 @@ class CareerController extends Controller
      * Lists all Career entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Career a";
+        $query = $em->createQuery($dql);
 
-        $careers = $em->getRepository('AppBundle:Career')->findAll();
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+        $career = $em->getRepository('AppBundle:Career')->findAll();
+        $deleteForms = array();
+
+        foreach ($career as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
         return $this->render('career/index.html.twig', array(
-            'careers' => $careers,
+            'careers' => $pagination,
+            'deleteForms' => $deleteForms,
         ));
+    }
+
+    /**
+     * Lists all Career entities.
+     *
+     */
+    public function sucessAction()
+    {
+        return $this->render('career/sucess.html.twig');
     }
 
     /**
@@ -44,7 +68,7 @@ class CareerController extends Controller
             $em->persist($career);
             $em->flush();
 
-            return $this->redirectToRoute('career_show', array('id' => $career->getId()));
+            return $this->redirectToRoute('career_sucess');
         }
 
         return $this->render('career/new.html.twig', array(

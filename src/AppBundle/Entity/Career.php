@@ -15,18 +15,22 @@ class Career
     /**
      * @var string
      */
+    private $name;
+
+    /**
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var string
+     */
     private $title;
 
     /**
      * @var string
      */
-    private $decsription;
-
-    /**
-     * @var string
-     */
-    private $largeImage;
-
+    private $message;
 
     /**
      * Get id
@@ -36,6 +40,30 @@ class Career
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Career
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -63,50 +91,50 @@ class Career
     }
 
     /**
-     * Set decsription
+     * Set email
      *
-     * @param string $decsription
+     * @param string $email
      *
      * @return Career
      */
-    public function setDecsription($decsription)
+    public function setEmail($email)
     {
-        $this->decsription = $decsription;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get decsription
+     * Get email
      *
      * @return string
      */
-    public function getDecsription()
+    public function getEmail()
     {
-        return $this->decsription;
+        return $this->email;
     }
 
     /**
-     * Set largeImage
+     * Set message
      *
-     * @param string $largeImage
+     * @param string $message
      *
      * @return Career
      */
-    public function setLargeImage($largeImage)
+    public function setMessage($message)
     {
-        $this->largeImage = $largeImage;
+        $this->message = $message;
 
         return $this;
     }
 
     /**
-     * Get largeImage
+     * Get message
      *
      * @return string
      */
-    public function getLargeImage()
+    public function getMessage()
     {
-        return $this->largeImage;
+        return $this->message;
     }
 }

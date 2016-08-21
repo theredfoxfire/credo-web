@@ -7,9 +7,11 @@ AppBundle\Entity\Career:
    type: integer
    generator: { strategy: AUTO }
  fields:
+  name:
+   type: string
+  email:
+   type: string
   title:
    type: string
-  decsription:
+  message:
    type: text
-  largeImage:
-   type: string

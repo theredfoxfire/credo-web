@@ -8,6 +8,11 @@ news_show:
     defaults: { _controller: "AppBundle:News:show" }
     methods:  GET
 
+news_show_public:
+    path:     /news/{id}/showing
+    defaults: { _controller: "AppBundle:News:showPublic" }
+    methods:  GET
+
 news_new:
     path:     /admin/news/new
     defaults: { _controller: "AppBundle:News:new" }

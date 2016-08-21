@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use AppBundle\Entity\Slide;
+use AppBundle\Entity\News;
 use AppBundle\Entity\Logo;
 use AppBundle\Entity\Quote;
 
@@ -28,6 +29,15 @@ class DefaultController extends Controller
      public function indexAction(Request $request)
      {
          $em = $this->getDoctrine()->getManager();
+         $dqlNews   = "SELECT a FROM AppBundle:News a";
+         $newsQuery = $em->createQuery($dqlNews);
+
+         $newsPaginator  = $this->get('knp_paginator');
+         $news = $newsPaginator->paginate(
+             $newsQuery, /* query NOT result */
+             $request->query->getInt('page', 1)/*page number*/,
+             3/*limit per page*/
+         );
 
          $slides = $em->getRepository('AppBundle:Slide')->findAll();
          $logos = $em->getRepository('AppBundle:Logo')->findAll();
@@ -39,6 +49,7 @@ class DefaultController extends Controller
              'logos' => $logos,
              'quotes' => $quotes,
              'abouts' => $abouts,
+             'news' => $news,
          ));
      }
 }

@@ -33,11 +33,6 @@ class News
     private $largeImage;
 
     /**
-     * @var string
-     */
-    private $smallImage;
-
-    /**
      * @var \DateTime
      */
     private $dateTime;
@@ -45,7 +40,7 @@ class News
     /**
      * @var string
      */
-    private $by;
+    private $postedBy;
 
 
     /**
@@ -155,30 +150,6 @@ class News
     }
 
     /**
-     * Set smallImage
-     *
-     * @param string $smallImage
-     *
-     * @return News
-     */
-    public function setSmallImage($smallImage)
-    {
-        $this->smallImage = $smallImage;
-
-        return $this;
-    }
-
-    /**
-     * Get smallImage
-     *
-     * @return string
-     */
-    public function getSmallImage()
-    {
-        return $this->smallImage;
-    }
-
-    /**
      * Set dateTime
      *
      * @param \DateTime $dateTime
@@ -209,9 +180,9 @@ class News
      *
      * @return News
      */
-    public function setBy($by)
+    public function setPostedBy($postedBy)
     {
-        $this->by = $by;
+        $this->postedBy = $postedBy;
 
         return $this;
     }
@@ -221,8 +192,8 @@ class News
      *
      * @return string
      */
-    public function getBy()
+    public function getPostedBy()
     {
-        return $this->by;
+        return $this->postedBy;
     }
 }
