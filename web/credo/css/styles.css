@@ -25,15 +25,17 @@ body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #6d6e71;
 }
-
+p {
+  font-family: "din-light";
+  font-size: 12px;
+}
 /**
  * Header CSS
 **/
 .stripe {
     height: 10px;
     color: #fff;
-    background: -webkit-repeating-linear-gradient(135deg,#d5ae5f,#d5ae5f 800px,#bd2226 10px,#bd2226,#bd2226 1000px);
-    background: (135deg,#606dbc,#606dbc 10px,#465298 10px,#465298 20px);
+    background: -webkit-repeating-linear-gradient(135deg,#d5ae5f,#d5ae5f 80%,#bd2226 10px,#bd2226,#bd2226 1000px);
 }
 
 .arrow-link {
@@ -50,23 +52,53 @@ body {
     min-width: 350px !important;
   }
 }
-#business-unit-list.dropdown-menu a{
+.list-bu {
+  font-family: "TheanoDidot-Regular";
+  font-size: 11px;
+  list-style: none;
+  text-align: left;
+}
+.list-bu li {
+  padding-top: 10px;
+}
+.list-bu a {
   color: #868686 !important;
   text-decoration: none !important;
 }
-#business-unit-list.dropdown-menu a:hover{
+.list-bu a:hover {
   color: #bd2226 !important;
 }
-#business-unit-list.dropdown-menu{
-  min-width: 750px;
-  padding-left: 20px;
-  background: #ffffff;
-  float: right !important;
-  border-color: #ffffff;
+.list-bu-dw {
   font-family: "TheanoDidot-Regular";
+  font-size: 11px;
+  list-style: none;
+  text-align: left !important;
 }
-.list-bu {
-  padding-top: 20px;
+.list-bu-dw li {
+  padding-top: 10px;
+}
+.list-bu-dw a {
+  color: #868686 !important;
+  text-decoration: none !important;
+}
+.list-bu-dw a:hover {
+  color: #bd2226 !important;
+}
+.list-ab {
+  font-family: "TheanoDidot-Regular";
+  font-size: 11px;
+  list-style: none;
+  text-align: center;
+}
+.list-ab li {
+  padding-top: 10px;
+}
+.list-ab a {
+  color: #868686 !important;
+  text-decoration: none !important;
+}
+.list-ab a:hover {
+  color: #fff !important;
 }
 
 .top-header {
@@ -79,9 +111,9 @@ body {
 }
 
 input.txtsearch {
-    font-family: "din-bold";
+    font-family: "TheanoDidot-Regular";
     border: 0;
-    font-size: 13px;
+    font-size: 11px;
     letter-spacing: 1px;
     color: #6d6e71;
     background: #fff;
@@ -92,20 +124,23 @@ input.txtsearch {
     background-color: #fff;
     border-color: #fff;
 }
-
+@media (max-width: 800px) {
+  h1 {
+    font-size: 16px !important;
+  }
+}
 @media (min-width: 768px) {
     .navbar .divider-vertical {
         height: 20px;
         border-left: 1px solid #fff;
         border-right: 1px solid #868686;
-        top: 20px;
+        margin-top: 20px;
     }
 
     .navbar .divider-vertical:last-of-type {
         height: 20px;
         border-left: 1px solid #fff;
         border-right: 1px solid #fff;
-        top: 20px;
     }
 }
 
@@ -135,11 +170,23 @@ input.txtsearch {
     -moz-box-shadow: 0 10px 6px -6px #777;
     box-shadow: 0 10px 6px -6px #777;
 }
+.logo-list {
+  height: 200px !important;
+}
 
+.img-slider {
+  margin: 0 auto;
+}
+.carousel-control.left {
+  background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.5) 100%) !important;
+}
+.carousel-control.right {
+  background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.5) 100%) !important;
+}
 #site-header .site-navbar .navbar-nav > li > a {
     font-family: "TheanoDidot-Regular";
-    font-size: 14px;
-    padding: 0 12px;
+    font-size: 11px;
+    padding: 0 5px;
     color: #868686;
     display: inline-block;
     height: 40px;
@@ -283,13 +330,7 @@ input.txtsearch {
 
 #business-units h1 {
     font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 36px;
-}
-
-#business-units .lead {
-    font-family: "din-light";
-    font-size: 18px;
+    font-size: 20px;
 }
 
 #owl-demo .item {
@@ -388,10 +429,10 @@ input.txtsearch {
 }
 
 #owl-demo .owl-item > div {
-    background: #42bdc2;
+    background: #fff;
     text-align: center;
-    padding: 50px 0;
-    margin: 3px;
+    padding: 0;
+    margin: -50;
     color: #fff;
     font-size: 32px;
     border: 1px #fff;
@@ -407,12 +448,12 @@ input.txtsearch {
 
 .owl-theme .owl-controls .owl-buttons .owl-prev {
     left: -45px;
-    top: 55px;
+    top: 105px;
 }
 
 .owl-theme .owl-controls .owl-buttons .owl-next {
     right: -45px;
-    top: 55px;
+    top: 105px;
 }
 
 #vision {
@@ -428,8 +469,7 @@ input.txtsearch {
 
 #vision .heading a {
     font-family: "TheanoDidot-Regular";
-    font-weight: 300;
-    font-size: 20px;
+    font-size: 12px;
     color: #be1e2d;
 }
 
@@ -439,15 +479,10 @@ input.txtsearch {
     font-size: 37px;
 }
 
-#vision .lead {
-    font-family: "din-light";
-    font-size: 18px;
-}
-
 #vision .readmore {
     font-family: "din-light";
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 11px;
+
 }
 
 #vision .readmore a {
@@ -465,19 +500,13 @@ input.txtsearch {
 
 #about-us h1 {
     font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 36px;
-}
-
-#about-us .lead {
-    font-family: "din-light";
-    font-size: 18px;
+    font-size: 20px;
 }
 
 #about-us .readmore {
     font-family: "din-light";
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 11px;
+
 }
 
 #about-us .readmore a {
@@ -498,33 +527,26 @@ input.txtsearch {
 
 #news .media-body .media-heading {
     font-family: "din-light";
-    font-weight: 400;
     text-align: center;
-    font-size: 20px;
+    font-size: 12px;
 }
 
 #news .media-body p {
     font-family: "din-light";
     text-align: center;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 #news h1 {
     font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 36px;
-}
-
-#news .lead {
-    font-family: "din-light";
-    font-size: 18px;
+    font-size: 20px;
 }
 
 #news .readmore {
     margin-top: 40px;
     font-family: "din-light";
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 11px;
+
     text-align: center;
 }
 
@@ -579,8 +601,7 @@ input.txtsearch {
 
 #career h1 {
     font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 45px;
+    font-size: 20px;
     color: #fff;
     padding-top: 130px;
     padding-bottom: 40px;
@@ -821,7 +842,7 @@ input.txtsearch {
 .contact-us h1 {
     font-family: "TheanoDidot-Regular";
     color: #6d6e71;
-    font-size: 36px;
+    font-size: 20px;
 }
 
 .contact-us h2 {
@@ -832,8 +853,6 @@ input.txtsearch {
 }
 
 .contact-us .lead {
-    font-family: "din-light";
-    font-size: 18px;
     text-align: justify;
 }
 
@@ -902,13 +921,7 @@ input.txtsearch {
 
 .csr h1 {
     font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 36px;
-}
-
-.csr .lead {
-    font-family: "din-light";
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .about-us {
@@ -925,22 +938,20 @@ input.txtsearch {
 .about-us .title::before {
     content: "";
     display: block;
-    background: url(../img/icon.png) no-repeat;
     width: 53px;
     height: 35px;
     float: left;
     margin: 6px 20px 0 0;
 }
 
-.about-us h1 {
-    font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 36px;
+.page-title {
+  margin-top: -6px !important;
+  font-size: 32px;
 }
 
-.about-us .lead {
-    font-family: "din-light";
-    font-size: 18px;
+.about-us h1 {
+    font-family: "TheanoDidot-Regular";
+    font-size: 20px;
 }
 
 .business-unit {
@@ -966,13 +977,7 @@ input.txtsearch {
 
 .business-unit h1 {
     font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 36px;
-}
-
-.business-unit .lead {
-    font-family: "din-light";
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .news-media {
@@ -982,14 +987,13 @@ input.txtsearch {
 
 .news-media h1 {
     font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 36px;
+    font-size: 20px;
 }
 
 .news-media .media-heading {
     font-family: "din-light";
     font-weight: 700;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .news-media .media-heading a {
@@ -1008,7 +1012,7 @@ input.txtsearch {
 
 .news-media .entry {
     font-family: "din-light";
-    font-size: 16px;
+    font-size: 12px;
     color: #6d6e71;
     padding-bottom: 7px;
 }
@@ -1042,14 +1046,14 @@ input.txtsearch {
     border-bottom: 1px solid #E1E6E7;
 }
 
-.news-media .pagination > .active > a,.news-media .pagination > .active > a:focus,.news-media .pagination > .active > a:hover,.news-media .pagination > .active > span,.news-media .pagination > .active > span:focus,.news-media .pagination > .active > span:hover {
+.pagination > .active > a,.pagination > .active > a:focus,.pagination > .active > a:hover,.pagination > .active > span,.pagination > .active > span:focus,.pagination > .active > span:hover {
     background-color: #c0392b;
     border-color: #c0392b;
 }
 
 .ac-label {
     color: #808285;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
     position: relative;
     padding: .5em 1em;
@@ -1137,8 +1141,7 @@ input.txtsearch {
 
 .people h1 {
     font-family: "TheanoDidot-Regular";
-    font-weight: 700;
-    font-size: 36px;
+    font-size: 20px;
     color: #6d6e71;
 }
 
@@ -1151,8 +1154,6 @@ input.txtsearch {
 }
 
 .people .lead {
-    font-family: "din-light";
-    font-size: 18px;
     color: #6d6e71;
 }
 
@@ -1170,7 +1171,6 @@ h6.description {
 
 .profile h1 {
     font-family: "din-light";
-    font-weight: 400;
     font-size: 20px;
     margin: 10px 0 0;
     text-align: center;
@@ -1178,7 +1178,7 @@ h6.description {
 
 .profile h2 {
     font-family: "din-light";
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 400;
     margin-top: 5px;
     text-align: center;
@@ -1238,10 +1238,6 @@ h6.description {
     color: #fff;
 }
 
-.img-box:hover:after {
-    opacity: 1;
-}
-
 .img-box:hover ul {
     opacity: 1;
 }
@@ -1259,4 +1255,81 @@ h6.description {
 
 i.red {
     color: #BC0213;
+}
+
+
+.mega-dropdown {
+  position: static !important;
+}
+
+.mega-dropdown-menu {
+  padding: 20px 0px;
+  width: 100%;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+}
+
+.mega-dropdown-menu:before {
+  content: "";
+  border-bottom: 15px solid #fff;
+  border-right: 17px solid transparent;
+  border-left: 17px solid transparent;
+  position: absolute;
+  top: -15px;
+  left: 285px;
+  z-index: 10;
+}
+
+.mega-dropdown-menu:after {
+  content: "";
+  border-bottom: 17px solid #ccc;
+  border-right: 19px solid transparent;
+  border-left: 19px solid transparent;
+  position: absolute;
+  top: -17px;
+  left: 283px;
+  z-index: 8;
+}
+
+.mega-dropdown-menu > li > ul {
+  padding: 0;
+  margin: 0;
+}
+
+.mega-dropdown-menu > li > ul > li {
+  list-style: none;
+}
+
+.mega-dropdown-menu > li > ul > li > a {
+  font-family: "din-light";
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #999;
+  white-space: normal;
+}
+
+.mega-dropdown-menu > li ul > li > a:hover,
+.mega-dropdown-menu > li ul > li > a:focus {
+  text-decoration: none;
+  color: #444;
+  background-color: #f5f5f5;
+}
+
+.mega-dropdown-menu .dropdown-header-dw {
+  font-family: "TheanoDidot-Regular";
+  color: #bd2226;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.mega-dropdown-menu form {
+  margin: 3px 20px;
+}
+
+.mega-dropdown-menu .form-group {
+  margin-bottom: 3px;
 }

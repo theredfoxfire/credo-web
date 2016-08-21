@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>CREDO GROUP Group</title>
+        <title>CREDO GROUP</title>
         <!-- Bootstrap Core CSS -->
         <link href="{{ asset('credo/css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('credo/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -20,98 +20,180 @@
         <![endif]-->
     </head>
     <body>
-        <div class="stripe"></div>
-        <div class="top-header hidden-xs">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="logo">
-                            <img src="{{ asset('credo/img/logo.png') }}" alt="Logo">
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="search_div pull-right">
-                            <form name="form_search" id="form_search" method="get" action="article.php">
-                                <input placeholder="SEARCH HERE ..." class="txtsearch" name="form_search" id="txtsearch" value="" type="text">
-                                <button type="submit" class="btn btn-search btn-danger"> <i class="fa fa-search"></i></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Navigation -->
-        <header id="site-header">
-            <nav class="navbar site-navbar navbar-default">
-                <div class="container">
-                    <div class="navbar-header visible-xs">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#">CREDO GROUP Group</a>
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li class="divider-vertical active"><a href="index.html">HOME</a></li>
-                            <li class="divider-vertical"><a href="about-us.html">ABOUT US</a></li>
-                            <li class="divider-vertical"><a href="people-executive.html">PEOPLE</a></li>
-                            <li class="divider-vertical"><a href="csr.html">CSR</a></li>
-                            <li class="divider-vertical"><a href="career.html">CAREER</a></li>
-                            <li class="dropdown divider-vertical"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
-                             <ul class="dropdown-menu" id="business-unit-list">
-                               <li>
-                                 <ul class='list-inline'>
-                                     <li class="list-bu"><a href="meli-yog.html" id="">MELIA YOGYAKARTA (PUROSANI)</a></li>
-                                     <li class="list-bu"><a href="meli-mas.html" id="">MELIA KUALA LUMPUR</a></li>
-                                     <li class="list-bu"><a href="aman.html" id="">AMANDARI</a></li>
-                                     <li class="list-bu"><a href="the-statue.html" id="">THE STATURE (SRC)</a></li>
-                                     <li class="list-bu"><a href="emer.html" id="">EMERALDA</a></li>
-                                     <li class="list-bu"><a href="pt-bug.html" id="">PT. BUMI UPAYA GRIYA</a></li>
-                                     <li class="list-bu"><a href="medis.html" id="">MEDISTRA HOSPITAL</a></li>
-                                     <li class="list-bu"><a href="astri.html" id="">ASTRINDO</a></li>
-                                     <li class="list-bu"><a href="laund.html" id="">LAUNDRETTE</a></li>
-                                     <li class="list-bu"><a href="credo-boga.html" id="">CREDO BOGA MAKMUR (MADAME LILY + HOG)</a></li>
-                                     <li class="list-bu"><a href="kbe.html" id="">KBE (KUTAI BARAT ENERGI)</a></li>
-                                     <li class="list-bu"><a href="vkc.html" id="">VKC (VERDANTURA KALTIM COAL)</a></li>
-                                     <li class="list-bu"><a href="shac.html" id="">SHACMAN</a></li>
-                                     <li class="list-bu"><a href="geoki.html" id="">GEO KINETICS (OIKOS)</a></li>
-                                     <li class="list-bu"><a href="reach.html" id="">REACHOUT FOUNDATION</a></li>
-                                 </ul>
-                               </li>
-                             </ul>
-                         </li>
-                            <li class="divider-vertical"><a href="contact-us.html">CONTACT</a></li>
-                            <li class="divider-vertical"><a href="news-media.html">NEWS AND MEDIA</a></li>
-                        </ul>
-                    </div>
-                    <!--/.nav-collapse -->
-                    <!--/.nav-collapse -->
-                </div>
-            </nav>
-        </header>
+      <div class="stripe"></div>
+      <div class="top-header hidden-xs">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="logo">
+                          <a href="{{ path('homepage') }}"><img src="{{ asset('credo/img/logo.png') }}" width="300px" height="70px" class="img-responsive" alt="Logo"></a>
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="search_div pull-right">
+                          <form name="form_search" id="form_search" method="get" action="article.php">
+                              <input placeholder="SEARCH HERE ..." class="txtsearch" name="form_search" id="txtsearch" value="" type="text">
+                              <button type="submit" class="btn btn-search btn-danger"> <i class="fa fa-search"></i></button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Navigation -->
+      <header id="site-header">
+          <nav class="navbar site-navbar navbar-default">
+              <div class="container">
+                  <div class="navbar-header visible-xs">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="index.html"><img src="{{ asset('credo/img/logo.png') }}" width="150px" height="25px" class="img-responsive" alt="Logo"></a>
+                  </div>
+                  <div id="navbar" class="collapse navbar-collapse">
+                      <ul class="nav navbar-nav navbar-right">
+                          <li class="divider-vertical active"><a href="index.html">HOME</a></li>
+                          <li class="divider-vertical dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
+                            <ul class="dropdown-menu list-ab">
+                              <li><a href="about-us.html">COMPANY HISTORY</a></li>
+                              <li><a href="download.html">DOWNLOAD</a></li>
+                            </ul>
+                          </li>
+                          <li class="divider-vertical"><a href="people-executive.html">PEOPLE</a></li>
+                          <li class="divider-vertical dropdown mega-dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
+                              <ul class="dropdown-menu mega-dropdown-menu row">
+                                <div class="row">
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu">
+                                          <li class="dropdown-header-dw">PROPERTY</li>
+                                          <li><a href="meli-yog.html">MELIA - YOGYAKARTA</a></li>
+                                          <li><a href="meli-mas.html">MELIA - KUALA LUMPUR</a></li>
+                                          <li><a href="aman.html">AMANDARI - BALI</a></li>
+                                          <li><a href="the-statue.html">THE STATURE - JAKARTA</a></li>
+                                          <li><a href="surya.html">SURYA RAYA INVESTAMA</a></li>
+                                          <li><a href="t8tower.html">T8TOWER - JAKARTA</a></li>
+                                          <li><a href="kiara.html">KIARA RESIDENCE - BOGOR</a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu">
+                                          <li class="dropdown-header-dw">HEALTH CARE</li>
+                                          <li><a href="medis.html">MEDISTRA HOSPITAL</a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu">
+                                          <li class="dropdown-header-dw">RETAIL</li>
+                                          <li><a href="astri.html">ASTRINDO</a></li>
+                                          <li><a href="laund.html">LAUNDRETTE</a></li>
+                                          <li><a href="credo-boga.html">CREDO BOGA MAKMUR</a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu">
+                                          <li class="dropdown-header-dw">ENERGY</li>
+                                          <li><a href="vkc.html">VERDANTURA KALTIM COAL</a></li>
+                                          <li><a href="kbe.html">KUTAI BARAT ENERGI</a></li>
+                                      </ul>
+                                  </li>
+                                </div>
+                                <hr />
+                                <div class="row">
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu">
+                                          <li class="dropdown-header-dw">SERVICES</li>
+                                          <li><a href="shac.html">SHACMAN</a></li>
+                                          <li><a href="alpolic.html">ALPOLIC</a></li>
+                                          <li><a href="bcm.html">BANGUN CIPTA MAKMUR</a></li>
+                                          <li><a href="ois.html">OPTIMA INTI SELARAS</a></li>
+                                      </ul>
+                                  </li>
+                              </div>
+                              </ul>
+                          </li>
+                          <li class="divider-vertical"><a href="news-media.html">NEWS AND MEDIA</a></li>
+                          <li class="divider-vertical"><a href="csr.html">CSR</a></li>
+                          <li class="divider-vertical"><a href="career.html">CAREER</a></li>
+                          <li class="divider-vertical"><a href="contact-us.html">CONTACT US</a></li>
+                      </ul>
+                  </div>
+                  <!--/.nav-collapse -->
+                  <!--/.nav-collapse -->
+              </div>
+          </nav>
+      </header>
         {% block body %}{% endblock %}
         <footer id="footer">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        <ul class="nav footer-nav list-unstyled">
-                            <li><a href="/">About Us</a></li>
-                            <li><a href="#">Our Service</a></li>
-                            <li><a href="#">Client Area</a></li>
-                            <li><a href="#">Article</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                        </ul>
+                      <ul class="nav footer-nav list-unstyled">
+                          <li class=""><a href="index.html">HOME</a></li>
+                          <li class=""><a href="about-us.html">ABOUT US</a></li>
+                          <li class=""><a href="people-executive.html">PEOPLE</a></li>
+                          <li class="dropdown mega-dropdown">
+                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
+                              <ul class="dropdown-menu mega-dropdown-menu row">
+                                <div class="row col-sm-12">
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu-dw"><br />
+                                        <li class="dropdown-header-dw">PROPERTY</li>
+                                        <li><a href="meli-yog.html">MELIA - YOGYAKARTA</a></li>
+                                        <li><a href="meli-mas.html">MELIA - KUALA LUMPUR</a></li>
+                                        <li><a href="aman.html">AMANDARI - BALI</a></li>
+                                        <li><a href="the-statue.html">THE STATURE - JAKARTA</a></li>
+                                        <li><a href="surya.html">SURYA RAYA INVESTAMA</a></li>
+                                        <li><a href="t8tower.html">T8TOWER - JAKARTA</a></li>
+                                        <li><a href="kiara.html">KIARA RESIDENCE - BOGOR</a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu-dw"><br />
+                                        <li class="dropdown-header-dw">HEALTH CARE</li>
+                                        <li><a href="medis.html">MEDISTRA HOSPITAL</a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu-dw"><br />
+                                        <li class="dropdown-header-dw">RETAIL</li><br />
+                                        <li><a href="astri.html">ASTRINDO</a></li>
+                                        <li><a href="laund.html">LAUNDRETTE</a></li>
+                                        <li><a href="credo-boga.html">CREDO BOGA MAKMUR</a></li>
+                                      </ul>
+                                  </li>
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu-dw"><br />
+                                        <li class="dropdown-header-dw">ENERGY</li>
+                                        <li><a href="vkc.html">VERDANTURA KALTIM COAL</a></li>
+                                        <li><a href="kbe.html">KUTAI BARAT ENERGI</a></li>
+                                      </ul>
+                                  </li>
+                                </div>
+                                <div class="row col-sm-12">
+                                  <li class="col-sm-3">
+                                      <ul class="list-bu-dw"><br />
+                                        <li class="dropdown-header-dw">SERVICES</li><br />
+                                        <li><a href="shac.html">SHACMAN</a></li>
+                                        <li><a href="alpolic.html">ALPOLIC</a></li>
+                                        <li><a href="bcm.html">BANGUN CIPTA MAKMUR</a></li>
+                                        <li><a href="ois.html">OPTIMA INTI SELARAS</a></li>
+                                      </ul>
+                                  </li>
+                              </div>
+                              </ul>
+                          </li>
+                          <li class=""><a href="news-media.html">NEWS AND MEDIA</a></li>
+                          <li class=""><a href="csr.html">CSR</a></li>
+                          <li class=""><a href="career.html">CAREER</a></li>
+                          <li class=""><a href="contact-us.html">CONTACT US</a></li>
+                      </ul>
                     </div>
                     <div class="col-md-4">
-                        <div id="social">
-                            <a target="_blank" class="facebookBtn smGlobalBtn" href="#"></a>
-                            <a target="_blank" class="twitterBtn smGlobalBtn" href="#"></a>
-                            <a target="_blank" class="instagramBtn smGlobalBtn" href="#"></a>
-                            <a target="_blank" class="pinterestBtn smGlobalBtn" href="#"></a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -128,7 +210,7 @@
             $(document).ready(function() {
                 var owl = $("#owl-demo");
                 owl.owlCarousel({
-                    items: 6, //10 items above 1000px browser width
+                    items: 4, //10 items above 1000px browser width
                     itemsDesktop: [1000, 5], //5 items between 1000px and 901px
                     itemsDesktopSmall: [900, 3], // betweem 900px and 601px
                     itemsTablet: [600, 2], //2 items between 600 and 0

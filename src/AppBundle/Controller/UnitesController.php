@@ -18,9 +18,18 @@ class UnitesController extends Controller
      * Lists all Unites entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Unites a";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
 
         $unites = $em->getRepository('AppBundle:Unites')->findAll();
         $deleteForms = array();
@@ -30,7 +39,7 @@ class UnitesController extends Controller
         }
 
         return $this->render('unites/index.html.twig', array(
-            'unites' => $unites,
+            'pagination' => $pagination,
             'deleteForms' => $deleteForms,
         ));
     }

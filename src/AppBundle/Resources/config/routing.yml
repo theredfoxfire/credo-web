@@ -1,6 +1,3 @@
-app_branches:
-    resource: "@AppBundle/Resources/config/routing/branches.yml"
-    prefix:   /
 app_career:
     resource: "@AppBundle/Resources/config/routing/career.yml"
     prefix:   /
@@ -13,20 +10,8 @@ app_csr:
 app_download:
     resource: "@AppBundle/Resources/config/routing/download.yml"
     prefix:   /
-app_history:
-    resource: "@AppBundle/Resources/config/routing/history.yml"
-    prefix:   /
-app_messages:
-    resource: "@AppBundle/Resources/config/routing/messages.yml"
-    prefix:   /
-app_mission:
-    resource: "@AppBundle/Resources/config/routing/mission.yml"
-    prefix:   /
 app_news:
     resource: "@AppBundle/Resources/config/routing/news.yml"
-    prefix:   /
-app_overview:
-    resource: "@AppBundle/Resources/config/routing/overview.yml"
     prefix:   /
 app_peoples:
     resource: "@AppBundle/Resources/config/routing/peoples.yml"
@@ -34,12 +19,15 @@ app_peoples:
 app_unites:
     resource: "@AppBundle/Resources/config/routing/unites.yml"
     prefix:   /
-app_vision:
-    resource: "@AppBundle/Resources/config/routing/vision.yml"
+app_slide:
+    resource: "@AppBundle/Resources/config/routing/slide.yml"
     prefix:   /
-app_whatwedo:
-    resource: "@AppBundle/Resources/config/routing/whatwedo.yml"
+app_logo:
+    resource: "@AppBundle/Resources/config/routing/logo.yml"
     prefix:   /
-app_whoweare:
-    resource: "@AppBundle/Resources/config/routing/whoweare.yml"
+app_quote:
+    resource: "@AppBundle/Resources/config/routing/quote.yml"
+    prefix:   /
+app_aboutus:
+    resource: "@AppBundle/Resources/config/routing/aboutus.yml"
     prefix:   /
