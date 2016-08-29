@@ -13,5 +13,8 @@ AppBundle\Entity\Unites:
    type: text
   largeImage:
    type: string
-  smallImage:
-   type: string
+ oneToMany:
+  unites_image:
+   targetEntity: Buimage
+   orphanRemoval: true
+   mappedBy: unites

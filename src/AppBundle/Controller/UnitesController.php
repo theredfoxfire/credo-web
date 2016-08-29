@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Unites;
+use AppBundle\Entity\Buimage;
 use AppBundle\Form\UnitesType;
 
 /**
@@ -51,6 +52,7 @@ class UnitesController extends Controller
     public function newAction(Request $request)
     {
         $unite = new Unites();
+        $buimage = new Buimage();
         $form = $this->createForm('AppBundle\Form\UnitesType', $unite);
         $form->handleRequest($request);
 
@@ -64,10 +66,26 @@ class UnitesController extends Controller
             $unite->setLargeImage($fileName);
 
             $em = $this->getDoctrine()->getManager();
+            $data = $request->request->get('unites');
+            $count = $data['fileCount'];
+            for ($i = 0; $i <= $count; $i++) {
+              $file =  $request->files->get('unites')['anotherImage'.$i += 1];
+              if (!empty($file)) {
+                  $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                  $file->move(
+                      $this->getParameter('buimage_directory'),
+                      $fileName
+                  );
+                  $buimage->setCreatedAt(new \DateTime());
+                  $buimage->setLargeImage($fileName);
+                  $buimage->setUnites($unite);
+                  $em->persist($buimage);
+              }
+            }
             $em->persist($unite);
             $em->flush();
 
-            return $this->redirectToRoute('unites_show', array('id' => $unite->getId()));
+            return $this->redirectToRoute('unites_index');
         }
 
         return $this->render('unites/new.html.twig', array(
@@ -104,7 +122,7 @@ class UnitesController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if (file_exists($this->getParameter('unites_directory').'/'.$oldFile)) {
+            if (file_exists($this->getParameter('unites_directory').'/'.$oldFile) && !empty($unite->getLargeImage())) {
                 unlink($this->getParameter('unites_directory').'/'.$oldFile);
             }
             $file = $unite->getLargeImage();
@@ -138,7 +156,7 @@ class UnitesController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if (file_exists($this->getParameter('unites_directory').'/'.$unite->getLargeImage())) {
+            if (file_exists($this->getParameter('unites_directory').'/'.$unite->getLargeImage()) && !empty($unite->getLargeImage())) {
                 unlink($this->getParameter('unites_directory').'/'.$unite->getLargeImage());
             }
             $em->remove($unite);

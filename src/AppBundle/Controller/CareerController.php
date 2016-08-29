@@ -45,7 +45,7 @@ class CareerController extends Controller
     }
 
     /**
-     * Lists all Career entities.
+     * Render page after success submit
      *
      */
     public function sucessAction()

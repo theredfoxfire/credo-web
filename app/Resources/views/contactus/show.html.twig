@@ -1,44 +1,33 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Contactus</h1>
+<div class="container">
+            <a href="{{ path('contactus_index') }}">Back to the list</a>
+    <h1>Career</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
+                <th width="100">Id</th>
                 <td>{{ contactus.id }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Name</th>
+                <td>{{ contactus.name }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ contactus.email }}</td>
+            </tr>
+            <tr>
+                <th>Subject</th>
                 <td>{{ contactus.title }}</td>
             </tr>
             <tr>
-                <th>Story</th>
-                <td>{{ contactus.story }}</td>
-            </tr>
-            <tr>
-                <th>Largeimage</th>
-                <td>{{ contactus.largeImage }}</td>
-            </tr>
-            <tr>
-                <th>Smallimage</th>
-                <td>{{ contactus.smallImage }}</td>
+                <th>Message</th>
+                <td>{{ contactus.message | raw }}</td>
             </tr>
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('contactus_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('contactus_edit', { 'id': contactus.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+</div>
 {% endblock %}

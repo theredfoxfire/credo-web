@@ -1,0 +1,14 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <h1>Slide edit</h1>
+    <a href="{{ path('slide_index') }}">Back to the list</a> <br /><br />
+    <img src="{{ asset('uploads/slide/') }}{{ slide.largeImage }}" height="100" width="250">
+
+
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}<br />
+        <input type="submit" value="Edit" class="btn btn-default"/>
+    {{ form_end(edit_form) }}
+
+{% endblock %}

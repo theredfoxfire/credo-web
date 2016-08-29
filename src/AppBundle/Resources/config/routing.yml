@@ -31,3 +31,12 @@ app_quote:
 app_aboutus:
     resource: "@AppBundle/Resources/config/routing/aboutus.yml"
     prefix:   /
+app_overview:
+    resource: "@AppBundle/Resources/config/routing/overview.yml"
+    prefix:   /
+app_aboutus_image:
+    resource: "@AppBundle/Resources/config/routing/aboutus_image.yml"
+    prefix:   /
+app_bu_image:
+    resource: "@AppBundle/Resources/config/routing/bu_image.yml"
+    prefix:   /

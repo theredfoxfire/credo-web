@@ -17,8 +17,8 @@
         <tbody>
         {% for career in careers %}
             <tr>
-                <td><a href="{{ path('career_show', { 'id': career.id }) }}">{{ loop.index }}</a></td>
-                <td>{{ career.name }}</td>
+                <td><a href="{{ path('career_show', { 'id': career.id }) }}">{{ careers.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
+                <td><a href="{{ path('career_show', { 'id': career.id }) }}">{{ career.name }}</a></td>
                 <td>{{ career.email }}</td>
                 <td>{{ career.title }}</td>
                 <td>{{ career.message }}</td>

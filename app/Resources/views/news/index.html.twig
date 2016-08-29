@@ -19,7 +19,7 @@
         <tbody>
         {% for news in pagination %}
             <tr>
-                <td><a href="{{ path('news_show', { 'id': news.id }) }}">{{ loop.index }}</a></td>
+                <td><a href="{{ path('news_show', { 'id': news.id }) }}">{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
                 <td>{{ news.title | raw }}</td>
                 <td>{{ news.subtitle | raw }}</td>
                 <td>{{ news.story | raw }}</td>

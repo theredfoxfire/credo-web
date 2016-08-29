@@ -1,0 +1,11 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block body %}
+    <h1>About us edit</h1>
+    <a href="{{ path('aboutus_index') }}">Back to the list</a> <br /><br />
+    {{ form_start(edit_form) }}
+        {{ form_widget(edit_form) }}<br />
+        <input type="submit" value="Save Edit" class="btn btn-default"/>
+    {{ form_end(edit_form) }}
+
+{% endblock %}

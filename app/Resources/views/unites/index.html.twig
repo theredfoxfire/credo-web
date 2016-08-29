@@ -7,11 +7,9 @@
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Story</th>
-                <th>Largeimage</th>
-                <th>Smallimage</th>
-                <th>Actions</th>
+                <th>Name</th>
+                <th>About</th>
+                <th width="100">Actions</th>
             </tr>
         </thead>
 
@@ -19,11 +17,9 @@
 
           {% for unite in pagination %}
               <tr>
-                  <td>{{ loop.index }}</td>
+                  <td>{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</td>
                   <td><a href="{{ path('unites_show', { 'id': unite.id }) }}">{{ unite.title }}</a></td>
-                  <td>{{ unite.story }}</td>
-                  <td>{{ unite.largeImage }}</td>
-                  <td>{{ unite.smallImage }}</td>
+                  <td>{{ unite.story | raw }}</td>
                   <td>
                       <a class="btn btn-small" href="{{ path('unites_edit', { 'id': unite.id }) }}">
                         <button type="submit" class="btn btn-small">

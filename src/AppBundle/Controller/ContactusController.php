@@ -18,15 +18,30 @@ class ContactusController extends Controller
      * Lists all Contactus entities.
      *
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+      $em = $this->getDoctrine()->getManager();
+      $dql   = "SELECT a FROM AppBundle:Contactus a";
+      $query = $em->createQuery($dql);
 
-        $contactuses = $em->getRepository('AppBundle:Contactus')->findAll();
+      $paginator  = $this->get('knp_paginator');
+      $pagination = $paginator->paginate(
+          $query, /* query NOT result */
+          $request->query->getInt('page', 1)/*page number*/,
+          10/*limit per page*/
+      );
 
-        return $this->render('contactus/index.html.twig', array(
-            'contactuses' => $contactuses,
-        ));
+      $contactus = $em->getRepository('AppBundle:Contactus')->findAll();
+      $deleteForms = array();
+
+      foreach ($contactus as $entity) {
+          $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+      }
+
+      return $this->render('contactus/index.html.twig', array(
+          'contactuss' => $pagination,
+          'deleteForms' => $deleteForms,
+      ));
     }
 
     /**
@@ -36,6 +51,8 @@ class ContactusController extends Controller
     public function newAction(Request $request)
     {
         $contactus = new Contactus();
+        $em = $this->getDoctrine()->getRepository('AppBundle:Overview');
+        $overview = $em->findOneById(2);
         $form = $this->createForm('AppBundle\Form\ContactusType', $contactus);
         $form->handleRequest($request);
 
@@ -44,13 +61,23 @@ class ContactusController extends Controller
             $em->persist($contactus);
             $em->flush();
 
-            return $this->redirectToRoute('contactus_show', array('id' => $contactus->getId()));
+            return $this->redirectToRoute('contactus_sucess');
         }
 
         return $this->render('contactus/new.html.twig', array(
             'contactus' => $contactus,
+            'overview' => $overview,
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * Render page after success submit message
+     *
+     */
+    public function sucessAction()
+    {
+        return $this->render('contactus/sucess.html.twig');
     }
 
     /**

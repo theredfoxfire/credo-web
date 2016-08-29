@@ -15,23 +15,22 @@ class Contactus
     /**
      * @var string
      */
+    private $name;
+
+    /**
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var string
+     */
     private $title;
 
     /**
      * @var string
      */
-    private $story;
-
-    /**
-     * @var string
-     */
-    private $largeImage;
-
-    /**
-     * @var string
-     */
-    private $smallImage;
-
+    private $message;
 
     /**
      * Get id
@@ -44,11 +43,35 @@ class Contactus
     }
 
     /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Career
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set title
      *
      * @param string $title
      *
-     * @return Contactus
+     * @return Career
      */
     public function setTitle($title)
     {
@@ -68,74 +91,50 @@ class Contactus
     }
 
     /**
-     * Set story
+     * Set email
      *
-     * @param string $story
+     * @param string $email
      *
-     * @return Contactus
+     * @return Career
      */
-    public function setStory($story)
+    public function setEmail($email)
     {
-        $this->story = $story;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * Get story
+     * Get email
      *
      * @return string
      */
-    public function getStory()
+    public function getEmail()
     {
-        return $this->story;
+        return $this->email;
     }
 
     /**
-     * Set largeImage
+     * Set message
      *
-     * @param string $largeImage
+     * @param string $message
      *
-     * @return Contactus
+     * @return Career
      */
-    public function setLargeImage($largeImage)
+    public function setMessage($message)
     {
-        $this->largeImage = $largeImage;
+        $this->message = $message;
 
         return $this;
     }
 
     /**
-     * Get largeImage
+     * Get message
      *
      * @return string
      */
-    public function getLargeImage()
+    public function getMessage()
     {
-        return $this->largeImage;
-    }
-
-    /**
-     * Set smallImage
-     *
-     * @param string $smallImage
-     *
-     * @return Contactus
-     */
-    public function setSmallImage($smallImage)
-    {
-        $this->smallImage = $smallImage;
-
-        return $this;
-    }
-
-    /**
-     * Get smallImage
-     *
-     * @return string
-     */
-    public function getSmallImage()
-    {
-        return $this->smallImage;
+        return $this->message;
     }
 }

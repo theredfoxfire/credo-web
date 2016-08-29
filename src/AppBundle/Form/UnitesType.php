@@ -17,13 +17,13 @@ class UnitesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
+            ->add('title', null, array('label' => 'Name'))
             ->add('story', TextareaType::class, array(
+                'label' => 'Short Story',
                 'required' => false,
                 'attr' => array('class' => 'tinymce'),
             ))
-            ->add('largeImage', FileType::class, array('label' => 'Foto (image file)', 'data' => null))
-            ->add('smallImage')
+            ->add('largeImage', FileType::class, array('label' => 'Foto (image file, best fit width 1280px x height 793px) ', 'data' => null))
         ;
     }
 
@@ -33,7 +33,8 @@ class UnitesType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Unites'
+            'data_class' => 'AppBundle\Entity\Unites',
+            'allow_extra_fields' => true
         ));
     }
 }

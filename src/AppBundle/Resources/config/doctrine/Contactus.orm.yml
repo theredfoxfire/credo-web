@@ -7,11 +7,11 @@ AppBundle\Entity\Contactus:
    type: integer
    generator: { strategy: AUTO }
  fields:
+  name:
+   type: string
+  email:
+   type: string
   title:
    type: string
-  story:
+  message:
    type: text
-  largeImage:
-   type: string
-  smallImage:
-   type: string

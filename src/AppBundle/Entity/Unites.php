@@ -31,11 +31,6 @@ class Unites
      */
     private $largeImage;
 
-    /**
-     * @var string
-     */
-    private $smallImage;
-
 
     /**
      * Get id
@@ -118,28 +113,50 @@ class Unites
     {
         return $this->largeImage;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $unites_image;
 
     /**
-     * Set smallImage
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->unites_image = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add unitesImage
      *
-     * @param string $smallImage
+     * @param \AppBundle\Entity\Buimage $unitesImage
      *
      * @return Unites
      */
-    public function setSmallImage($smallImage)
+    public function addUnitesImage(\AppBundle\Entity\Buimage $unitesImage)
     {
-        $this->smallImage = $smallImage;
+        $this->unites_image[] = $unitesImage;
 
         return $this;
     }
 
     /**
-     * Get smallImage
+     * Remove unitesImage
      *
-     * @return string
+     * @param \AppBundle\Entity\Buimage $unitesImage
      */
-    public function getSmallImage()
+    public function removeUnitesImage(\AppBundle\Entity\Buimage $unitesImage)
     {
-        return $this->smallImage;
+        $this->unites_image->removeElement($unitesImage);
+    }
+
+    /**
+     * Get unitesImage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUnitesImage()
+    {
+        return $this->unites_image;
     }
 }

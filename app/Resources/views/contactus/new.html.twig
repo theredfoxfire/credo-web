@@ -1,16 +1,54 @@
-{% extends 'baseAdmin.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Contactus creation</h1>
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+<img src="{{ asset('uploads/overview/') }}{{ overview.largeImage }}" class="img-responsive">
+<div class="container">
+        <div class="contact-us">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>CONTACT US</h1>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                  <div id="googleMap"></div>
+                </div>
+                <div class="col-md-6">
+                    <h2>OVERVIEW</h2>
+                    {{ overview.overview | raw }}
+                    <h2>CONTACT US</h2>
+                    {{ form_start(form) }}
+                        {{ form_widget(form) }}
+                        <button type="submit" class="btn btn-default pull-right btn-contact">SUBMIT <i class="fa fa-arrow-circle-o-right"></i> </button>
+                    {{ form_end(form) }}
+                    <br /><br /><br />
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+                    <p>
+                      <b>HEAD OFFICE</b><br />
+                      {{ overview.mainAddress | raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('contactus_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <script>
+          function initMap() {
+            var mapDiv = document.getElementById('googleMap');
+            var map = new google.maps.Map(mapDiv, {
+                center: {lat: {{ overview.latitude }}, lng: {{ overview.longitude }} },
+                zoom: 16
+            });
+            var marker = new google.maps.Marker({
+                position: {lat: {{ overview.latitude }}, lng: {{ overview.longitude }} },
+                map: map,
+                title: 'CREDO GROUP'
+            });
+          }
+        </script>
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg_CsFf86RhVykKP00ro5MliYhx6t4BY0&callback=initMap">
+        </script>
 {% endblock %}
