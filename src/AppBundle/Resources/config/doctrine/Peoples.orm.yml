@@ -9,7 +9,10 @@ AppBundle\Entity\Peoples:
  fields:
   name:
    type: string
-  description:
+  position:
    type: string
-  profileImage:
+  story:
+   type: text
+  largeImage:
    type: string
+   nullable: true

@@ -109,4 +109,91 @@ class Peoples
     {
         return $this->profileImage;
     }
+    /**
+     * @var string
+     */
+    private $position;
+
+    /**
+     * @var string
+     */
+    private $story;
+
+    /**
+     * @var string
+     */
+    private $largeImage;
+
+
+    /**
+     * Set position
+     *
+     * @param string $position
+     *
+     * @return Peoples
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+
+        return $this;
+    }
+
+    /**
+     * Get position
+     *
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set story
+     *
+     * @param string $story
+     *
+     * @return Peoples
+     */
+    public function setStory($story)
+    {
+        $this->story = $story;
+
+        return $this;
+    }
+
+    /**
+     * Get story
+     *
+     * @return string
+     */
+    public function getStory()
+    {
+        return $this->story;
+    }
+
+    /**
+     * Set largeImage
+     *
+     * @param string $largeImage
+     *
+     * @return Peoples
+     */
+    public function setLargeImage($largeImage)
+    {
+        $this->largeImage = $largeImage;
+
+        return $this;
+    }
+
+    /**
+     * Get largeImage
+     *
+     * @return string
+     */
+    public function getLargeImage()
+    {
+        return $this->largeImage;
+    }
 }

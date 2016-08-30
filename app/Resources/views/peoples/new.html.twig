@@ -1,16 +1,14 @@
 {% extends 'baseAdmin.html.twig' %}
-
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% block body %}
     <h1>Peoples creation</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <button class="btn btn-info" type="Submit" >Post </button>
     {{ form_end(form) }}
-
-    <ul>
-        <li>
+<br />
             <a href="{{ path('peoples_index') }}">Back to the list</a>
-        </li>
-    </ul>
+            <br />
+
 {% endblock %}

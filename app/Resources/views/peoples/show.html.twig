@@ -6,35 +6,31 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ people.id }}</td>
+                <th width="100">Id</th>
+                <td>{{ peoples.id }}</td>
             </tr>
             <tr>
                 <th>Name</th>
-                <td>{{ people.name }}</td>
+                <td>{{ peoples.name }}</td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td>{{ peoples.position }}</td>
             </tr>
             <tr>
                 <th>Description</th>
-                <td>{{ people.description }}</td>
+                <td>{{ peoples.story | raw }}</td>
             </tr>
             <tr>
                 <th>Profileimage</th>
-                <td>{{ people.profileImage }}</td>
+                <td><img src="{{ asset('uploads/peoples/') }}{{ peoples.largeImage }}" height="400" width="400"></td>
             </tr>
         </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('peoples_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('peoples_edit', { 'id': people.id }) }}">Edit</a>
-        </li>
-        <li>
+    </table><br>
+            <a href="{{ path('peoples_index') }}">Back to the list</a><br />
+            <a href="{{ path('peoples_edit', { 'id': peoples.id }) }}">Edit</a>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input type="submit" class="btn btn-large btn-danger" onclick="return confirm('Are you sure you want to delete this item?')" value="Delete">
             {{ form_end(delete_form) }}
-        </li>
-    </ul>
+        <br /><br />
 {% endblock %}

@@ -156,4 +156,3 @@ class Csr
         return $this->csr_image;
     }
 }
-

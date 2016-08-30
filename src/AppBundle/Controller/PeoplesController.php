@@ -18,16 +18,31 @@ class PeoplesController extends Controller
      * Lists all Peoples entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+     public function indexAction(Request $request)
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql   = "SELECT a FROM AppBundle:Peoples a";
+         $query = $em->createQuery($dql);
 
-        $peoples = $em->getRepository('AppBundle:Peoples')->findAll();
+         $paginator  = $this->get('knp_paginator');
+         $pagination = $paginator->paginate(
+             $query, /* query NOT result */
+             $request->query->getInt('page', 1)/*page number*/,
+             10/*limit per page*/
+         );
 
-        return $this->render('peoples/index.html.twig', array(
-            'peoples' => $peoples,
-        ));
-    }
+         $peoples = $em->getRepository('AppBundle:Peoples')->findAll();
+         $deleteForms = array();
+
+         foreach ($peoples as $entity) {
+             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+         }
+
+         return $this->render('peoples/index.html.twig', array(
+             'pagination' => $pagination,
+             'deleteForms' => $deleteForms,
+         ));
+     }
 
     /**
      * Creates a new Peoples entity.
@@ -35,20 +50,27 @@ class PeoplesController extends Controller
      */
     public function newAction(Request $request)
     {
-        $people = new Peoples();
-        $form = $this->createForm('AppBundle\Form\PeoplesType', $people);
+        $peoples = new Peoples();
+        $form = $this->createForm('AppBundle\Form\PeoplesType', $peoples);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($people);
+            $file = $peoples->getLargeImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('peoples_directory'),
+                $fileName
+            );
+            $peoples->setLargeImage($fileName);
+            $em->persist($peoples);
             $em->flush();
 
-            return $this->redirectToRoute('peoples_show', array('id' => $people->getId()));
+            return $this->redirectToRoute('peoples_show', array('id' => $peoples->getId()));
         }
 
         return $this->render('peoples/new.html.twig', array(
-            'people' => $people,
+            'peoples' => $peoples,
             'form' => $form->createView(),
         ));
     }
@@ -57,12 +79,26 @@ class PeoplesController extends Controller
      * Finds and displays a Peoples entity.
      *
      */
-    public function showAction(Peoples $people)
+    public function showAction(Peoples $peoples)
     {
-        $deleteForm = $this->createDeleteForm($people);
+        $deleteForm = $this->createDeleteForm($peoples);
 
         return $this->render('peoples/show.html.twig', array(
-            'people' => $people,
+            'peoples' => $peoples,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a Peoples entity.
+     *
+     */
+    public function showPublicAction(Peoples $peoples)
+    {
+        $deleteForm = $this->createDeleteForm($peoples);
+
+        return $this->render('peoples/showPublic.html.twig', array(
+            'peoples' => $peoples,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -71,22 +107,38 @@ class PeoplesController extends Controller
      * Displays a form to edit an existing Peoples entity.
      *
      */
-    public function editAction(Request $request, Peoples $people)
+    public function editAction(Request $request, Peoples $peoples)
     {
-        $deleteForm = $this->createDeleteForm($people);
-        $editForm = $this->createForm('AppBundle\Form\PeoplesType', $people);
+        $deleteForm = $this->createDeleteForm($peoples);
+        $editForm = $this->createForm('AppBundle\Form\PeoplesType', $peoples);
+        $oldFile = $peoples->getLargeImage();
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($people);
+            $file = $peoples->getLargeImage();
+            if (!empty($file)) {
+                if (file_exists($this->getParameter('peoples_directory').'/'.$oldFile)) {
+                    unlink($this->getParameter('peoples_directory').'/'.$oldFile);
+                }
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('peoples_directory'),
+                    $fileName
+                );
+                $peoples->setLargeImage($fileName);
+            } else {
+              $peoples->setLargeImage($oldFile);
+            }
+
+            $em->persist($peoples);
             $em->flush();
 
-            return $this->redirectToRoute('peoples_edit', array('id' => $people->getId()));
+            return $this->redirectToRoute('peoples_index');
         }
 
         return $this->render('peoples/edit.html.twig', array(
-            'people' => $people,
+            'peoples' => $peoples,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -96,14 +148,17 @@ class PeoplesController extends Controller
      * Deletes a Peoples entity.
      *
      */
-    public function deleteAction(Request $request, Peoples $people)
+    public function deleteAction(Request $request, Peoples $peoples)
     {
-        $form = $this->createDeleteForm($people);
+        $form = $this->createDeleteForm($peoples);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($people);
+            if (file_exists($this->getParameter('peoples_directory').'/'.$peoples->getLargeImage())) {
+                unlink($this->getParameter('peoples_directory').'/'.$peoples->getLargeImage());
+            }
+            $em->remove($peoples);
             $em->flush();
         }
 
@@ -113,14 +168,14 @@ class PeoplesController extends Controller
     /**
      * Creates a form to delete a Peoples entity.
      *
-     * @param Peoples $people The Peoples entity
+     * @param Peoples $peoples The Peoples entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Peoples $people)
+    private function createDeleteForm(Peoples $peoples)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('peoples_delete', array('id' => $people->getId())))
+            ->setAction($this->generateUrl('peoples_delete', array('id' => $peoples->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

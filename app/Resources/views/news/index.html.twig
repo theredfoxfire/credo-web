@@ -20,7 +20,7 @@
         {% for news in pagination %}
             <tr>
                 <td><a href="{{ path('news_show', { 'id': news.id }) }}">{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
-                <td>{{ news.title | raw }}</td>
+                <td><a href="{{ path('news_show', { 'id': news.id }) }}">{{ news.title | raw }}</a></td>
                 <td>{{ news.subtitle | raw }}</td>
                 <td>{{ news.story | raw }}</td>
                 <td><img src="{{ asset('uploads/news/') }}{{ news.largeImage }}" height="400" width="400"></td>

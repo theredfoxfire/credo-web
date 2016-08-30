@@ -136,7 +136,7 @@ class NewsController extends Controller
             $em->persist($news);
             $em->flush();
 
-            return $this->redirectToRoute('news_edit', array('id' => $news->getId()));
+            return $this->redirectToRoute('news_index');
         }
 
         return $this->render('news/edit.html.twig', array(

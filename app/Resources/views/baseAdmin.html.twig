@@ -29,7 +29,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">CREDO GROUP</a>
+            <a class="navbar-brand" href="{{ path('adminHomepage') }}">CREDO GROUP</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -43,21 +43,22 @@
               <li><a href="{{ path('download_index') }}">Downloads</a></li>
               <li><a href="{{ path('aboutus_index') }}">About Us</a></li>
               <li>
+                <a href="{{ path('news_index') }}">News & Media</a>
+              </li>
+              <li>
+                <a href="{{ path('peoples_index') }}">Peoples</a>
+              </li>
+              <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Others...</b></a>
                 <ul class="dropdown-menu">
+
                   <li>
-                    <a href="{{ path('news_index') }}">News & Media</a>
-                  </li>
-                  <li>
-                    <a href="{{ path('peoples_index') }}">Peoples</a>
-                  </li>
-                  <li>
-                    <a href="{{ path('slide_index') }}">Slides Show</a>
+                    <a href="{{ path('slide_index') }}">Home Slides Show</a>
                   </li>
                   <li>
                     <a href="{{ path('logo_index') }}">Logo Business Units</a>
                   </li>
-                  <li><a href="{{ path('quote_index') }}">Quotes</a></li>
+                  <li><a href="{{ path('quote_index') }}">Home Quotes</a></li>
                   <li><a href="{{ path('overview_index') }}">Overview Contact Us</a></li>
                 </ul>
               </li>
