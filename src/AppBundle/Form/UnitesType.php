@@ -23,7 +23,7 @@ class UnitesType extends AbstractType
                 'required' => false,
                 'attr' => array('class' => 'tinymce'),
             ))
-            ->add('largeImage', FileType::class, array('label' => 'Foto (image file, best fit width 1280px x height 793px) ', 'data' => null))
+            ->add('largeImage', FileType::class, array('required' => false, 'label' => 'Foto (image file, best fit width 1280px x height 793px) ', 'data' => null))
         ;
     }
 

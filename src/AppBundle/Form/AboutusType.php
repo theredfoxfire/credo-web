@@ -28,6 +28,7 @@ class AboutusType extends AbstractType
                   'rows' => '20'
                 ),
             ))
+            ->add('largeImage', FileType::class, array('required' => false, 'label' => 'Foto (image file, best fit width 1280px x height 793px) ', 'data' => null))
         ;
     }
 
@@ -37,7 +38,8 @@ class AboutusType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Aboutus'
+            'data_class' => 'AppBundle\Entity\Aboutus',
+            'allow_extra_fields' => true
         ));
     }
 }

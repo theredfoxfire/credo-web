@@ -24,6 +24,14 @@ class Aboutus
     private $story;
 
     /**
+     * @var string
+     * @Assert\Image(
+     * )
+     *
+     */
+    private $largeImage;
+
+    /**
      * Get id
      *
      * @return integer
@@ -79,6 +87,30 @@ class Aboutus
     public function getStory()
     {
         return $this->story;
+    }
+
+    /**
+     * Set largeImage
+     *
+     * @param string $largeImage
+     *
+     * @return Unites
+     */
+    public function setLargeImage($largeImage)
+    {
+        $this->largeImage = $largeImage;
+
+        return $this;
+    }
+
+    /**
+     * Get largeImage
+     *
+     * @return string
+     */
+    public function getLargeImage()
+    {
+        return $this->largeImage;
     }
     /**
      * @var \Doctrine\Common\Collections\Collection

@@ -52,7 +52,6 @@ class UnitesController extends Controller
     public function newAction(Request $request)
     {
         $unite = new Unites();
-        $buimage = new Buimage();
         $form = $this->createForm('AppBundle\Form\UnitesType', $unite);
         $form->handleRequest($request);
 
@@ -66,10 +65,10 @@ class UnitesController extends Controller
             $unite->setLargeImage($fileName);
 
             $em = $this->getDoctrine()->getManager();
-            $data = $request->request->get('unites');
-            $count = $data['fileCount'];
-            for ($i = 0; $i <= $count; $i++) {
-              $file =  $request->files->get('unites')['anotherImage'.$i += 1];
+            $count = $request->request->get('unites')['fileCount'];
+            for ($i = 1; $i <= $count; $i++) {
+              $buimage = new Buimage();
+              $file =  $request->files->get('unites')['anotherImage'.$i];
               if (!empty($file)) {
                   $fileName = md5(uniqid()).'.'.$file->guessExtension();
                   $file->move(
@@ -115,6 +114,7 @@ class UnitesController extends Controller
     public function editAction(Request $request, Unites $unite)
     {
         $deleteForm = $this->createDeleteForm($unite);
+        $images = $unite->getUnitesImage();
         $editForm = $this->createForm('AppBundle\Form\UnitesType', $unite);
         $oldFile = $unite->getLargeImage();
 
@@ -122,16 +122,40 @@ class UnitesController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $count = $request->request->get('unites')['fileCount'];
+            for ($i = 1; $i <= $count; $i++) {
+              $buimage = new Buimage();
+              $file =  $request->files->get('unites')['anotherImage'.$i];
+                if (!empty($file)) {
+                    foreach ($images as $image) {
+                        if (file_exists($this->getParameter('buimage_directory').'/'.$image->getLargeImage()) && !empty($image->getLargeImage())) {
+                            unlink($this->getParameter('buimage_directory').'/'.$image->getLargeImage());
+                            $em->remove($image);
+                            $em->flush();
+                        }
+                    }
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move(
+                        $this->getParameter('buimage_directory'),
+                        $fileName
+                    );
+                    $buimage->setCreatedAt(new \DateTime());
+                    $buimage->setLargeImage($fileName);
+                    $buimage->setUnites($unite);
+                    $em->persist($buimage);
+                    $em->flush();
+                }
+            }
             if (file_exists($this->getParameter('unites_directory').'/'.$oldFile) && !empty($unite->getLargeImage())) {
                 unlink($this->getParameter('unites_directory').'/'.$oldFile);
+                $file = $unite->getLargeImage();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('unites_directory'),
+                    $fileName
+                );
+                $unite->setLargeImage($fileName);
             }
-            $file = $unite->getLargeImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
-                $this->getParameter('unites_directory'),
-                $fileName
-            );
-            $unite->setLargeImage($fileName);
             $em->persist($unite);
             $em->flush();
 
@@ -140,7 +164,7 @@ class UnitesController extends Controller
 
         return $this->render('unites/edit.html.twig', array(
             'unite' => $unite,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -152,9 +176,18 @@ class UnitesController extends Controller
     public function deleteAction(Request $request, Unites $unite)
     {
         $form = $this->createDeleteForm($unite);
+        $images = $unite->getUnitesImage();
         $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($images as $image) {
+                if (file_exists($this->getParameter('buimage_directory').'/'.$image->getLargeImage()) && !empty($image->getLargeImage())) {
+                    unlink($this->getParameter('buimage_directory').'/'.$image->getLargeImage());
+                    $em->remove($image);
+                    $em->flush();
+                }
+            }
             $em = $this->getDoctrine()->getManager();
             if (file_exists($this->getParameter('unites_directory').'/'.$unite->getLargeImage()) && !empty($unite->getLargeImage())) {
                 unlink($this->getParameter('unites_directory').'/'.$unite->getLargeImage());

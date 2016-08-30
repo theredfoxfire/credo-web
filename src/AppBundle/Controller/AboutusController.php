@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Aboutus;
+use AppBundle\Entity\Aboutusimage;
 use AppBundle\Form\AboutusType;
 
 /**
@@ -56,10 +57,33 @@ class AboutusController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $file = $aboutus->getLargeImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('aboutus_directory'),
+                $fileName
+            );
+            $aboutus->setLargeImage($fileName);
+            $count = $request->request->get('aboutus')['fileCount'];
+            for ($i = 1; $i <= $count; $i++) {
+              $abimage = new Aboutusimage();
+              $file =  $request->files->get('aboutus')['anotherImage'.$i];
+              if (!empty($file)) {
+                  $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                  $file->move(
+                      $this->getParameter('aboutusimage_directory'),
+                      $fileName
+                  );
+                  $abimage->setCreatedAt(new \DateTime());
+                  $abimage->setLargeImage($fileName);
+                  $abimage->setAboutus($aboutus);
+                  $em->persist($abimage);
+              }
+            }
             $em->persist($aboutus);
             $em->flush();
 
-            return $this->redirectToRoute('aboutus_show', array('id' => $aboutus->getId()));
+            return $this->redirectToRoute('aboutus_index');
         }
 
         return $this->render('aboutus/new.html.twig', array(
@@ -89,16 +113,52 @@ class AboutusController extends Controller
     public function editAction(Request $request, Aboutus $aboutus)
     {
         $deleteForm = $this->createDeleteForm($aboutus);
+        $images = $aboutus->getAboutusImage();
         $editForm = $this->createForm('AppBundle\Form\AboutusType', $aboutus);
+        $oldFile = $aboutus->getLargeImage();
 
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $count = $request->request->get('aboutus')['fileCount'];
+            for ($i = 1; $i <= $count; $i++) {
+              $abimage = new Aboutusimage();
+              $file =  $request->files->get('aboutus')['anotherImage'.$i];
+                if (!empty($file)) {
+                    foreach ($images as $image) {
+                        if (file_exists($this->getParameter('aboutusimage_directory').'/'.$image->getLargeImage()) && !empty($image->getLargeImage())) {
+                            unlink($this->getParameter('aboutusimage_directory').'/'.$image->getLargeImage());
+                            $em->remove($image);
+                            $em->flush();
+                        }
+                    }
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move(
+                        $this->getParameter('aboutusimage_directory'),
+                        $fileName
+                    );
+                    $abimage->setCreatedAt(new \DateTime());
+                    $abimage->setLargeImage($fileName);
+                    $abimage->setAboutus($aboutus);
+                    $em->persist($abimage);
+                    $em->flush();
+                }
+            }
+            if (file_exists($this->getParameter('aboutus_directory').'/'.$oldFile) && !empty($aboutus->getLargeImage())) {
+                unlink($this->getParameter('aboutus_directory').'/'.$oldFile);
+                $file = $aboutus->getLargeImage();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('aboutus_directory'),
+                    $fileName
+                );
+                $aboutus->setLargeImage($fileName);
+            }
             $em->persist($aboutus);
             $em->flush();
 
-            return $this->redirectToRoute('aboutus_edit', array('id' => $aboutus->getId()));
+            return $this->redirectToRoute('aboutus_index');
         }
 
         return $this->render('aboutus/edit.html.twig', array(

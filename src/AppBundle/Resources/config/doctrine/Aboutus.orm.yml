@@ -11,7 +11,10 @@ AppBundle\Entity\Aboutus:
    type: text
   story:
    type: text
+  largeImage:
+   type: string
  oneToMany:
   aboutus_image:
    targetEntity: Aboutusimage
+   orphanRemoval: true
    mappedBy: aboutus
