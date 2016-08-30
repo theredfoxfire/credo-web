@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>Download list</h1>
+    {{ knp_pagination_render(pagination) }}
     <a class="pull-right btn btn-small" href="{{ path('download_new') }}"><i class="fa fa-plus-square-o"></i>&nbsp;Posting a download</a><br /><br />
     <table class="table table-striped table-bordered">
         <thead>

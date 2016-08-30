@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>News list</h1>
+    {{ knp_pagination_render(pagination) }}
     <a class="pull-right btn btn-small" href="{{ path('news_new') }}"><i class="fa fa-plus-square-o"></i>&nbsp;Posting a news</a><br /><br />
     <table class="table table-striped table-bordered">
         <thead>

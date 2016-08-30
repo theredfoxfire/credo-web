@@ -2,6 +2,7 @@
 
 {% block body %}
     <h1>CSR</h1>
+    {{ knp_pagination_render(pagination) }}
     {#<a class="pull-right btn btn-small" href="{{ path('csr_new') }}"><i class="fa fa-plus-square-o"></i>&nbsp;Create a new CSR</a><br /><br /> #}
     <table class="table table-striped table-bordered">
         <thead>
