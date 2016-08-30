@@ -5,6 +5,8 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class DownloadType extends AbstractType
 {
@@ -16,13 +18,21 @@ class DownloadType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('subtitle')
-            ->add('description')
-            ->add('file')
-            ->add('smallImage')
+            ->add('overview', TextareaType::class, array(
+                'required' => false,
+                'attr' => array(
+                  'class' => 'tinymce',
+                  'rows' => '10'
+                ),
+            ))
+            ->add('file', FileType::class, array(
+              'label' => 'Foto (image file)',
+               'data' => null,
+               'required' => false,
+             ))
         ;
     }
-    
+
     /**
      * @param OptionsResolver $resolver
      */

@@ -28,7 +28,9 @@ class News
     private $story;
 
     /**
-     * @var string
+    * @var string
+    * @Assert\Image(
+    * )
      */
     private $largeImage;
 

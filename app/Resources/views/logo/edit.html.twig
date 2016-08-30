@@ -1,5 +1,5 @@
 {% extends 'baseAdmin.html.twig' %}
-
+{% form_theme edit_form 'bootstrap_3_layout.html.twig' %}
 {% block body %}
     <h1>Logo edit</h1>
     <a href="{{ path('logo_index') }}">Back to the list</a> <br /><br />
@@ -8,7 +8,7 @@
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}<br />
-        <input type="submit" value="Edit" class="btn btn-default"/>
+        <input type="submit" value="Save Edit" class="btn btn-default"/>
     {{ form_end(edit_form) }}
 
 {% endblock %}

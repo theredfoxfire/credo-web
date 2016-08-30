@@ -2,46 +2,46 @@
 
 {% block body %}
     <h1>Download list</h1>
-
-    <table>
+    <a class="pull-right btn btn-small" href="{{ path('download_new') }}"><i class="fa fa-plus-square-o"></i>&nbsp;Posting a download</a><br /><br />
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Title</th>
-                <th>Subtitle</th>
-                <th>Description</th>
+                <th>Overview</th>
                 <th>File</th>
-                <th>Smallimage</th>
-                <th>Actions</th>
+                <th>Datetime</th>
+                <th>Posted By</th>
+                <th width="100">Actions</th>
             </tr>
         </thead>
         <tbody>
-        {% for download in downloads %}
+        {% for download in pagination %}
             <tr>
-                <td><a href="{{ path('download_show', { 'id': download.id }) }}">{{ download.id }}</a></td>
-                <td>{{ download.title }}</td>
-                <td>{{ download.subtitle }}</td>
-                <td>{{ download.description }}</td>
-                <td>{{ download.file }}</td>
-                <td>{{ download.smallImage }}</td>
+                <td><a href="{{ path('download_show', { 'id': download.id }) }}">{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
+                <td><a href="{{ path('download_show', { 'id': download.id }) }}">{{ download.title | raw }}</a></td>
+                <td>{{ download.overview | raw }}</td>
+                <td><a href="{{ asset('uploads/download/') }}{{ download.file }}" target="_blank" download>{{ download.title }}</a></td>
+                <td>{% if download.dateTime %}{{ download.dateTime|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ download.postedBy | capitalize }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('download_show', { 'id': download.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('download_edit', { 'id': download.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a class="btn btn-small" href="{{ path('download_edit', { 'id': download.id }) }}">
+                      <button type="submit" class="btn btn-small">
+                        <i class="fa fa-pencil-square-o "></i>
+                        Edit
+                      </button>
+                    </a>
+                    {{ form_start(deleteForms[download.id]) }}
+                        <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
+                            <i class="fa fa-trash-o"></i>
+                            Delete
+                        </button>
+                    {{ form_end(deleteForms[download.id]) }}
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('download_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    {# display navigation #}
+    {{ knp_pagination_render(pagination) }}
 {% endblock %}

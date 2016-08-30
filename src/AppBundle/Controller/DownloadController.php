@@ -18,16 +18,31 @@ class DownloadController extends Controller
      * Lists all Download entities.
      *
      */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
+     public function indexAction(Request $request)
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql   = "SELECT a FROM AppBundle:Download a";
+         $query = $em->createQuery($dql);
 
-        $downloads = $em->getRepository('AppBundle:Download')->findAll();
+         $paginator  = $this->get('knp_paginator');
+         $pagination = $paginator->paginate(
+             $query, /* query NOT result */
+             $request->query->getInt('page', 1)/*page number*/,
+             10/*limit per page*/
+         );
 
-        return $this->render('download/index.html.twig', array(
-            'downloads' => $downloads,
-        ));
-    }
+         $download = $em->getRepository('AppBundle:Download')->findAll();
+         $deleteForms = array();
+
+         foreach ($download as $entity) {
+             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+         }
+
+         return $this->render('download/index.html.twig', array(
+             'pagination' => $pagination,
+             'deleteForms' => $deleteForms,
+         ));
+     }
 
     /**
      * Creates a new Download entity.
@@ -41,6 +56,15 @@ class DownloadController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $file = $download->getFile();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
+                $this->getParameter('download_directory'),
+                $fileName
+            );
+            $download->setFile($fileName);
+            $download->setDateTime(new \DateTime());
+            $download->setPostedBy($this->getUser()->getUsername());
             $em->persist($download);
             $em->flush();
 
@@ -68,6 +92,20 @@ class DownloadController extends Controller
     }
 
     /**
+     * Finds and displays a Download entity.
+     *
+     */
+    public function showPublicAction(Download $download)
+    {
+        $deleteForm = $this->createDeleteForm($download);
+
+        return $this->render('download/showPublic.html.twig', array(
+            'download' => $download,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
      * Displays a form to edit an existing Download entity.
      *
      */
@@ -75,14 +113,30 @@ class DownloadController extends Controller
     {
         $deleteForm = $this->createDeleteForm($download);
         $editForm = $this->createForm('AppBundle\Form\DownloadType', $download);
+        $oldFile = $download->getFile();
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $file = $download->getFile();
+            if (!empty($file)) {
+                if (file_exists($this->getParameter('download_directory').'/'.$oldFile)) {
+                    unlink($this->getParameter('download_directory').'/'.$oldFile);
+                }
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('download_directory'),
+                    $fileName
+                );
+                $download->setFile($fileName);
+            } else {
+              $download->setFile($oldFile);
+            }
+
             $em->persist($download);
             $em->flush();
 
-            return $this->redirectToRoute('download_edit', array('id' => $download->getId()));
+            return $this->redirectToRoute('download_index');
         }
 
         return $this->render('download/edit.html.twig', array(
@@ -103,6 +157,9 @@ class DownloadController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            if (file_exists($this->getParameter('download_directory').'/'.$download->getFile())) {
+                unlink($this->getParameter('download_directory').'/'.$download->getFile());
+            }
             $em->remove($download);
             $em->flush();
         }

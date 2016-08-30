@@ -20,12 +20,7 @@ class Download
     /**
      * @var string
      */
-    private $subtitle;
-
-    /**
-     * @var string
-     */
-    private $description;
+    private $overview;
 
     /**
      * @var string
@@ -33,9 +28,14 @@ class Download
     private $file;
 
     /**
+     * @var \DateTime
+     */
+    private $dateTime;
+
+    /**
      * @var string
      */
-    private $smallImage;
+    private $postedBy;
 
 
     /**
@@ -73,51 +73,27 @@ class Download
     }
 
     /**
-     * Set subtitle
+     * Set overview
      *
-     * @param string $subtitle
+     * @param string $overview
      *
      * @return Download
      */
-    public function setSubtitle($subtitle)
+    public function setOverview($overview)
     {
-        $this->subtitle = $subtitle;
+        $this->overview = $overview;
 
         return $this;
     }
 
     /**
-     * Get subtitle
+     * Get overview
      *
      * @return string
      */
-    public function getSubtitle()
+    public function getOverview()
     {
-        return $this->subtitle;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return Download
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
+        return $this->overview;
     }
 
     /**
@@ -145,26 +121,50 @@ class Download
     }
 
     /**
-     * Set smallImage
+     * Set dateTime
      *
-     * @param string $smallImage
+     * @param \DateTime $dateTime
      *
      * @return Download
      */
-    public function setSmallImage($smallImage)
+    public function setDateTime($dateTime)
     {
-        $this->smallImage = $smallImage;
+        $this->dateTime = $dateTime;
 
         return $this;
     }
 
     /**
-     * Get smallImage
+     * Get dateTime
+     *
+     * @return \DateTime
+     */
+    public function getDateTime()
+    {
+        return $this->dateTime;
+    }
+
+    /**
+     * Set by
+     *
+     * @param string $by
+     *
+     * @return Download
+     */
+    public function setPostedBy($postedBy)
+    {
+        $this->postedBy = $postedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get by
      *
      * @return string
      */
-    public function getSmallImage()
+    public function getPostedBy()
     {
-        return $this->smallImage;
+        return $this->postedBy;
     }
 }

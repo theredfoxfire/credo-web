@@ -6,7 +6,7 @@
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
+                <th width="100">Id</th>
                 <td>{{ logo.id }}</td>
             </tr>
             <tr>
@@ -19,15 +19,10 @@
             </tr>
         </tbody>
     </table>
+    <a href="{{ path('logo_index') }}">Back to the list</a><br>
 
-    <ul>
-        <li>
-            <a href="{{ path('logo_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('logo_edit', { 'id': logo.id }) }}">Edit</a>
-        </li>
-    </ul>
+            <a href="{{ path('logo_edit', { 'id': logo.id }) }}">Edit</a><br>
+
     {{ form_start(delete_form) }}
         <button type="submit" class="btn btn-large btn-danger" onclick="return confirm('Are you sure you want to delete this item?')"> Delete</button>
     {{ form_end(delete_form) }}

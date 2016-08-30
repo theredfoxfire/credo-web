@@ -9,11 +9,12 @@ AppBundle\Entity\Download:
  fields:
   title:
    type: string
-  subtitle:
-   type: string
-  description:
+  overview:
    type: text
   file:
    type: string
-  smallImage:
+   nullable: true
+  dateTime:
+   type: datetime
+  postedBy:
    type: string
