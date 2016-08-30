@@ -1,12 +1,12 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Csr</h1>
+    <h1>CSR</h1>
 
     <table>
         <tbody>
             <tr>
-                <th>Id</th>
+                <th width="200">Id</th>
                 <td>{{ csr.id }}</td>
             </tr>
             <tr>
@@ -14,51 +14,12 @@
                 <td>{{ csr.title }}</td>
             </tr>
             <tr>
-                <th>Description</th>
-                <td>{{ csr.description }}</td>
+                <th>Story</th>
+                <td>{{ csr.story | raw}}</td>
             </tr>
-            <tr>
-                <th>Organitation</th>
-                <td>{{ csr.organitation }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ csr.address }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ csr.phone }}</td>
-            </tr>
-            <tr>
-                <th>Facisimile</th>
-                <td>{{ csr.facisimile }}</td>
-            </tr>
-            <tr>
-                <th>Largeimage</th>
-                <td>{{ csr.largeImage }}</td>
-            </tr>
-            <tr>
-                <th>Mediumimage</th>
-                <td>{{ csr.mediumImage }}</td>
-            </tr>
-            <tr>
-                <th>Smallimage</th>
-                <td>{{ csr.smallImage }}</td>
-            </tr>
+
         </tbody>
     </table>
 
-    <ul>
-        <li>
             <a href="{{ path('csr_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('csr_edit', { 'id': csr.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
 {% endblock %}

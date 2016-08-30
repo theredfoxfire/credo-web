@@ -155,11 +155,13 @@ class UnitesController extends Controller
                     $fileName
                 );
                 $unite->setLargeImage($fileName);
+            } else {
+              $unite->setLargeImage($oldFile);
             }
             $em->persist($unite);
             $em->flush();
 
-            return $this->redirectToRoute('unites_edit', array('id' => $unite->getId()));
+            return $this->redirectToRoute('unites_index');
         }
 
         return $this->render('unites/edit.html.twig', array(

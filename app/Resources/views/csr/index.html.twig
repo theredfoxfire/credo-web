@@ -1,55 +1,45 @@
 {% extends 'baseAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Csr list</h1>
-
-    <table>
+    <h1>CSR</h1>
+    {#<a class="pull-right btn btn-small" href="{{ path('csr_new') }}"><i class="fa fa-plus-square-o"></i>&nbsp;Create a new CSR</a><br /><br /> #}
+    <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Organitation</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Facisimile</th>
-                <th>Largeimage</th>
-                <th>Mediumimage</th>
-                <th>Smallimage</th>
-                <th>Actions</th>
+                <th>Name</th>
+                <th>About</th>
+                <th width="100">Actions</th>
             </tr>
         </thead>
-        <tbody>
-        {% for csr in csrs %}
-            <tr>
-                <td><a href="{{ path('csr_show', { 'id': csr.id }) }}">{{ csr.id }}</a></td>
-                <td>{{ csr.title }}</td>
-                <td>{{ csr.description }}</td>
-                <td>{{ csr.organitation }}</td>
-                <td>{{ csr.address }}</td>
-                <td>{{ csr.phone }}</td>
-                <td>{{ csr.facisimile }}</td>
-                <td>{{ csr.largeImage }}</td>
-                <td>{{ csr.mediumImage }}</td>
-                <td>{{ csr.smallImage }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('csr_show', { 'id': csr.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('csr_edit', { 'id': csr.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
+
+      <tbody>
+
+          {% for csr in pagination %}
+              <tr>
+                  <td>{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</td>
+                  <td><a href="{{ path('csr_show', { 'id': csr.id }) }}">{{ csr.title }}</a></td>
+                  <td>{{ csr.story | raw }}</td>
+                  <td>
+                      <a class="btn btn-small" href="{{ path('csr_edit', { 'id': csr.id }) }}">
+                        <button type="submit" class="btn btn-small">
+                          <i class="fa fa-pencil-square-o "></i>
+                          Edit
+                        </button>
+                      </a>
+                      {#
+                      {{ form_start(deleteForms[csr.id]) }}
+                          <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
+                              <i class="fa fa-trash-o"></i>
+                              Delete
+                          </button>
+                      {{ form_end(deleteForms[csr.id]) }}
+                      #}
+                  </td>
+              </tr>
+          {% endfor %}
         </tbody>
     </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('csr_new') }}">Create a new entry</a>
-        </li>
-    </ul>
+    {# display navigation #}
+    {{ knp_pagination_render(pagination) }}
 {% endblock %}

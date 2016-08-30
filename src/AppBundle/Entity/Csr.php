@@ -20,27 +20,7 @@ class Csr
     /**
      * @var string
      */
-    private $description;
-
-    /**
-     * @var string
-     */
-    private $organitation;
-
-    /**
-     * @var string
-     */
-    private $address;
-
-    /**
-     * @var string
-     */
-    private $phone;
-
-    /**
-     * @var string
-     */
-    private $facisimile;
+    private $story;
 
     /**
      * @var string
@@ -48,15 +28,17 @@ class Csr
     private $largeImage;
 
     /**
-     * @var string
+     * @var \Doctrine\Common\Collections\Collection
      */
-    private $mediumImage;
+    private $csr_image;
 
     /**
-     * @var string
+     * Constructor
      */
-    private $smallImage;
-
+    public function __construct()
+    {
+        $this->csr_image = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -93,123 +75,27 @@ class Csr
     }
 
     /**
-     * Set description
+     * Set story
      *
-     * @param string $description
+     * @param string $story
      *
      * @return Csr
      */
-    public function setDescription($description)
+    public function setStory($story)
     {
-        $this->description = $description;
+        $this->story = $story;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get story
      *
      * @return string
      */
-    public function getDescription()
+    public function getStory()
     {
-        return $this->description;
-    }
-
-    /**
-     * Set organitation
-     *
-     * @param string $organitation
-     *
-     * @return Csr
-     */
-    public function setOrganitation($organitation)
-    {
-        $this->organitation = $organitation;
-
-        return $this;
-    }
-
-    /**
-     * Get organitation
-     *
-     * @return string
-     */
-    public function getOrganitation()
-    {
-        return $this->organitation;
-    }
-
-    /**
-     * Set address
-     *
-     * @param string $address
-     *
-     * @return Csr
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
-
-    /**
-     * Set phone
-     *
-     * @param string $phone
-     *
-     * @return Csr
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
-
-        return $this;
-    }
-
-    /**
-     * Get phone
-     *
-     * @return string
-     */
-    public function getPhone()
-    {
-        return $this->phone;
-    }
-
-    /**
-     * Set facisimile
-     *
-     * @param string $facisimile
-     *
-     * @return Csr
-     */
-    public function setFacisimile($facisimile)
-    {
-        $this->facisimile = $facisimile;
-
-        return $this;
-    }
-
-    /**
-     * Get facisimile
-     *
-     * @return string
-     */
-    public function getFacisimile()
-    {
-        return $this->facisimile;
+        return $this->story;
     }
 
     /**
@@ -237,50 +123,37 @@ class Csr
     }
 
     /**
-     * Set mediumImage
+     * Add csrImage
      *
-     * @param string $mediumImage
+     * @param \AppBundle\Entity\Csrimage $csrImage
      *
      * @return Csr
      */
-    public function setMediumImage($mediumImage)
+    public function addCsrImage(\AppBundle\Entity\Csrimage $csrImage)
     {
-        $this->mediumImage = $mediumImage;
+        $this->csr_image[] = $csrImage;
 
         return $this;
     }
 
     /**
-     * Get mediumImage
+     * Remove csrImage
      *
-     * @return string
+     * @param \AppBundle\Entity\Csrimage $csrImage
      */
-    public function getMediumImage()
+    public function removeCsrImage(\AppBundle\Entity\Csrimage $csrImage)
     {
-        return $this->mediumImage;
+        $this->csr_image->removeElement($csrImage);
     }
 
     /**
-     * Set smallImage
+     * Get csrImage
      *
-     * @param string $smallImage
-     *
-     * @return Csr
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setSmallImage($smallImage)
+    public function getCsrImage()
     {
-        $this->smallImage = $smallImage;
-
-        return $this;
-    }
-
-    /**
-     * Get smallImage
-     *
-     * @return string
-     */
-    public function getSmallImage()
-    {
-        return $this->smallImage;
+        return $this->csr_image;
     }
 }
+

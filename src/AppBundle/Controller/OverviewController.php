@@ -116,8 +116,10 @@ class OverviewController extends Controller
                    $fileName
                );
                $overview->setLargeImage($fileName);
+             } else {
+               $overview->setLargeImage($oldFile);
              }
-             $em->persist( $overview);
+             $em->persist($overview);
              $em->flush();
 
              return $this->redirectToRoute('overview_edit', array('id' =>  $overview->getId()));
@@ -141,9 +143,9 @@ class OverviewController extends Controller
 
          if ($form->isSubmitted() && $form->isValid()) {
              $em = $this->getDoctrine()->getManager();
-            //  if (file_exists($this->getParameter('overview_directory').'/'.$overview->getLargeImage())) {
-            //      unlink($this->getParameter('overview_directory').'/'.$overview->getLargeImage());
-            //  }
+             if (file_exists($this->getParameter('overview_directory').'/'.$overview->getLargeImage())) {
+                 unlink($this->getParameter('overview_directory').'/'.$overview->getLargeImage());
+             }
              $em->remove($overview);
              $em->flush();
          }

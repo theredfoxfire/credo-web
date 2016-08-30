@@ -9,19 +9,12 @@ AppBundle\Entity\Csr:
  fields:
   title:
    type: string
-  description:
+  story:
    type: text
-  organitation:
-   type: string
-  address:
-   type: text
-  phone:
-   type: string
-  facisimile:
-   type: string
   largeImage:
    type: string
-  mediumImage:
-   type: string
-  smallImage:
-   type: string
+ oneToMany:
+  csr_image:
+   targetEntity: Csrimage
+   orphanRemoval: true
+   mappedBy: csr

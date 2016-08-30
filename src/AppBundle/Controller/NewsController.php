@@ -129,6 +129,8 @@ class NewsController extends Controller
                     $fileName
                 );
                 $news->setLargeImage($fileName);
+            } else {
+              $news->setLargeImage($oldFile);
             }
 
             $em->persist($news);

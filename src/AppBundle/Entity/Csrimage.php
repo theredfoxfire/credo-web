@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 /**
- * Buimage
+ * Csrimage
  */
-class Buimage
+class Csrimage
 {
     /**
      * @var integer
@@ -26,9 +26,9 @@ class Buimage
     private $createdAt;
 
     /**
-     * @var \AppBundle\Entity\Unites
+     * @var \AppBundle\Entity\Csr
      */
-    private $unites;
+    private $csr;
 
 
     /**
@@ -46,7 +46,7 @@ class Buimage
      *
      * @param string $largeImage
      *
-     * @return Buimage
+     * @return Csrimage
      */
     public function setLargeImage($largeImage)
     {
@@ -70,7 +70,7 @@ class Buimage
      *
      * @param \DateTime $createdAt
      *
-     * @return Buimage
+     * @return Csrimage
      */
     public function setCreatedAt($createdAt)
     {
@@ -90,26 +90,26 @@ class Buimage
     }
 
     /**
-     * Set unites
+     * Set csr
      *
-     * @param \AppBundle\Entity\Unites $unites
+     * @param \AppBundle\Entity\Csr $csr
      *
-     * @return Buimage
+     * @return Csrimage
      */
-    public function setUnites(\AppBundle\Entity\Unites $unites = null)
+    public function setCsr(\AppBundle\Entity\Csr $csr = null)
     {
-        $this->unites = $unites;
+        $this->csr = $csr;
 
         return $this;
     }
 
     /**
-     * Get unites
+     * Get csr
      *
-     * @return \AppBundle\Entity\Unites
+     * @return \AppBundle\Entity\Csr
      */
-    public function getUnites()
+    public function getCsr()
     {
-        return $this->unites;
+        return $this->csr;
     }
 }

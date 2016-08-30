@@ -154,6 +154,8 @@ class AboutusController extends Controller
                     $fileName
                 );
                 $aboutus->setLargeImage($fileName);
+            } else {
+              $aboutus->setLargeImage($oldFile);
             }
             $em->persist($aboutus);
             $em->flush();

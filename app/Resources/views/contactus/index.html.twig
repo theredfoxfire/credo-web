@@ -17,7 +17,7 @@
         <tbody>
         {% for contactus in contactuss %}
             <tr>
-                <td><a href="{{ path('contactus_show', { 'id': contactus.id }) }}">{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
+                <td><a href="{{ path('contactus_show', { 'id': contactus.id }) }}">{{ contactuss.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
                 <td><a href="{{ path('contactus_show', { 'id': contactus.id }) }}">{{ contactus.name }}</a></td>
                 <td>{{ contactus.email }}</td>
                 <td>{{ contactus.title }}</td>

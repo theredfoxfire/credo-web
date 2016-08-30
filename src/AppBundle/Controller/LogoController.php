@@ -109,12 +109,16 @@ class LogoController extends Controller
                  unlink($this->getParameter('logo_directory').'/'.$oldFile);
              }
              $file =  $logo->getLargeImage();
+             if (!empty($file)) {
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
                  $this->getParameter('logo_directory'),
                  $fileName
              );
              $logo->setLargeImage($fileName);
+             } else {
+               $logo->setLargeImage($oldFile);
+             }
              $em->persist( $logo);
              $em->flush();
 
