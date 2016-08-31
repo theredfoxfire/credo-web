@@ -40,3 +40,6 @@ app_aboutus_image:
 app_bu_image:
     resource: "@AppBundle/Resources/config/routing/bu_image.yml"
     prefix:   /
+app_users:
+    resource: "@AppBundle/Resources/config/routing/users.yml"
+    prefix:   /

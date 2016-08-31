@@ -266,4 +266,18 @@ class Users implements AdvancedUserInterface, \Serializable
     {
 		return ($this->is_active == true ? $this->status = "Aktif" : $this->status = "Tidak Aktif");
 	  }
+
+    /**
+    * @var string
+    */
+    private $passwordEdit;
+
+    public function getPasswordEdit() {
+      return;
+    }
+
+    public function setPasswordEdit($passwordEdit) {
+      $this->passwordEdit = $passwordEdit;
+      return;
+    }
 }
