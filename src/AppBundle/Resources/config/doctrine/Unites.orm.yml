@@ -18,3 +18,10 @@ AppBundle\Entity\Unites:
    targetEntity: Buimage
    orphanRemoval: true
    mappedBy: unites
+ manyToOne:
+  category:
+   targetEntity: Category
+   inversedBy: unites
+   joinColumn:
+    name: category_id
+    referencedColumnName: id

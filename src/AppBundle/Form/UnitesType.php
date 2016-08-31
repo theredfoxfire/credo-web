@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use AppBundle\Entity\Category;
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -18,6 +20,7 @@ class UnitesType extends AbstractType
     {
         $builder
             ->add('title', null, array('label' => 'Name'))
+            ->add('category', null, array('empty_data' => '-- Please select business category --', 'placeholder' => 'Please select business category'))
             ->add('story', TextareaType::class, array(
                 'label' => 'Short Story',
                 'required' => false,

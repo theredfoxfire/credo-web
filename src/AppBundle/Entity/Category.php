@@ -52,4 +52,57 @@ class Category
     {
         return $this->category;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $unites;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->unites = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add unite
+     *
+     * @param \AppBundle\Entity\Unites $unite
+     *
+     * @return Category
+     */
+    public function addUnite(\AppBundle\Entity\Unites $unite)
+    {
+        $this->unites[] = $unite;
+
+        return $this;
+    }
+
+    /**
+     * Remove unite
+     *
+     * @param \AppBundle\Entity\Unites $unite
+     */
+    public function removeUnite(\AppBundle\Entity\Unites $unite)
+    {
+        $this->unites->removeElement($unite);
+    }
+
+    /**
+     * Get unites
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUnites()
+    {
+        return $this->unites;
+    }
+
+    /**
+    * convert to string to make it available in select options
+    */
+    public function __toString() {
+        return $this->category;
+    }
 }

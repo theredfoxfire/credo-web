@@ -9,3 +9,8 @@ AppBundle\Entity\Category:
  fields:
   category:
    type: string
+ oneToMany:
+  unites:
+   targetEntity: Unites
+   orphanRemoval: true
+   mappedBy: category
