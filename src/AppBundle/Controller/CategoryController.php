@@ -5,23 +5,23 @@ namespace AppBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use AppBundle\Entity\Quote;
-use AppBundle\Form\QuoteType;
+use AppBundle\Entity\Category;
+use AppBundle\Form\CategoryType;
 
 /**
- * Quote controller.
+ * Category controller.
  *
  */
-class QuoteController extends Controller
+class CategoryController extends Controller
 {
     /**
-     * Lists all Quote entities.
+     * Lists all Category entities.
      *
      */
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM AppBundle:Quote a";
+        $dql   = "SELECT a FROM AppBundle:Category a";
         $query = $em->createQuery($dql);
 
         $paginator  = $this->get('knp_paginator');
@@ -31,112 +31,112 @@ class QuoteController extends Controller
             10/*limit per page*/
         );
 
-        $quote = $em->getRepository('AppBundle:Quote')->findAll();
+        $category = $em->getRepository('AppBundle:Category')->findAll();
         $deleteForms = array();
 
-        foreach ($quote as $entity) {
+        foreach ($category as $entity) {
             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
         }
 
-        return $this->render('quote/index.html.twig', array(
+        return $this->render('category/index.html.twig', array(
             'pagination' => $pagination,
             'deleteForms' => $deleteForms,
         ));
     }
 
     /**
-     * Creates a new Quote entity.
+     * Creates a new Category entity.
      *
      */
     public function newAction(Request $request)
     {
-        $quote = new Quote();
-        $form = $this->createForm('AppBundle\Form\QuoteType', $quote);
+        $category = new Category();
+        $form = $this->createForm('AppBundle\Form\CategoryType', $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($quote);
+            $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute('quote_index');
+            return $this->redirectToRoute('category_index');
         }
 
-        return $this->render('quote/new.html.twig', array(
-            'quote' => $quote,
+        return $this->render('category/new.html.twig', array(
+            'category' => $category,
             'form' => $form->createView(),
         ));
     }
 
     /**
-     * Finds and displays a Quote entity.
+     * Finds and displays a Category entity.
      *
      */
-    public function showAction(Quote $quote)
+    public function showAction(Category $category)
     {
-        $deleteForm = $this->createDeleteForm($quote);
+        $deleteForm = $this->createDeleteForm($category);
 
-        return $this->render('quote/show.html.twig', array(
-            'quote' => $quote,
+        return $this->render('category/show.html.twig', array(
+            'category' => $category,
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Displays a form to edit an existing Quote entity.
+     * Displays a form to edit an existing Category entity.
      *
      */
-    public function editAction(Request $request, Quote $quote)
+    public function editAction(Request $request, Category $category)
     {
-        $deleteForm = $this->createDeleteForm($quote);
-        $editForm = $this->createForm('AppBundle\Form\QuoteType', $quote);
+        $deleteForm = $this->createDeleteForm($category);
+        $editForm = $this->createForm('AppBundle\Form\CategoryType', $category);
 
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($quote);
+            $em->persist($category);
             $em->flush();
 
-            return $this->redirectToRoute('quote_index');
+            return $this->redirectToRoute('category_index');
         }
 
-        return $this->render('quote/edit.html.twig', array(
-            'quote' => $quote,
+        return $this->render('category/edit.html.twig', array(
+            'category' => $category,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
 
     /**
-     * Deletes a Quote entity.
+     * Deletes a Category entity.
      *
      */
-    public function deleteAction(Request $request, Quote $quote)
+    public function deleteAction(Request $request, Category $category)
     {
-        $form = $this->createDeleteForm($quote);
+        $form = $this->createDeleteForm($category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->remove($quote);
+            $em->remove($category);
             $em->flush();
         }
 
-        return $this->redirectToRoute('quote_index');
+        return $this->redirectToRoute('category_index');
     }
 
     /**
-     * Creates a form to delete a Quote entity.
+     * Creates a form to delete a Category entity.
      *
-     * @param Quote $quote The Quote entity
+     * @param Category $category The Category entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createDeleteForm(Quote $quote)
+    private function createDeleteForm(Category $category)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('quote_delete', array('id' => $quote->getId())))
+            ->setAction($this->generateUrl('category_delete', array('id' => $category->getId())))
             ->setMethod('DELETE')
             ->getForm()
         ;

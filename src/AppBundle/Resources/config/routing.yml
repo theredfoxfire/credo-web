@@ -43,3 +43,6 @@ app_bu_image:
 app_users:
     resource: "@AppBundle/Resources/config/routing/users.yml"
     prefix:   /
+app_category:
+    resource: "@AppBundle/Resources/config/routing/category.yml"
+    prefix:   /
