@@ -26,6 +26,7 @@ class Aboutus
     /**
      * @var string
      * @Assert\Image(
+     * maxSize = "2024k"
      * )
      *
      */

@@ -15,6 +15,7 @@ class Csrimage
     /**
     * @var string
     * @Assert\Image(
+    * maxSize = "2024k"
     * )
      * @var string
      */

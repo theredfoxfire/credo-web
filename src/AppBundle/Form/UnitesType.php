@@ -20,13 +20,15 @@ class UnitesType extends AbstractType
     {
         $builder
             ->add('title', null, array('label' => 'Name'))
+            ->add('subtitle', null, array('label' => 'Sub name'))
             ->add('category', null, array('empty_data' => '-- Please select business category --', 'placeholder' => 'Please select business category'))
             ->add('story', TextareaType::class, array(
                 'label' => 'Short Story',
                 'required' => false,
-                'attr' => array('class' => 'tinymce'),
+                'attr' => array('class' => 'tinymce', 'rows' => '15'),
             ))
-            ->add('largeImage', FileType::class, array('required' => false, 'label' => 'Foto (image file, best fit width 1280px x height 793px) ', 'data' => null))
+            ->add('largeImage', FileType::class, array('required' => false, 'label' => 'Foto (image file, best fit width 1280px x height 793px Max size 2MB) ', 'data' => null))
+            ->add('webUrl', null, array('required' => false, 'label' => 'Website Address'))
         ;
     }
 

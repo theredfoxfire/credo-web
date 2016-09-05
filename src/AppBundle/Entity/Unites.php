@@ -26,6 +26,7 @@ class Unites
     /**
      * @var string
      * @Assert\Image(
+     * maxSize = "2024k"
      * )
      *
      */
@@ -187,5 +188,63 @@ class Unites
     public function getCategory()
     {
         return $this->category;
+    }
+    /**
+     * @var string
+     */
+    private $subtitle;
+
+
+    /**
+     * Set subtitle
+     *
+     * @param string $subtitle
+     *
+     * @return Unites
+     */
+    public function setSubtitle($subtitle)
+    {
+        $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    /**
+     * Get subtitle
+     *
+     * @return string
+     */
+    public function getSubtitle()
+    {
+        return $this->subtitle;
+    }
+    /**
+     * @var string
+     */
+    private $webUrl;
+
+
+    /**
+     * Set webUrl
+     *
+     * @param string $webUrl
+     *
+     * @return Unites
+     */
+    public function setWebUrl($webUrl)
+    {
+        $this->webUrl = $webUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get webUrl
+     *
+     * @return string
+     */
+    public function getWebUrl()
+    {
+        return $this->webUrl;
     }
 }

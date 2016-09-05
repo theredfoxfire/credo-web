@@ -39,6 +39,7 @@ class DefaultController extends Controller
              3/*limit per page*/
          );
 
+
          $slides = $em->getRepository('AppBundle:Slide')->findAll();
          $logos = $em->getRepository('AppBundle:Logo')->findAll();
          $quotes = $em->getRepository('AppBundle:Quote')->findAll();
@@ -50,6 +51,7 @@ class DefaultController extends Controller
              'quotes' => $quotes,
              'abouts' => $abouts,
              'news' => $news,
+             'categories' => $this->get('app.services.getCategories')->getCategories(),
          ));
      }
 }

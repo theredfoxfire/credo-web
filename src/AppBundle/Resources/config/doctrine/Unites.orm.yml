@@ -9,10 +9,15 @@ AppBundle\Entity\Unites:
  fields:
   title:
    type: string
+  subtitle:
+   type: string
   story:
    type: text
   largeImage:
    type: string
+  webUrl:
+   type: string
+   nullable: true
  oneToMany:
   unites_image:
    targetEntity: Buimage

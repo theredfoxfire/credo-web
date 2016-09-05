@@ -23,7 +23,7 @@ class NewsType extends AbstractType
                 'required' => false,
                 'attr' => array(
                   'class' => 'tinymce',
-                  'rows' => '20'
+                  'rows' => '15'
                 ),
             ))
             ->add('largeImage', FileType::class, array(

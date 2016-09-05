@@ -24,6 +24,9 @@ class Download
 
     /**
      * @var string
+     * @Assert\File(
+     *  maxSize = "2024k"
+     *)
      */
     private $file;
 

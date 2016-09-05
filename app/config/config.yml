@@ -80,3 +80,8 @@ knp_paginator:
 twig:
     form:
         resources: ['bootstrap_3_layout.html.twig']
+services:
+  app.services.getCategories:
+    class: AppBundle\Services\GetCategories
+    arguments:
+      em: "@doctrine.orm.entity_manager"

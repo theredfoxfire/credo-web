@@ -16,6 +16,7 @@ class Aboutusimage
     /**
      * @var string
      * @Assert\Image(
+     * maxSize = "2024k"
      * )
      */
     private $largeImage;

@@ -67,53 +67,22 @@
                           <li class="divider-vertical dropdown mega-dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
                               <ul class="dropdown-menu mega-dropdown-menu row">
-                                <div class="row">
-                                  <li class="col-sm-3">
-                                      <ul class="list-bu">
-                                          <li class="dropdown-header-dw">PROPERTY</li>
-                                          <li><a href="meli-yog.html">MELIA - YOGYAKARTA</a></li>
-                                          <li><a href="meli-mas.html">MELIA - KUALA LUMPUR</a></li>
-                                          <li><a href="aman.html">AMANDARI - BALI</a></li>
-                                          <li><a href="the-statue.html">THE STATURE - JAKARTA</a></li>
-                                          <li><a href="surya.html">SURYA RAYA INVESTAMA</a></li>
-                                          <li><a href="t8tower.html">T8TOWER - JAKARTA</a></li>
-                                          <li><a href="kiara.html">KIARA RESIDENCE - BOGOR</a></li>
-                                      </ul>
-                                  </li>
-                                  <li class="col-sm-3">
-                                      <ul class="list-bu">
-                                          <li class="dropdown-header-dw">HEALTH CARE</li>
-                                          <li><a href="medis.html">MEDISTRA HOSPITAL</a></li>
-                                      </ul>
-                                  </li>
-                                  <li class="col-sm-3">
-                                      <ul class="list-bu">
-                                          <li class="dropdown-header-dw">RETAIL</li>
-                                          <li><a href="astri.html">ASTRINDO</a></li>
-                                          <li><a href="laund.html">LAUNDRETTE</a></li>
-                                          <li><a href="credo-boga.html">CREDO BOGA MAKMUR</a></li>
-                                      </ul>
-                                  </li>
-                                  <li class="col-sm-3">
-                                      <ul class="list-bu">
-                                          <li class="dropdown-header-dw">ENERGY</li>
-                                          <li><a href="vkc.html">VERDANTURA KALTIM COAL</a></li>
-                                          <li><a href="kbe.html">KUTAI BARAT ENERGI</a></li>
-                                      </ul>
-                                  </li>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                  <li class="col-sm-3">
-                                      <ul class="list-bu">
-                                          <li class="dropdown-header-dw">SERVICES</li>
-                                          <li><a href="shac.html">SHACMAN</a></li>
-                                          <li><a href="alpolic.html">ALPOLIC</a></li>
-                                          <li><a href="bcm.html">BANGUN CIPTA MAKMUR</a></li>
-                                          <li><a href="ois.html">OPTIMA INTI SELARAS</a></li>
-                                      </ul>
-                                  </li>
-                              </div>
+                                  {% for category in categories %}
+                                      {% if loop.index % 4 == 0 or loop.index == 1 %}
+                                          <div class="row">
+                                      {% endif %}
+                                              <li class="col-sm-3">
+                                                  <ul class="list-bu">
+                                                        <li class="dropdown-header-dw">{{ category.category | upper }}</li>
+                                                        {% for unite in category.unites %}
+                                                            <li><a href="{{ path('unites_show', { 'id': unite.id }) }}">{{ unite.title | upper }}</a></li>
+                                                        {% endfor %}
+                                                  </ul>
+                                              </li>
+                                      {% if loop.index % 4 == 0 %}
+                                          </div><hr />
+                                      {% endif %}
+                                  {% endfor %}
                               </ul>
                           </li>
                           <li class="divider-vertical"><a href="news-media.html">NEWS AND MEDIA</a></li>
