@@ -8,6 +8,11 @@ aboutus_show:
     defaults: { _controller: "AppBundle:Aboutus:show" }
     methods:  GET
 
+aboutus_show_public:
+    path:     /aboutus/{id}/show
+    defaults: { _controller: "AppBundle:Aboutus:showPublic" }
+    methods:  GET
+
 aboutus_new:
     path:     /admin/aboutus/new
     defaults: { _controller: "AppBundle:Aboutus:new" }

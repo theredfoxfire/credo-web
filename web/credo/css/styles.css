@@ -25,10 +25,7 @@ body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #6d6e71;
 }
-p {
-  font-family: "din-light";
-  font-size: 12px;
-}
+
 /**
  * Header CSS
 **/
@@ -125,8 +122,37 @@ input.txtsearch {
     border-color: #fff;
 }
 @media (max-width: 800px) {
+  .judith {
+    margin-left: 0px !important;
+  }
   h1 {
     font-size: 16px !important;
+  }
+  .logo-list {
+    height: 120px !important;
+  }
+  .h1, .h2, .h3, h1, h2, h3 {
+      margin-top: 0px !important;
+      margin-bottom: 5px !important;
+  }
+
+  hr {
+      margin-top: 10px !important;
+      margin-bottom: 5px !important;
+      border: 0;
+      border-top: 1px solid #eee;
+  }
+
+  #news .readmore {
+      margin-top: 0px !important;
+      margin-bottom: 25px !important;
+      font-family: "din-light";
+      font-size: 11px;
+
+      text-align: center;
+  }
+  .carousel-inner {
+    height: auto !important;
   }
 }
 @media (min-width: 768px) {
@@ -156,7 +182,9 @@ input.txtsearch {
     border-color: #D9D9DE;
     background: #fff;
 }
-
+.carousel-inner {
+  height: 500px;
+}
 #site-header .site-navbar {
     height: 60px;
     background-color: #FFF;
@@ -171,11 +199,12 @@ input.txtsearch {
     box-shadow: 0 10px 6px -6px #777;
 }
 .logo-list {
-  height: 200px !important;
+  height: 200px;
 }
 
 .img-slider {
   margin: 0 auto;
+  margin-top: -15%;
 }
 .carousel-control.left {
   background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.5) 100%) !important;
@@ -333,6 +362,20 @@ input.txtsearch {
     font-size: 20px;
 }
 
+#business-units .lead {
+    font-family: "din-light";
+    font-size: 12px;
+}
+.lead {
+    font-family: "din-light";
+    font-size: 12px;
+}
+
+p {
+    font-family: "din-light";
+    font-size: 12px;
+}
+
 #owl-demo .item {
     background: #3fbf79;
     padding: 30px 0;
@@ -437,9 +480,16 @@ input.txtsearch {
     font-size: 32px;
     border: 1px #fff;
 }
-
+.quotes {
+  font-size: 14px !important;
+  font-family: "TheanoDidot-Regular";
+}
 .wrapper-with-margin {
     margin: 0 50px;
+}
+
+h4 {
+  font-family: "TheanoDidot-Regular";
 }
 
 .owl-theme .owl-controls .owl-buttons div {
@@ -479,6 +529,11 @@ input.txtsearch {
     font-size: 37px;
 }
 
+#vision .lead {
+    font-family: "din-light";
+    font-size: 12px;
+}
+
 #vision .readmore {
     font-family: "din-light";
     font-size: 11px;
@@ -501,6 +556,11 @@ input.txtsearch {
 #about-us h1 {
     font-family: "TheanoDidot-Regular";
     font-size: 20px;
+}
+
+#about-us .lead {
+    font-family: "din-light";
+    font-size: 12px;
 }
 
 #about-us .readmore {
@@ -540,6 +600,11 @@ input.txtsearch {
 #news h1 {
     font-family: "TheanoDidot-Regular";
     font-size: 20px;
+}
+
+#news .lead {
+    font-family: "din-light";
+    font-size: 12px;
 }
 
 #news .readmore {
@@ -595,11 +660,11 @@ input.txtsearch {
     }
 }
 
-#career-home {
+#career {
     background: #d5ae5f;
 }
 
-#career-home h1 {
+#career h1 {
     font-family: "TheanoDidot-Regular";
     font-size: 20px;
     color: #fff;
@@ -607,12 +672,12 @@ input.txtsearch {
     padding-bottom: 40px;
 }
 
-#career-home .career-button-wrapper {
+#career .career-button-wrapper {
     text-align: center;
     margin-bottom: 100px;
 }
 
-#career-home .career-button {
+#career .career-button {
     height: 50px;
     width: 200px;
     background: #d5ae5f;
@@ -622,7 +687,7 @@ input.txtsearch {
     color: #fff;
 }
 
-#career-home .career-button:hover,#career-home .career-button:focus {
+#career .career-button:hover,#career .career-button:focus {
     background: #ce0027;
 }
 
@@ -853,6 +918,8 @@ input.txtsearch {
 }
 
 .contact-us .lead {
+    font-family: "din-light";
+    font-size: 12px;
     text-align: justify;
 }
 
@@ -924,6 +991,11 @@ input.txtsearch {
     font-size: 20px;
 }
 
+.csr .lead {
+    font-family: "din-light";
+    font-size: 12px;
+}
+
 .about-us {
     margin-bottom: 50px;
     margin-top: 50px;
@@ -943,15 +1015,23 @@ input.txtsearch {
     float: left;
     margin: 6px 20px 0 0;
 }
-
+.judith {
+  margin-left: 450px;
+}
 .page-title {
   margin-top: -6px !important;
-  font-size: 32px;
+  font-family: "TheanoDidot-Regular";
+  font-size: 18px;
 }
 
 .about-us h1 {
     font-family: "TheanoDidot-Regular";
     font-size: 20px;
+}
+
+.about-us .lead {
+    font-family: "din-light";
+    font-size: 12px;
 }
 
 .business-unit {
@@ -978,6 +1058,11 @@ input.txtsearch {
 .business-unit h1 {
     font-family: "TheanoDidot-Regular";
     font-size: 20px;
+}
+
+.business-unit .lead {
+    font-family: "din-light";
+    font-size: 12px;
 }
 
 .news-media {
@@ -1046,7 +1131,7 @@ input.txtsearch {
     border-bottom: 1px solid #E1E6E7;
 }
 
-.pagination > .active > a,.pagination > .active > a:focus,.pagination > .active > a:hover,.pagination > .active > span,.pagination > .active > span:focus,.pagination > .active > span:hover {
+.news-media .pagination > .active > a,.news-media .pagination > .active > a:focus,.news-media .pagination > .active > a:hover,.news-media .pagination > .active > span,.news-media .pagination > .active > span:focus,.news-media .pagination > .active > span:hover {
     background-color: #c0392b;
     border-color: #c0392b;
 }
@@ -1154,6 +1239,8 @@ input.txtsearch {
 }
 
 .people .lead {
+    font-family: "din-light";
+    font-size: 12px;
     color: #6d6e71;
 }
 

@@ -107,6 +107,19 @@ class AboutusController extends Controller
     }
 
     /**
+     * Finds and displays a Aboutus entity.
+     *
+     */
+    public function showPublicAction(Aboutus $aboutus)
+    {
+
+        return $this->render('aboutus/showPublic.html.twig', array(
+            'aboutus' => $aboutus,
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
+        ));
+    }
+
+    /**
      * Displays a form to edit an existing Aboutus entity.
      *
      */

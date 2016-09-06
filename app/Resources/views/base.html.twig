@@ -59,7 +59,7 @@
                           <li class="divider-vertical dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
                             <ul class="dropdown-menu list-ab">
-                              <li><a href="about-us.html">COMPANY HISTORY</a></li>
+                              <li><a href="{{ path('aboutus_show_public', {'id': 3}) }}">COMPANY HISTORY</a></li>
                               <li><a href="download.html">DOWNLOAD</a></li>
                             </ul>
                           </li>
@@ -68,7 +68,7 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
                               <ul class="dropdown-menu mega-dropdown-menu row">
                                   {% for category in categories.categories %}
-                                      {% if loop.index % 4 == 0 or loop.index == 1 %}
+                                      {% if loop.index % 4 == 1 or loop.index == 1 %}
                                           <div class="row">
                                       {% endif %}
                                               <li class="col-sm-3">
@@ -109,7 +109,7 @@
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
                               <ul class="dropdown-menu mega-dropdown-menu row">
                                 {% for category in categories.categories %}
-                                    {% if loop.index % 5 == 0 or loop.index == 1 %}
+                                    {% if loop.index % 4 == 1 or loop.index == 1 %}
                                         <div class="row col-sm-12">
                                     {% endif %}
                                             <li class="col-sm-3">
@@ -118,9 +118,9 @@
                                                       {% for unite in category.unites %}
                                                           <li><a href="{{ path('unites_show_public', { 'id': unite.id }) }}">{{ unite.title | upper }}</a></li>
                                                       {% endfor %}
-                                                </ul>
+                                              </ul>
                                             </li>
-                                    {% if loop.index % 5 == 0  or loop.index == categories.numData %}
+                                    {% if loop.index % 4 == 0  or loop.index == categories.numData %}
                                         </div>
                                     {% endif %}
                                 {% endfor %}
