@@ -3,6 +3,11 @@ download_index:
     defaults: { _controller: "AppBundle:Download:index" }
     methods:  GET
 
+download_index_public:
+    path:     /download/
+    defaults: { _controller: "AppBundle:Download:indexPublic" }
+    methods:  GET
+
 download_show:
     path:     /admin/download/{id}/show
     defaults: { _controller: "AppBundle:Download:show" }

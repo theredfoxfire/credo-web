@@ -46,3 +46,6 @@ app_users:
 app_category:
     resource: "@AppBundle/Resources/config/routing/category.yml"
     prefix:   /
+app_month:
+    resource: "@AppBundle/Resources/config/routing/month.yml"
+    prefix:   /

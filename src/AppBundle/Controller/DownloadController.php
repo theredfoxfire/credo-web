@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Download;
+use AppBundle\Entity\Year;
+use AppBundle\Entity\Month;
 use AppBundle\Form\DownloadType;
 
 /**
@@ -45,6 +47,39 @@ class DownloadController extends Controller
      }
 
     /**
+     * Lists all Download entities.
+     *
+     */
+     public function indexPublicAction(Request $request)
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql   = "SELECT a FROM AppBundle:Download a";
+         $query = $em->createQuery($dql);
+
+         $paginator  = $this->get('knp_paginator');
+         $pagination = $paginator->paginate(
+             $query, /* query NOT result */
+             $request->query->getInt('page', 1)/*page number*/,
+             10/*limit per page*/
+         );
+
+         $download = $em->getRepository('AppBundle:Download')->findAll();
+         $year = $em->getRepository('AppBundle:Year')->findAll();
+         $deleteForms = array();
+
+         foreach ($download as $entity) {
+             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+         }
+
+         return $this->render('download/indexPublic.html.twig', array(
+             'pagination' => $pagination,
+             'deleteForms' => $deleteForms,
+             'categories' => $this->get('app.services.getCategories')->getCategories(),
+             'year' => $year,
+         ));
+     }
+
+    /**
      * Creates a new Download entity.
      *
      */
@@ -64,11 +99,30 @@ class DownloadController extends Controller
             );
             $download->setFile($fileName);
             $download->setDateTime(new \DateTime());
+            $year = $em->getRepository('AppBundle:Year')->findOneByYear(date('Y'));
+            $month = $em->getRepository('AppBundle:Month')->findOneByMonth(date('Y-F'));
+            $newYear = new Year();
+            $newMonth = new Month();
+            if (empty($year)) {
+                $newYear->setYear(date('Y'));
+                $newMonth->setYear($newYear);
+                $em->persist($newYear);
+            } else {
+                $newMonth->setYear($year);
+            }
+            if (empty($month)) {
+                $newMonth->setMonth(date('Y-F'));
+                $newMonth->setName(date('F'));
+                $download->setMonth($newMonth);
+                $em->persist($newMonth);
+            } else {
+                $download->setMonth($month);
+            }
             $download->setPostedBy($this->getUser()->getUsername());
             $em->persist($download);
             $em->flush();
 
-            return $this->redirectToRoute('download_show', array('id' => $download->getId()));
+            return $this->redirectToRoute('download_index');
         }
 
         return $this->render('download/new.html.twig', array(

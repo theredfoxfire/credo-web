@@ -18,3 +18,10 @@ AppBundle\Entity\Download:
    type: datetime
   postedBy:
    type: string
+ manyToOne:
+  month:
+   targetEntity: Month
+   inversedBy: download
+   joinColumn:
+    name: month_id
+    referencedColumnName: id

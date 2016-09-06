@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Download
@@ -169,5 +170,63 @@ class Download
     public function getPostedBy()
     {
         return $this->postedBy;
+    }
+    /**
+     * @var \AppBundle\Entity\Year
+     */
+    private $year;
+
+
+    /**
+     * Set year
+     *
+     * @param \AppBundle\Entity\Year $year
+     *
+     * @return Download
+     */
+    public function setYear(\AppBundle\Entity\Year $year = null)
+    {
+        $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * Get year
+     *
+     * @return \AppBundle\Entity\Year
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+    /**
+     * @var \AppBundle\Entity\Month
+     */
+    private $month;
+
+
+    /**
+     * Set month
+     *
+     * @param \AppBundle\Entity\Month $month
+     *
+     * @return Download
+     */
+    public function setMonth(\AppBundle\Entity\Month $month = null)
+    {
+        $this->month = $month;
+
+        return $this;
+    }
+
+    /**
+     * Get month
+     *
+     * @return \AppBundle\Entity\Month
+     */
+    public function getMonth()
+    {
+        return $this->month;
     }
 }
