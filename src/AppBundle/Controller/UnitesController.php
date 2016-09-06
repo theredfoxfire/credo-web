@@ -81,6 +81,12 @@ class UnitesController extends Controller
                   $em->persist($buimage);
               }
             }
+            if (!empty($unite->getWebUrl())) {
+              if (strtolower(substr($unite->getWebUrl(),0,4)) != 'http') {
+                  $url = 'http://'.$unite->getWebUrl();
+                  $unite->setWebUrl($url);
+              }
+            }
             $em->persist($unite);
             $em->flush();
 
@@ -104,6 +110,19 @@ class UnitesController extends Controller
         return $this->render('unites/show.html.twig', array(
             'unite' => $unite,
             'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a Unites entity.
+     *
+     */
+    public function showPublicAction(Unites $unite)
+    {
+
+        return $this->render('unites/showPublic.html.twig', array(
+            'unite' => $unite,
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
         ));
     }
 
@@ -157,6 +176,12 @@ class UnitesController extends Controller
                 $unite->setLargeImage($fileName);
             } else {
               $unite->setLargeImage($oldFile);
+            }
+            if (!empty($unite->getWebUrl())) {
+              if (strtolower(substr($unite->getWebUrl(),0,4)) != 'http') {
+                  $url = 'http://'.$unite->getWebUrl();
+                  $unite->setWebUrl($url);
+              }
             }
             $em->persist($unite);
             $em->flush();

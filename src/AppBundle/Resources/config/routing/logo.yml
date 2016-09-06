@@ -1,10 +1,10 @@
 logo_index:
-    path:     /logos/
+    path:     /admin/logos/
     defaults: { _controller: "AppBundle:Logo:index" }
     methods:  GET
 
 logo_show:
-    path:     /logos/{id}/show
+    path:     /admin/logos/{id}/show
     defaults: { _controller: "AppBundle:Logo:show" }
     methods:  GET
 

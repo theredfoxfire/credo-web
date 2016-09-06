@@ -1,10 +1,10 @@
 csrimage_index:
-    path:     /csrimage/
+    path:     /admin/csrimage/
     defaults: { _controller: "AppBundle:Csrimage:index" }
     methods:  GET
 
 csrimage_show:
-    path:     /csrimage/{id}/show
+    path:     /admin/csrimage/{id}/show
     defaults: { _controller: "AppBundle:Csrimage:show" }
     methods:  GET
 

@@ -1,10 +1,10 @@
 overview_index:
-    path:     /overviews/
+    path:     /admin/overviews/
     defaults: { _controller: "AppBundle:Overview:index" }
     methods:  GET
 
 overview_show:
-    path:     /overviews/{id}/show
+    path:     /admin/overviews/{id}/show
     defaults: { _controller: "AppBundle:Overview:show" }
     methods:  GET
 

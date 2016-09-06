@@ -1,10 +1,10 @@
 users_index:
-    path:     /users
+    path:     /admin/users
     defaults: { _controller: "AppBundle:Users:index" }
     methods:  GET
 
 users_show:
-    path:     /{id}/show
+    path:     /admin/{id}/show
     defaults: { _controller: "AppBundle:Users:show" }
     methods:  GET
 

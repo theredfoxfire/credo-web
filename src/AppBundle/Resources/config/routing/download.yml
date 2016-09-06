@@ -1,10 +1,10 @@
 download_index:
-    path:     /download/
+    path:     /admin/download/
     defaults: { _controller: "AppBundle:Download:index" }
     methods:  GET
 
 download_show:
-    path:     /download/{id}/show
+    path:     /admin/download/{id}/show
     defaults: { _controller: "AppBundle:Download:show" }
     methods:  GET
 

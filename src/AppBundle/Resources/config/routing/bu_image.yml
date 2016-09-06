@@ -1,10 +1,10 @@
 buimage_index:
-    path:     /buimage/
+    path:     /admin/buimage/
     defaults: { _controller: "AppBundle:Buimage:index" }
     methods:  GET
 
 buimage_show:
-    path:     /buimage/{id}/show
+    path:     /admin/buimage/{id}/show
     defaults: { _controller: "AppBundle:Buimage:show" }
     methods:  GET
 

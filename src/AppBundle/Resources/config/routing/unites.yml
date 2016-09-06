@@ -1,11 +1,16 @@
 unites_index:
-    path:     /unites/
+    path:     /admin/unites/
     defaults: { _controller: "AppBundle:Unites:index" }
     methods:  GET
 
 unites_show:
-    path:     /unites/{id}/show
+    path:     /admin/unites/{id}/show
     defaults: { _controller: "AppBundle:Unites:show" }
+    methods:  GET
+
+unites_show_public:
+    path:     /unites/{id}/show
+    defaults: { _controller: "AppBundle:Unites:showPublic" }
     methods:  GET
 
 unites_new:

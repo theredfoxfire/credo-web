@@ -1,10 +1,10 @@
 career_index:
-    path:     /career/
+    path:     /admin/career/
     defaults: { _controller: "AppBundle:Career:index" }
     methods:  GET
 
 career_show:
-    path:     /career/{id}/show
+    path:     /admin/career/{id}/show
     defaults: { _controller: "AppBundle:Career:show" }
     methods:  GET
 

@@ -1,10 +1,10 @@
 contactus_index:
-    path:     /contactus/
+    path:     /admin/contactus/
     defaults: { _controller: "AppBundle:Contactus:index" }
     methods:  GET
 
 contactus_show:
-    path:     /contactus/{id}/show
+    path:     /admin/contactus/{id}/show
     defaults: { _controller: "AppBundle:Contactus:show" }
     methods:  GET
 

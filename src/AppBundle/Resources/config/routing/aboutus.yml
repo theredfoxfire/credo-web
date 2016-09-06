@@ -1,10 +1,10 @@
 aboutus_index:
-    path:     /aboutus/
+    path:     /admin/aboutus/
     defaults: { _controller: "AppBundle:Aboutus:index" }
     methods:  GET
 
 aboutus_show:
-    path:     /aboutus/{id}/show
+    path:     /admin/aboutus/{id}/show
     defaults: { _controller: "AppBundle:Aboutus:show" }
     methods:  GET
 

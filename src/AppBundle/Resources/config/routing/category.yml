@@ -1,10 +1,10 @@
 category_index:
-    path:     /category/
+    path:     /admin/category/
     defaults: { _controller: "AppBundle:Category:index" }
     methods:  GET
 
 category_show:
-    path:     /category/{id}/show
+    path:     /admin/category/{id}/show
     defaults: { _controller: "AppBundle:Category:show" }
     methods:  GET
 

@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+    * Return number rows of Category
+    */
+    public function getRows() {
+      $query = $this->getEntityManager()
+			->createQuery('SELECT c FROM
+    			AppBundle:Category c
+      ');
+      $rq = $query->getResult();
+      return count($rq);
+    }
 }

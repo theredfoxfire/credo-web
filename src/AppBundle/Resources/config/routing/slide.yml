@@ -1,10 +1,10 @@
 slide_index:
-    path:     /slides/
+    path:     /admin/slides/
     defaults: { _controller: "AppBundle:Slide:index" }
     methods:  GET
 
 slide_show:
-    path:     /slides/{id}/show
+    path:     /admin/slides/{id}/show
     defaults: { _controller: "AppBundle:Slide:show" }
     methods:  GET
 

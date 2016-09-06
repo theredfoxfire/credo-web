@@ -1,10 +1,10 @@
 aboutusimage_index:
-    path:     /aboutusimage/
+    path:     /admin/aboutusimage/
     defaults: { _controller: "AppBundle:Aboutusimage:index" }
     methods:  GET
 
 aboutusimage_show:
-    path:     /aboutusimage/{id}/show
+    path:     /admin/aboutusimage/{id}/show
     defaults: { _controller: "AppBundle:Aboutusimage:show" }
     methods:  GET
 

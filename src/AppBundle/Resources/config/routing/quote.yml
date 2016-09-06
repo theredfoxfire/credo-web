@@ -1,10 +1,10 @@
 quote_index:
-    path:     /quote/
+    path:     /admin/quote/
     defaults: { _controller: "AppBundle:Quote:index" }
     methods:  GET
 
 quote_show:
-    path:     /quote/{id}/show
+    path:     /admin/quote/{id}/show
     defaults: { _controller: "AppBundle:Quote:show" }
     methods:  GET
 

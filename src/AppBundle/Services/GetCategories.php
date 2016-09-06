@@ -20,6 +20,10 @@ class GetCategories {
     * return Object of Business Category
     */
     public function getCategories() {
-        return $this->em->getRepository('AppBundle:Category')->findAll();
+        $data = $this->em->getRepository('AppBundle:Category');
+        return array(
+            'categories' => $data->findAll(),
+            'numData' => $data->getRows(),
+        );
     }
 }

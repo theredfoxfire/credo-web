@@ -1,10 +1,10 @@
 peoples_index:
-    path:     /peoples/
+    path:     /admin/peoples/
     defaults: { _controller: "AppBundle:Peoples:index" }
     methods:  GET
 
 peoples_show:
-    path:     /peoples/{id}/show
+    path:     /admin/peoples/{id}/show
     defaults: { _controller: "AppBundle:Peoples:show" }
     methods:  GET
 

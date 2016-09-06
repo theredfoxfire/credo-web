@@ -1,10 +1,10 @@
 csr_index:
-    path:     /csr/
+    path:     /admin/csr/
     defaults: { _controller: "AppBundle:Csr:index" }
     methods:  GET
 
 csr_show:
-    path:     /csr/{id}/show
+    path:     /admin/csr/{id}/show
     defaults: { _controller: "AppBundle:Csr:show" }
     methods:  GET
 
