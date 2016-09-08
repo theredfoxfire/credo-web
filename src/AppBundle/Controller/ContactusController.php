@@ -68,6 +68,7 @@ class ContactusController extends Controller
             'contactus' => $contactus,
             'overview' => $overview,
             'form' => $form->createView(),
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
         ));
     }
 

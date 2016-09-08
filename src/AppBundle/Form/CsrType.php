@@ -21,7 +21,7 @@ class CsrType extends AbstractType
             ->add('story', TextareaType::class, array(
                 'label' => 'Short Story',
                 'required' => false,
-                'attr' => array('class' => 'tinymce'),
+                'attr' => array('class' => 'tinymce', 'rows' => 15),
             ))
             ->add('largeImage', FileType::class, array('required' => false, 'label' => 'Foto (image file, best fit width 1280px x height 793px) ', 'data' => null))
         ;

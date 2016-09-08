@@ -204,7 +204,7 @@ input.txtsearch {
 
 .img-slider {
   margin: 0 auto;
-  margin-top: -15%;
+  margin-top: -8%;
 }
 .carousel-control.left {
   background-image: linear-gradient(to right,rgba(0,0,0,.5) 0,rgba(0,0,0,.5) 100%) !important;
@@ -661,10 +661,14 @@ h4 {
 }
 
 #career {
+    background: #fff;
+}
+
+#career-home {
     background: #d5ae5f;
 }
 
-#career h1 {
+#career-home h1 {
     font-family: "TheanoDidot-Regular";
     font-size: 20px;
     color: #fff;
@@ -672,12 +676,12 @@ h4 {
     padding-bottom: 40px;
 }
 
-#career .career-button-wrapper {
+#career-home .career-button-wrapper {
     text-align: center;
     margin-bottom: 100px;
 }
 
-#career .career-button {
+#career-home .career-button {
     height: 50px;
     width: 200px;
     background: #d5ae5f;
@@ -687,7 +691,7 @@ h4 {
     color: #fff;
 }
 
-#career .career-button:hover,#career .career-button:focus {
+#career-home .career-button:hover,#career-home .career-button:focus {
     background: #ce0027;
 }
 

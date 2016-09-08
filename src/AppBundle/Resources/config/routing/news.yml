@@ -3,6 +3,11 @@ news_index:
     defaults: { _controller: "AppBundle:News:index" }
     methods:  GET
 
+news_index_public:
+    path:     /news/
+    defaults: { _controller: "AppBundle:News:indexPublic" }
+    methods:  GET
+
 news_show:
     path:     /admin/news/{id}/show
     defaults: { _controller: "AppBundle:News:show" }

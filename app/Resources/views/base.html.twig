@@ -55,7 +55,7 @@
                   </div>
                   <div id="navbar" class="collapse navbar-collapse">
                       <ul class="nav navbar-nav navbar-right">
-                          <li class="divider-vertical active"><a href="index.html">HOME</a></li>
+                          <li class="divider-vertical"><a href="{{ path('homepage') }}">HOME</a></li>
                           <li class="divider-vertical dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
                             <ul class="dropdown-menu list-ab">
@@ -85,8 +85,8 @@
                                   {% endfor %}
                               </ul>
                           </li>
-                          <li class="divider-vertical"><a href="news-media.html">NEWS AND MEDIA</a></li>
-                          <li class="divider-vertical"><a href="csr.html">CSR</a></li>
+                          <li class="divider-vertical"><a href="{{ path('news_index_public') }}">NEWS AND MEDIA</a></li>
+                          <li class="divider-vertical"><a href="{{ path('csr_show_public', {'id': 2}) }}">CSR</a></li>
                           <li class="divider-vertical"><a href="{{ path('career_new') }}">CAREER</a></li>
                           <li class="divider-vertical"><a href="{{ path('contactus_new') }}">CONTACT US</a></li>
                       </ul>
@@ -102,9 +102,15 @@
                 <div class="row">
                     <div class="col-md-8">
                       <ul class="nav footer-nav list-unstyled">
-                          <li class=""><a href="index.html">HOME</a></li>
-                          <li class=""><a href="about-us.html">ABOUT US</a></li>
-                          <li class=""><a href="people-executive.html">PEOPLE</a></li>
+                          <li class=""><a href="{{ path('homepage') }}">HOME</a></li>
+                          <li class="divider-vertical dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
+                            <ul class="dropdown-menu list-ab">
+                              <li><a href="{{ path('aboutus_show_public', {'id': 3}) }}">COMPANY HISTORY</a></li>
+                              <li><a href="{{ path('download_index_public') }}">DOWNLOAD</a></li>
+                            </ul>
+                          </li>
+                          <li class=""><a href="{{ path('peoples_index_public') }}">PEOPLE</a></li>
                           <li class="dropdown mega-dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
                               <ul class="dropdown-menu mega-dropdown-menu row">
@@ -126,10 +132,10 @@
                                 {% endfor %}
                               </ul>
                           </li>
-                          <li class=""><a href="news-media.html">NEWS AND MEDIA</a></li>
-                          <li class=""><a href="csr.html">CSR</a></li>
+                          <li class=""><a href="{{ path('news_index_public') }}">NEWS AND MEDIA</a></li>
+                          <li class=""><a href="{{ path('csr_show_public', {'id': 2}) }}">CSR</a></li>
                           <li class=""><a href="{{ path('career_new') }}">CAREER</a></li>
-                          <li class=""><a href="contact-us.html">CONTACT US</a></li>
+                          <li class=""><a href="{{ path('contactus_new') }}">CONTACT US</a></li>
                       </ul>
                     </div>
                 </div>

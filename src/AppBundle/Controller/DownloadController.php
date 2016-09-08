@@ -60,7 +60,7 @@ class DownloadController extends Controller
          $pagination = $paginator->paginate(
              $query, /* query NOT result */
              $request->query->getInt('page', 1)/*page number*/,
-             10/*limit per page*/
+             6/*limit per page*/
          );
 
          $download = $em->getRepository('AppBundle:Download')->findAll();

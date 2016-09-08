@@ -74,6 +74,7 @@ class CareerController extends Controller
         return $this->render('career/new.html.twig', array(
             'career' => $career,
             'form' => $form->createView(),
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
         ));
     }
 

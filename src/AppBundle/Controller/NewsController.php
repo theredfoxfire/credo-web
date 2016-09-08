@@ -6,6 +6,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\News;
+use AppBundle\Entity\Yearnews;
+use AppBundle\Entity\Monthnews;
 use AppBundle\Form\NewsType;
 
 /**
@@ -44,6 +46,39 @@ class NewsController extends Controller
          ));
      }
 
+     /**
+      * Lists all News entities.
+      *
+      */
+      public function indexPublicAction(Request $request)
+      {
+          $em = $this->getDoctrine()->getManager();
+          $dql   = "SELECT a FROM AppBundle:News a";
+          $query = $em->createQuery($dql);
+
+          $paginator  = $this->get('knp_paginator');
+          $pagination = $paginator->paginate(
+              $query, /* query NOT result */
+              $request->query->getInt('page', 1)/*page number*/,
+              6/*limit per page*/
+          );
+
+          $news = $em->getRepository('AppBundle:News')->findAll();
+          $year = $em->getRepository('AppBundle:Yearnews')->findAll();
+          $deleteForms = array();
+
+          foreach ($news as $entity) {
+              $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+          }
+
+          return $this->render('news/indexPublic.html.twig', array(
+              'pagination' => $pagination,
+              'deleteForms' => $deleteForms,
+              'categories' => $this->get('app.services.getCategories')->getCategories(),
+              'year' => $year,
+          ));
+      }
+
     /**
      * Creates a new News entity.
      *
@@ -64,6 +99,25 @@ class NewsController extends Controller
             );
             $news->setLargeImage($fileName);
             $news->setDateTime(new \DateTime());
+            $year = $em->getRepository('AppBundle:Yearnews')->findOneByYear(date('Y'));
+            $month = $em->getRepository('AppBundle:Monthnews')->findOneByMonth(date('Y-F'));
+            $newYear = new Yearnews();
+            $newMonth = new Monthnews();
+            if (empty($year)) {
+                $newYear->setYear(date('Y'));
+                $newMonth->setYearnews($newYear);
+                $em->persist($newYear);
+            } else {
+                $newMonth->setYearnews($year);
+            }
+            if (empty($month)) {
+                $newMonth->setMonth(date('Y-F'));
+                $newMonth->setName(date('F'));
+                $news->setMonthnews($newMonth);
+                $em->persist($newMonth);
+            } else {
+                $news->setMonthnews($month);
+            }
             $news->setPostedBy($this->getUser()->getUsername());
             $em->persist($news);
             $em->flush();
@@ -97,11 +151,10 @@ class NewsController extends Controller
      */
     public function showPublicAction(News $news)
     {
-        $deleteForm = $this->createDeleteForm($news);
 
         return $this->render('news/showPublic.html.twig', array(
             'news' => $news,
-            'delete_form' => $deleteForm->createView(),
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
         ));
     }
 

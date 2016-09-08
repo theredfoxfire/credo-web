@@ -20,3 +20,10 @@ AppBundle\Entity\News:
    type: datetime
   postedBy:
    type: string
+ manyToOne:
+  monthnews:
+   targetEntity: Monthnews
+   inversedBy: news
+   joinColumn:
+    name: monthnews_id
+    referencedColumnName: id

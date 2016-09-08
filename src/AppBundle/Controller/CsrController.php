@@ -110,6 +110,19 @@ class CsrController extends Controller
     }
 
     /**
+     * Finds and displays a Csr entity.
+     *
+     */
+    public function showPublicAction(Csr $csr)
+    {
+
+        return $this->render('csr/showPublic.html.twig', array(
+            'csr' => $csr,
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
+        ));
+    }
+
+    /**
      * Displays a form to edit an existing Csr entity.
      *
      */

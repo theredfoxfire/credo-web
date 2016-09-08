@@ -200,4 +200,33 @@ class News
     {
         return $this->postedBy;
     }
+    /**
+     * @var \AppBundle\Entity\Monthnews
+     */
+    private $monthnews;
+
+
+    /**
+     * Set monthnews
+     *
+     * @param \AppBundle\Entity\Monthnews $monthnews
+     *
+     * @return News
+     */
+    public function setMonthnews(\AppBundle\Entity\Monthnews $monthnews = null)
+    {
+        $this->monthnews = $monthnews;
+
+        return $this;
+    }
+
+    /**
+     * Get monthnews
+     *
+     * @return \AppBundle\Entity\Monthnews
+     */
+    public function getMonthnews()
+    {
+        return $this->monthnews;
+    }
 }

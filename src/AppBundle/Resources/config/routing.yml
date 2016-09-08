@@ -49,3 +49,6 @@ app_category:
 app_month:
     resource: "@AppBundle/Resources/config/routing/month.yml"
     prefix:   /
+app_month_news:
+    resource: "@AppBundle/Resources/config/routing/monthnews.yml"
+    prefix:   /
