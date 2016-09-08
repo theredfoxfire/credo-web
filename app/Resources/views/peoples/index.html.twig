@@ -30,12 +30,14 @@
                         Edit
                       </button>
                     </a>
-                    {{ form_start(deleteForms[peoples.id]) }}
-                        <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
-                            <i class="fa fa-trash-o"></i>
-                            Delete
-                        </button>
-                    {{ form_end(deleteForms[peoples.id]) }}
+                    {% if peoples.id != 1 %}
+                      {{ form_start(deleteForms[peoples.id]) }}
+                          <button type="submit" class="btn btn-small btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">
+                              <i class="fa fa-trash-o"></i>
+                              Delete
+                          </button>
+                      {{ form_end(deleteForms[peoples.id]) }}
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}

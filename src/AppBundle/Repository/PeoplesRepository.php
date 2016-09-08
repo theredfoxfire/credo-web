@@ -10,4 +10,15 @@ namespace AppBundle\Repository;
  */
 class PeoplesRepository extends \Doctrine\ORM\EntityRepository
 {
+  /**
+  * Return number rows of Peoples
+  */
+  public function getRows() {
+    $query = $this->getEntityManager()
+    ->createQuery('SELECT p FROM
+        AppBundle:Peoples p where p.id != 1
+    ');
+    $rq = $query->getResult();
+    return count($rq);
+  }
 }

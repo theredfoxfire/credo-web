@@ -45,6 +45,35 @@ class PeoplesController extends Controller
      }
 
     /**
+     * Lists all Peoples entities.
+     *
+     */
+     public function indexPublicAction(Request $request)
+     {
+         $em = $this->getDoctrine()->getManager();
+         $dql   = "SELECT a FROM AppBundle:Peoples a where a.id != 1";
+         $query = $em->createQuery($dql);
+
+         $paginator  = $this->get('knp_paginator');
+         $pagination = $paginator->paginate(
+             $query, /* query NOT result */
+             $request->query->getInt('page', 1)/*page number*/,
+             10/*limit per page*/
+         );
+
+         $peoples = $em->getRepository('AppBundle:Peoples')->findAll();
+         $judit = $em->getRepository('AppBundle:Peoples')->findOneById(1);
+         $numRow = $em->getRepository('AppBundle:Peoples')->getRows();
+
+         return $this->render('peoples/indexPublic.html.twig', array(
+             'pagination' => $pagination,
+             'judit' => $judit,
+             'numRow' => $numRow,
+             'categories' => $this->get('app.services.getCategories')->getCategories(),
+         ));
+     }
+
+    /**
      * Creates a new Peoples entity.
      *
      */
@@ -95,11 +124,10 @@ class PeoplesController extends Controller
      */
     public function showPublicAction(Peoples $peoples)
     {
-        $deleteForm = $this->createDeleteForm($peoples);
 
         return $this->render('peoples/showPublic.html.twig', array(
             'peoples' => $peoples,
-            'delete_form' => $deleteForm->createView(),
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
         ));
     }
 

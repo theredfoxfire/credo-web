@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<!-- Page Content -->
+<div class="container">
+    <div class="people">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>Executive</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row pt-md">
+                            <div class="col-lg-3 col-md-3 profile judith">
+                                <div class="img-box">
+                                    <img src="{{ asset('uploads/peoples/') }}{{ judit.largeImage }}" class="img-responsive">
+                                    <div class="stripe"></div>
+                                </div>
+                                <h1><a href="{{ path('peoples_show_public', {'id': judit.id}) }}">{{ judit.name | upper }}</a></h1>
+                                <h2>{{ judit.position | upper }}</h2>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% for peoples in pagination %}
+                {% if loop.index % 4 == 1 %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row pt-md">
+                {% endif %}
+                            <div class="col-lg-3 col-md-3 profile">
+                                <div class="img-box">
+                                  <img src="{{ asset('uploads/peoples/') }}{{ peoples.largeImage }}" class="img-responsive">
+                                  <div class="stripe"></div>
+                                </div>
+                                <h1><a href="{{ path('peoples_show_public', {'id': peoples.id}) }}">{{ peoples.name | upper }}</a></h1>
+                                <h2>{{ peoples.position | upper }}</h2>
+                            </div>
+                {% if loop.index % 4 == 0 or loop.index == numRow %}
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.container -->
+    {# display navigation #}
+    {{ knp_pagination_render(pagination) }}
+{% endblock %}

@@ -3,9 +3,19 @@ peoples_index:
     defaults: { _controller: "AppBundle:Peoples:index" }
     methods:  GET
 
+peoples_index_public:
+    path:     /peoples/
+    defaults: { _controller: "AppBundle:Peoples:indexPublic" }
+    methods:  GET
+
 peoples_show:
     path:     /admin/peoples/{id}/show
     defaults: { _controller: "AppBundle:Peoples:show" }
+    methods:  GET
+
+peoples_show_public:
+    path:     peoples/{id}/show
+    defaults: { _controller: "AppBundle:Peoples:showPublic" }
     methods:  GET
 
 peoples_new:
