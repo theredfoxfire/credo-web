@@ -53,7 +53,7 @@ class ContactusController extends Controller
         $contactus = new Contactus();
         $em = $this->getDoctrine()->getRepository('AppBundle:Overview');
         $overview = $em->findOneById(2);
-        $form = $this->createForm('AppBundle\Form\ContactusType', $contactus);
+        $form = $this->createForm(new ContactusType(), $contactus);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -61,7 +61,7 @@ class ContactusController extends Controller
             $em->persist($contactus);
             $em->flush();
 
-            return $this->redirectToRoute('contactus_sucess');
+            return $this->redirect($this->generateUrl('contactus_sucess'));
         }
 
         return $this->render('contactus/new.html.twig', array(
@@ -78,7 +78,9 @@ class ContactusController extends Controller
      */
     public function sucessAction()
     {
-        return $this->render('contactus/sucess.html.twig');
+        return $this->render('contactus/sucess.html.twig', array(
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
+        ));
     }
 
     /**
@@ -102,7 +104,7 @@ class ContactusController extends Controller
     public function editAction(Request $request, Contactus $contactus)
     {
         $deleteForm = $this->createDeleteForm($contactus);
-        $editForm = $this->createForm('AppBundle\Form\ContactusType', $contactus);
+        $editForm = $this->createForm(new ContactusType(), $contactus);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -110,7 +112,7 @@ class ContactusController extends Controller
             $em->persist($contactus);
             $em->flush();
 
-            return $this->redirectToRoute('contactus_edit', array('id' => $contactus->getId()));
+            return $this->redirect($this->generateUrl('contactus_edit', array('id' => $contactus->getId())));
         }
 
         return $this->render('contactus/edit.html.twig', array(
@@ -135,7 +137,7 @@ class ContactusController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('contactus_index');
+        return $this->redirect($this->generateUrl('contactus_index'));
     }
 
     /**

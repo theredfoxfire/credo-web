@@ -51,14 +51,14 @@ class AboutusimageController extends Controller
      public function newAction(Request $request)
      {
          $aboutusimage = new Aboutusimage();
-         $form = $this->createForm('AppBundle\Form\AboutusimageType', $aboutusimage);
+         $form = $this->createForm(new AboutusimageType(), $aboutusimage);
          $form->handleRequest($request);
 
          if ($form->isSubmitted() && $form->isValid()) {
              $file = $aboutusimage->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('aboutusimage_directory'),
+                 $this->container->getParameter('aboutusimage_directory'),
                  $fileName
              );
              $aboutusimage->setCreatedAt(new \DateTime());
@@ -68,7 +68,7 @@ class AboutusimageController extends Controller
              $em->persist($aboutusimage);
              $em->flush();
 
-             return $this->redirectToRoute('aboutusimage_show', array('id' => $aboutusimage->getId()));
+             return $this->redirect($this->generateUrl('aboutusimage_show', array('id' => $aboutusimage->getId())));
          }
 
          return $this->render('aboutusimage/new.html.twig', array(
@@ -98,27 +98,27 @@ class AboutusimageController extends Controller
      public function editAction(Request $request, Aboutusimage $aboutusimage)
      {
          $deleteForm = $this->createDeleteForm( $aboutusimage);
-         $editForm = $this->createForm('AppBundle\Form\AboutusimageType',  $aboutusimage);
+         $editForm = $this->createForm(new AboutusimageType(),  $aboutusimage);
          $oldFile =  $aboutusimage->getLargeImage();
 
          $editForm->handleRequest($request);
 
          if ($editForm->isSubmitted() && $editForm->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('aboutusimage_directory').'/'.$oldFile)) {
-                 unlink($this->getParameter('aboutusimage_directory').'/'.$oldFile);
+             if (file_exists($this->container->getParameter('aboutusimage_directory').'/'.$oldFile)) {
+                 unlink($this->container->getParameter('aboutusimage_directory').'/'.$oldFile);
              }
              $file =  $aboutusimage->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('aboutusimage_directory'),
+                 $this->container->getParameter('aboutusimage_directory'),
                  $fileName
              );
              $aboutusimage->setLargeImage($fileName);
              $em->persist( $aboutusimage);
              $em->flush();
 
-             return $this->redirectToRoute('aboutusimage_edit', array('id' =>  $aboutusimage->getId()));
+             return $this->redirect($this->generateUrl('aboutusimage_edit', array('id' =>  $aboutusimage->getId())));
          }
 
          return $this->render('aboutusimage/edit.html.twig', array(
@@ -139,14 +139,14 @@ class AboutusimageController extends Controller
 
          if ($form->isSubmitted() && $form->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('aboutusimage_directory').'/'.$aboutusimage->getLargeImage())) {
-                 unlink($this->getParameter('aboutusimage_directory').'/'.$aboutusimage->getLargeImage());
+             if (file_exists($this->container->getParameter('aboutusimage_directory').'/'.$aboutusimage->getLargeImage())) {
+                 unlink($this->container->getParameter('aboutusimage_directory').'/'.$aboutusimage->getLargeImage());
              }
              $em->remove($aboutusimage);
              $em->flush();
          }
 
-         return $this->redirectToRoute('aboutusimage_index');
+         return $this->redirect($this->generateUrl('aboutusimage_index'));
      }
 
     /**

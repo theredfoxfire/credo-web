@@ -51,14 +51,14 @@ class LogoController extends Controller
      public function newAction(Request $request)
      {
          $logo = new Logo();
-         $form = $this->createForm('AppBundle\Form\LogoType', $logo);
+         $form = $this->createForm(new LogoType(), $logo);
          $form->handleRequest($request);
 
          if ($form->isSubmitted() && $form->isValid()) {
              $file = $logo->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('logo_directory'),
+                 $this->container->getParameter('logo_directory'),
                  $fileName
              );
              $logo->setCreatedAt(new \DateTime());
@@ -68,7 +68,7 @@ class LogoController extends Controller
              $em->persist($logo);
              $em->flush();
 
-             return $this->redirectToRoute('logo_show', array('id' => $logo->getId()));
+             return $this->redirect($this->generateUrl('logo_show', array('id' => $logo->getId())));
          }
 
          return $this->render('logo/new.html.twig', array(
@@ -98,21 +98,21 @@ class LogoController extends Controller
      public function editAction(Request $request, Logo $logo)
      {
          $deleteForm = $this->createDeleteForm( $logo);
-         $editForm = $this->createForm('AppBundle\Form\LogoType',  $logo);
+         $editForm = $this->createForm(new LogoType(),  $logo);
          $oldFile =  $logo->getLargeImage();
 
          $editForm->handleRequest($request);
 
          if ($editForm->isSubmitted() && $editForm->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('logo_directory').'/'.$oldFile)) {
-                 unlink($this->getParameter('logo_directory').'/'.$oldFile);
+             if (file_exists($this->container->getParameter('logo_directory').'/'.$oldFile)) {
+                 unlink($this->container->getParameter('logo_directory').'/'.$oldFile);
              }
              $file =  $logo->getLargeImage();
              if (!empty($file)) {
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('logo_directory'),
+                 $this->container->getParameter('logo_directory'),
                  $fileName
              );
              $logo->setLargeImage($fileName);
@@ -122,7 +122,7 @@ class LogoController extends Controller
              $em->persist( $logo);
              $em->flush();
 
-             return $this->redirectToRoute('logo_edit', array('id' =>  $logo->getId()));
+             return $this->redirect($this->generateUrl('logo_edit', array('id' =>  $logo->getId())));
          }
 
          return $this->render('logo/edit.html.twig', array(
@@ -143,14 +143,14 @@ class LogoController extends Controller
 
          if ($form->isSubmitted() && $form->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('logo_directory').'/'.$logo->getLargeImage())) {
-                 unlink($this->getParameter('logo_directory').'/'.$logo->getLargeImage());
+             if (file_exists($this->container->getParameter('logo_directory').'/'.$logo->getLargeImage())) {
+                 unlink($this->container->getParameter('logo_directory').'/'.$logo->getLargeImage());
              }
              $em->remove($logo);
              $em->flush();
          }
 
-         return $this->redirectToRoute('logo_index');
+         return $this->redirect($this->generateUrl('logo_index'));
      }
 
     /**

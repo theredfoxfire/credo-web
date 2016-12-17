@@ -3,7 +3,7 @@
 {% block body %}
 <div id="carousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
+    {#<ol class="carousel-indicators">
     {% set i = 0 %}
     {% for slide in slides %}
         {% set i = loop.index - 1 %}
@@ -13,7 +13,7 @@
             <li data-target="#carousel" data-slide-to="{{i}}"></li>
         {% endif %}
     {% endfor %}
-    </ol>
+    </ol>#}
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         {% for slide in slides %}
@@ -26,107 +26,21 @@
           </div>
         {% endfor %}
     </div>
-    <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
+    {#<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
     </a>
     <a class="right carousel-control" href="#carousel" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
-    </a>
-</div>
-<!-- Page Content -->
-<div class="container">
-    <hr class="separator-line">
-    <section id="business-units">
-        <div class="row">
-            <div class="col-lg-12">
-            <h1>BUSINESS UNITS</h1>
-                  <div id="owl-demo" class="owl-carousel owl-theme">
-                  {% for logo in logos %}
-                      <div class="item logo-list">
-                          <img src="{{ asset('uploads/logo/') }}{{ logo.largeImage }}">
-                      </div>
-                  {% endfor %}
-                  </div>
-            </div>
-        </div>
-    </section>
-    <section id="vision">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="heading text-center">QUOTES</h1>
-                <hr class="separator-line">
-                <div class="text-center">
-                    {% for quote in quotes %}
-                        {{ quote.quote | raw }}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
-    <hr class="separator-line">
-    <section id="about-us">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class=>ABOUT US</h1>
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="{{ asset('credo/img/aboutus-img.png') }}" class="img-responsive">
-                    </div>
-                    <div class="col-md-6">
-                    {% for about in abouts %}
-                        {{ about.preword | raw }}
-                    {% endfor %}
-                        <div class="readmore">
-                            <a href="{{ path('aboutus_show_public', {'id': 3}) }}">CONTINUE READING <i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <hr class="separator-line">
-    <section id="news">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>NEWS AND MEDIA</h1>
-                <div class="row">
-                    {% for new in news %}
-                        <div class="col-md-4">
-                            <div class="media">
-                                <div class="media-top">
-                                    <a href="#">
-                                        <figure><img src="{{ asset('uploads/news/') }}{{ new.largeImage }}" class="img-responsive"></figure>
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">{{ new.title | raw }}</h4>
-                                    <p>{{ new.subtitle | raw }}</p>
-                                </div>
-                            </div>
-                            <div class="readmore">
-                                <a href="{{ path('news_show_public', { 'id': new.id }) }}">SEE MORE <i class="fa fa-arrow-circle-o-right fa-lg"></i></a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </section>
+    </a>#}
 </div>
 <!-- /.container -->
     <section id="career-home">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="text-center">WANT TO JOIN WITH US</h1>
                     <div class="career-button-wrapper">
-                        <a href="career.html">
-                        <button class="career-button" type="button">
-                        Career
-                        </button>
-                        </a>
                     </div>
                 </div>
             </div>

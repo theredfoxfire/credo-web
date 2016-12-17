@@ -50,7 +50,9 @@ class CareerController extends Controller
      */
     public function sucessAction()
     {
-        return $this->render('career/sucess.html.twig');
+        return $this->render('career/sucess.html.twig', array(
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
+        ));
     }
 
     /**
@@ -60,7 +62,7 @@ class CareerController extends Controller
     public function newAction(Request $request)
     {
         $career = new Career();
-        $form = $this->createForm('AppBundle\Form\CareerType', $career);
+        $form = $this->createForm(new CareerType(), $career);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,7 +70,7 @@ class CareerController extends Controller
             $em->persist($career);
             $em->flush();
 
-            return $this->redirectToRoute('career_sucess');
+            return $this->redirect($this->generateUrl('career_sucess'));
         }
 
         return $this->render('career/new.html.twig', array(
@@ -99,7 +101,7 @@ class CareerController extends Controller
     public function editAction(Request $request, Career $career)
     {
         $deleteForm = $this->createDeleteForm($career);
-        $editForm = $this->createForm('AppBundle\Form\CareerType', $career);
+        $editForm = $this->createForm(new CareerType(), $career);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -107,7 +109,7 @@ class CareerController extends Controller
             $em->persist($career);
             $em->flush();
 
-            return $this->redirectToRoute('career_edit', array('id' => $career->getId()));
+            return $this->redirect($this->generateUrl('career_edit', array('id' => $career->getId())));
         }
 
         return $this->render('career/edit.html.twig', array(
@@ -132,7 +134,7 @@ class CareerController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('career_index');
+        return $this->redirect($this->generateUrl('career_index'));
     }
 
     /**

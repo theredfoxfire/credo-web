@@ -15,4 +15,14 @@
         <input type="submit" class="btn btn-info" value="Create" />
     {{ form_end(form) }}
 
+    <script>
+    var counter = 1;
+    function addInput(divName, fileCount){
+          var newdiv = document.createElement('div');
+          newdiv.innerHTML = `<input type="file" id="buimage_largeImage" name="aboutus[anotherImage${counter + 1}]"/><br>`;
+          document.getElementById(fileCount).value = `${counter + 1}`;
+          document.getElementById(divName).appendChild(newdiv);
+          counter++;
+    }
+    </script>
 {% endblock %}

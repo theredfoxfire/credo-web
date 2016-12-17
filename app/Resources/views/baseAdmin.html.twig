@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <link rel="shortcut icon" type="image/png" href="{{ asset('credo/img/favicon.png') }}"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
@@ -33,7 +34,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="{{ path('adminHomepage') }}">Home</a></li>
+              <li><a href="{{ path('adminHomepage') }}">Home</a></li>
               <li>
                 <a href="{{ path('unites_index') }}">Bussines Units</a>
               </li>
@@ -51,13 +52,13 @@
               <li>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Others...</b></a>
                 <ul class="dropdown-menu">
-
                   <li>
                     <a href="{{ path('slide_index') }}">Home Slides Show</a>
                   </li>
                   <li>
                     <a href="{{ path('logo_index') }}">Logo Business Units</a>
                   </li>
+                  <li><a href="{{ path('video_index') }}">Landing GIF Video</a></li>
                   <li><a href="{{ path('quote_index') }}">Home Quotes</a></li>
                   <li><a href="{{ path('overview_index') }}">Contact Us Overview</a></li>
                   <li><a href="{{ path('category_index') }}">Business Category</a></li>

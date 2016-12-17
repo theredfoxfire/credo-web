@@ -37,7 +37,7 @@
                                 <div class="col-xs-12 col-sm-7">
                                     <div class="media-content">
                                         <div class="media-heading">
-                                            <a href="#">{{ news.title | upper }}</a>
+                                            <a href="{{ path('news_show_public', {'id': news.id}) }}">{{ news.title | upper }}</a>
                                         </div>
                                         <div class="media-time">
                                             {% if news.dateTime %}{{ news.dateTime|date('d.m.Y') }} | {{ news.dateTime|date('H.i') }}{% endif %}
@@ -46,7 +46,7 @@
                                             by: {{ news.postedBy | capitalize }}
                                         </div>
                                         <div class="entry">
-                                            {{ news.story | raw }}
+                                            {{ news.subtitle | raw }}
                                         </div>
                                         <div class="tool">
                                             <a href="{{ path('news_show_public', {'id': news.id}) }}" >Read More</a>

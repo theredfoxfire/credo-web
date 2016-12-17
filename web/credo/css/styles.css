@@ -666,6 +666,30 @@ h4 {
 
 #career-home {
     background: #d5ae5f;
+    margin-top: -35px;
+    height: 20px;
+}
+
+.landing {
+  height: 50% !important;
+}
+.landingTop {
+  height: 25% !important;
+}
+.landingBottom {
+  height: 25% !important;
+}
+
+.landing-link {
+    font-family: "TheanoDidot-Regular";
+    font-size: 18px;
+    padding: 0 5px;
+    color: #868686;
+    display: inline-block;
+    height: 40px;
+    line-height: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 #career-home h1 {
@@ -1263,7 +1287,7 @@ h6.description {
 .profile h1 {
     font-family: "din-light";
     font-size: 20px;
-    margin: 10px 0 0;
+    margin: -3px 0 0;
     text-align: center;
 }
 

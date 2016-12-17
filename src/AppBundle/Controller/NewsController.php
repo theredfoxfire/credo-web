@@ -86,7 +86,7 @@ class NewsController extends Controller
     public function newAction(Request $request)
     {
         $news = new News();
-        $form = $this->createForm('AppBundle\Form\NewsType', $news);
+        $form = $this->createForm(new NewsType(), $news);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -94,7 +94,7 @@ class NewsController extends Controller
             $file = $news->getLargeImage();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
-                $this->getParameter('news_directory'),
+                $this->container->getParameter('news_directory'),
                 $fileName
             );
             $news->setLargeImage($fileName);
@@ -122,7 +122,7 @@ class NewsController extends Controller
             $em->persist($news);
             $em->flush();
 
-            return $this->redirectToRoute('news_show', array('id' => $news->getId()));
+            return $this->redirect($this->generateUrl('news_show', array('id' => $news->getId())));
         }
 
         return $this->render('news/new.html.twig', array(
@@ -165,7 +165,7 @@ class NewsController extends Controller
     public function editAction(Request $request, News $news)
     {
         $deleteForm = $this->createDeleteForm($news);
-        $editForm = $this->createForm('AppBundle\Form\NewsType', $news);
+        $editForm = $this->createForm(new NewsType(), $news);
         $oldFile = $news->getLargeImage();
         $editForm->handleRequest($request);
 
@@ -173,12 +173,12 @@ class NewsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $file = $news->getLargeImage();
             if (!empty($file)) {
-                if (file_exists($this->getParameter('news_directory').'/'.$oldFile)) {
-                    unlink($this->getParameter('news_directory').'/'.$oldFile);
+                if (file_exists($this->container->getParameter('news_directory').'/'.$oldFile)) {
+                    unlink($this->container->getParameter('news_directory').'/'.$oldFile);
                 }
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
-                    $this->getParameter('news_directory'),
+                    $this->container->getParameter('news_directory'),
                     $fileName
                 );
                 $news->setLargeImage($fileName);
@@ -189,7 +189,7 @@ class NewsController extends Controller
             $em->persist($news);
             $em->flush();
 
-            return $this->redirectToRoute('news_index');
+            return $this->redirect($this->generateUrl('news_index'));
         }
 
         return $this->render('news/edit.html.twig', array(
@@ -210,14 +210,14 @@ class NewsController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if (file_exists($this->getParameter('news_directory').'/'.$news->getLargeImage())) {
-                unlink($this->getParameter('news_directory').'/'.$news->getLargeImage());
+            if (file_exists($this->container->getParameter('news_directory').'/'.$news->getLargeImage())) {
+                unlink($this->container->getParameter('news_directory').'/'.$news->getLargeImage());
             }
             $em->remove($news);
             $em->flush();
         }
 
-        return $this->redirectToRoute('news_index');
+        return $this->redirect($this->generateUrl('news_index'));
     }
 
     /**

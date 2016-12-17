@@ -80,7 +80,7 @@ class PeoplesController extends Controller
     public function newAction(Request $request)
     {
         $peoples = new Peoples();
-        $form = $this->createForm('AppBundle\Form\PeoplesType', $peoples);
+        $form = $this->createForm(new PeoplesType(), $peoples);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -88,14 +88,14 @@ class PeoplesController extends Controller
             $file = $peoples->getLargeImage();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
-                $this->getParameter('peoples_directory'),
+                $this->container->getParameter('peoples_directory'),
                 $fileName
             );
             $peoples->setLargeImage($fileName);
             $em->persist($peoples);
             $em->flush();
 
-            return $this->redirectToRoute('peoples_show', array('id' => $peoples->getId()));
+            return $this->redirect($this->generateUrl('peoples_index'));
         }
 
         return $this->render('peoples/new.html.twig', array(
@@ -138,7 +138,7 @@ class PeoplesController extends Controller
     public function editAction(Request $request, Peoples $peoples)
     {
         $deleteForm = $this->createDeleteForm($peoples);
-        $editForm = $this->createForm('AppBundle\Form\PeoplesType', $peoples);
+        $editForm = $this->createForm(new PeoplesType(), $peoples);
         $oldFile = $peoples->getLargeImage();
         $editForm->handleRequest($request);
 
@@ -146,12 +146,12 @@ class PeoplesController extends Controller
             $em = $this->getDoctrine()->getManager();
             $file = $peoples->getLargeImage();
             if (!empty($file)) {
-                if (file_exists($this->getParameter('peoples_directory').'/'.$oldFile)) {
-                    unlink($this->getParameter('peoples_directory').'/'.$oldFile);
+                if (file_exists($this->container->getParameter('peoples_directory').'/'.$oldFile)) {
+                    unlink($this->container->getParameter('peoples_directory').'/'.$oldFile);
                 }
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
-                    $this->getParameter('peoples_directory'),
+                    $this->container->getParameter('peoples_directory'),
                     $fileName
                 );
                 $peoples->setLargeImage($fileName);
@@ -162,7 +162,7 @@ class PeoplesController extends Controller
             $em->persist($peoples);
             $em->flush();
 
-            return $this->redirectToRoute('peoples_index');
+            return $this->redirect($this->generateUrl('peoples_index'));
         }
 
         return $this->render('peoples/edit.html.twig', array(
@@ -183,14 +183,14 @@ class PeoplesController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if (file_exists($this->getParameter('peoples_directory').'/'.$peoples->getLargeImage())) {
-                unlink($this->getParameter('peoples_directory').'/'.$peoples->getLargeImage());
+            if (file_exists($this->container->getParameter('peoples_directory').'/'.$peoples->getLargeImage())) {
+                unlink($this->container->getParameter('peoples_directory').'/'.$peoples->getLargeImage());
             }
             $em->remove($peoples);
             $em->flush();
         }
 
-        return $this->redirectToRoute('peoples_index');
+        return $this->redirect($this->generateUrl('peoples_index'));
     }
 
     /**

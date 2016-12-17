@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\Users;
 use AppBundle\Form\UsersType;
+use AppBundle\Form\EditUsersType;
 
 /**
  * Users controller.
@@ -51,21 +52,21 @@ class UsersController extends Controller
     public function newAction(Request $request)
     {
         $user = new Users();
-        $form = $this->createForm('AppBundle\Form\UsersType', $user);
+        $form = $this->createForm(new UsersType(), $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $factory = $this->container->get('security.encoder_factory');
-            $plain = $request->request->get('users')['password'];
+            $plain = $request->request->get('users');
             $encoder = $factory->getEncoder($user);
             $user->setIsActive(true);
-            $encodedPassword = $encoder->encodePassword($plain, $user->getSalt());
+            $encodedPassword = $encoder->encodePassword($plain['password'], $user->getSalt());
             $user->setPassword($encodedPassword);
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('users_index');
+            return $this->redirect($this->generateUrl('users_index'));
         }
 
         return $this->render('users/new.html.twig', array(
@@ -96,17 +97,17 @@ class UsersController extends Controller
     {
         $deleteForm = $this->createDeleteForm($user);
         $oldPass = $user->getPassword();
-        $editForm = $this->createForm('AppBundle\Form\EditUsersType', $user);
+        $editForm = $this->createForm(new EditUsersType(), $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $factory = $this->container->get('security.encoder_factory');
-            $plain = $request->request->get('edit_users')['passwordEdit'];
+            $plain = $request->request->get('edit_users');
             if (!empty($plain)) {
               $encoder = $factory->getEncoder($user);
               $user->setIsActive(true);
-              $encodedPassword = $encoder->encodePassword($plain, $user->getSalt());
+              $encodedPassword = $encoder->encodePassword($plain['passwordEdit'], $user->getSalt());
               $user->setPassword($encodedPassword);
             } else {
               $user->setPassword($oldPass);
@@ -115,7 +116,7 @@ class UsersController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('users_index');
+            return $this->redirect($this->generateUrl('users_index'));
         }
 
         return $this->render('users/edit.html.twig', array(
@@ -140,7 +141,7 @@ class UsersController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('users_index');
+        return $this->redirect($this->generateUrl('users_index'));
     }
 
     /**

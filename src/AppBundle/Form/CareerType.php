@@ -4,10 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CareerType extends AbstractType
 {
@@ -18,7 +15,7 @@ class CareerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class, array(
+            ->add('name', 'text', array(
               'label' => false,
               'attr' => array(
                 'class' => 'form-control',
@@ -26,7 +23,7 @@ class CareerType extends AbstractType
                 'placeholder' => 'NAME'
               ),
             ))
-            ->add('email', EmailType::class, array(
+            ->add('email', 'email', array(
                 'label' => false,
                 'attr' => array(
                   'class' => 'form-control',
@@ -34,7 +31,7 @@ class CareerType extends AbstractType
                   'placeholder' => 'EMAIL'
                 ),
             ))
-            ->add('title', TextType::class, array(
+            ->add('title', 'text', array(
                 'label' => false,
                 'attr' => array(
                   'class' => 'form-control',
@@ -42,7 +39,7 @@ class CareerType extends AbstractType
                   'placeholder' => 'SUBJECT'
                 ),
             ))
-            ->add('message', TextareaType::class, array(
+            ->add('message', 'textarea', array(
                 'label' => false,
                 'required' => false,
                 'attr' => array(
@@ -57,10 +54,18 @@ class CareerType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Career'
         ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'career';
     }
 }

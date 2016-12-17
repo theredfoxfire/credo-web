@@ -86,7 +86,7 @@ class DownloadController extends Controller
     public function newAction(Request $request)
     {
         $download = new Download();
-        $form = $this->createForm('AppBundle\Form\DownloadType', $download);
+        $form = $this->createForm(new DownloadType(), $download);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -94,7 +94,7 @@ class DownloadController extends Controller
             $file = $download->getFile();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
-                $this->getParameter('download_directory'),
+                $this->container->getParameter('download_directory'),
                 $fileName
             );
             $download->setFile($fileName);
@@ -122,7 +122,7 @@ class DownloadController extends Controller
             $em->persist($download);
             $em->flush();
 
-            return $this->redirectToRoute('download_index');
+            return $this->redirect($this->generateUrl('download_index'));
         }
 
         return $this->render('download/new.html.twig', array(
@@ -166,7 +166,7 @@ class DownloadController extends Controller
     public function editAction(Request $request, Download $download)
     {
         $deleteForm = $this->createDeleteForm($download);
-        $editForm = $this->createForm('AppBundle\Form\DownloadType', $download);
+        $editForm = $this->createForm(new DownloadType(), $download);
         $oldFile = $download->getFile();
         $editForm->handleRequest($request);
 
@@ -174,12 +174,12 @@ class DownloadController extends Controller
             $em = $this->getDoctrine()->getManager();
             $file = $download->getFile();
             if (!empty($file)) {
-                if (file_exists($this->getParameter('download_directory').'/'.$oldFile)) {
-                    unlink($this->getParameter('download_directory').'/'.$oldFile);
+                if (file_exists($this->container->getParameter('download_directory').'/'.$oldFile)) {
+                    unlink($this->container->getParameter('download_directory').'/'.$oldFile);
                 }
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
-                    $this->getParameter('download_directory'),
+                    $this->container->getParameter('download_directory'),
                     $fileName
                 );
                 $download->setFile($fileName);
@@ -190,7 +190,7 @@ class DownloadController extends Controller
             $em->persist($download);
             $em->flush();
 
-            return $this->redirectToRoute('download_index');
+            return $this->redirect($this->generateUrl('download_index'));
         }
 
         return $this->render('download/edit.html.twig', array(
@@ -211,14 +211,14 @@ class DownloadController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if (file_exists($this->getParameter('download_directory').'/'.$download->getFile())) {
-                unlink($this->getParameter('download_directory').'/'.$download->getFile());
+            if (file_exists($this->container->getParameter('download_directory').'/'.$download->getFile())) {
+                unlink($this->container->getParameter('download_directory').'/'.$download->getFile());
             }
             $em->remove($download);
             $em->flush();
         }
 
-        return $this->redirectToRoute('download_index');
+        return $this->redirect($this->generateUrl('download_index'));
     }
 
     /**

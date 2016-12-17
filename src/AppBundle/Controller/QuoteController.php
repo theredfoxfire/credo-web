@@ -51,7 +51,7 @@ class QuoteController extends Controller
     public function newAction(Request $request)
     {
         $quote = new Quote();
-        $form = $this->createForm('AppBundle\Form\QuoteType', $quote);
+        $form = $this->createForm(new QuoteType(), $quote);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +59,7 @@ class QuoteController extends Controller
             $em->persist($quote);
             $em->flush();
 
-            return $this->redirectToRoute('quote_index');
+            return $this->redirect($this->generateUrl('quote_index'));
         }
 
         return $this->render('quote/new.html.twig', array(
@@ -89,7 +89,7 @@ class QuoteController extends Controller
     public function editAction(Request $request, Quote $quote)
     {
         $deleteForm = $this->createDeleteForm($quote);
-        $editForm = $this->createForm('AppBundle\Form\QuoteType', $quote);
+        $editForm = $this->createForm(new QuoteType(), $quote);
 
         $editForm->handleRequest($request);
 
@@ -98,7 +98,7 @@ class QuoteController extends Controller
             $em->persist($quote);
             $em->flush();
 
-            return $this->redirectToRoute('quote_index');
+            return $this->redirect($this->generateUrl('quote_index'));
         }
 
         return $this->render('quote/edit.html.twig', array(
@@ -123,7 +123,7 @@ class QuoteController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('quote_index');
+        return $this->redirect($this->generateUrl('quote_index'));
     }
 
     /**

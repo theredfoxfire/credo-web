@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
+        <link rel="shortcut icon" type="image/png" href="{{ asset('credo/img/favicon.png') }}"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
@@ -31,8 +32,8 @@
                   </div>
                   <div class="col-md-6">
                       <div class="search_div pull-right">
-                          <form name="form_search" id="form_search" method="get" action="article.php">
-                              <input placeholder="SEARCH HERE ..." class="txtsearch" name="form_search" id="txtsearch" value="" type="text">
+                          <form name="form_search" id="form_search" method="get" action="{{ path('unites_search') }}">
+                              <input placeholder="SEARCH HERE ..." class="txtsearch" name="search" id="txtsearch" value="" type="text">
                               <button type="submit" class="btn btn-search btn-danger"> <i class="fa fa-search"></i></button>
                           </form>
                       </div>
@@ -59,13 +60,13 @@
                           <li class="divider-vertical dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
                             <ul class="dropdown-menu list-ab">
-                              <li><a href="{{ path('aboutus_show_public', {'id': 3}) }}">COMPANY HISTORY</a></li>
+                              <li><a href="{{ path('aboutus_show_public', {'id': 4}) }}">COMPANY HISTORY</a></li>
                               <li><a href="{{ path('download_index_public') }}">DOWNLOAD</a></li>
                             </ul>
                           </li>
                           <li class="divider-vertical"><a href="{{ path('peoples_index_public') }}">PEOPLE</a></li>
                           <li class="divider-vertical dropdown mega-dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
+                              <a href="#" class="dropdown-toggle">BUSINESS UNITS</a>
                               <ul class="dropdown-menu mega-dropdown-menu row">
                                   {% for category in categories.categories %}
                                       {% if loop.index % 4 == 1 or loop.index == 1 %}
@@ -73,10 +74,12 @@
                                       {% endif %}
                                               <li class="col-sm-3">
                                                   <ul class="list-bu">
-                                                        <li class="dropdown-header-dw">{{ category.category | upper }}</li>
+                                                      <li class="dropdown-header-dw"><a id="heading{{loop.index}}" data-toggle="collapse" data-parent="#accordion" href="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse{{loop.index}}">{{ category.category | upper }}</a></li>
+                                                      <div id="collapse{{loop.index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading{{loop.index}}">
                                                         {% for unite in category.unites %}
                                                             <li><a href="{{ path('unites_show_public', { 'id': unite.id }) }}">{{ unite.title | upper }}</a></li>
                                                         {% endfor %}
+                                                      </div>
                                                   </ul>
                                               </li>
                                       {% if loop.index % 4 == 0 or loop.index == categories.numData %}
@@ -86,7 +89,7 @@
                               </ul>
                           </li>
                           <li class="divider-vertical"><a href="{{ path('news_index_public') }}">NEWS AND MEDIA</a></li>
-                          <li class="divider-vertical"><a href="{{ path('csr_show_public', {'id': 2}) }}">CSR</a></li>
+                          <li class="divider-vertical"><a href="{{ path('csr_show_public', {'id': 3}) }}">CSR</a></li>
                           <li class="divider-vertical"><a href="{{ path('career_new') }}">CAREER</a></li>
                           <li class="divider-vertical"><a href="{{ path('contactus_new') }}">CONTACT US</a></li>
                       </ul>
@@ -106,7 +109,7 @@
                           <li class="divider-vertical dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
                             <ul class="dropdown-menu list-ab">
-                              <li><a href="{{ path('aboutus_show_public', {'id': 3}) }}">COMPANY HISTORY</a></li>
+                              <li><a href="{{ path('aboutus_show_public', {'id': 4}) }}">COMPANY HISTORY</a></li>
                               <li><a href="{{ path('download_index_public') }}">DOWNLOAD</a></li>
                             </ul>
                           </li>
@@ -133,7 +136,7 @@
                               </ul>
                           </li>
                           <li class=""><a href="{{ path('news_index_public') }}">NEWS AND MEDIA</a></li>
-                          <li class=""><a href="{{ path('csr_show_public', {'id': 2}) }}">CSR</a></li>
+                          <li class=""><a href="{{ path('csr_show_public', {'id': 3}) }}">CSR</a></li>
                           <li class=""><a href="{{ path('career_new') }}">CAREER</a></li>
                           <li class=""><a href="{{ path('contactus_new') }}">CONTACT US</a></li>
                       </ul>
@@ -142,13 +145,26 @@
             </div>
         </footer>
         <div class="developer">
-            <div class="container">ALL RIGHTS RESERVED - CREDO GROUP©{{ "now"|date("Y") }}</div>
+            <div class="container">ALL RIGHTS RESERVED - <a href="http://www.credogroup.co.id/webapps/webmail2" target="_blank">CREDO GROUP</a>©{{ "now"|date("Y") }}</div>
         </div>
         <!-- jQuery Version 1.11.1 -->
         <script src="{{ asset('credo/js/jquery.js') }}"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="{{ asset('credo/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('credo/js/owl-carousel/owl.carousel.js') }}"></script>
+        <script type="text/javascript">
+          $('li.divider-vertical.dropdown.mega-dropdown a').on('click', function (event) {
+            $(this).parent().toggleClass("open");
+          });
+          $('body').on('click', function (e) {
+              if (!$('li.divider-vertical.dropdown.mega-dropdown').is(e.target)
+                  && $('li.divider-vertical.dropdown.mega-dropdown').has(e.target).length === 0
+                  && $('.open').has(e.target).length === 0
+              ) {
+                  $('li.divider-vertical.dropdown.mega-dropdown').removeClass('open');
+              }
+          });
+        </script>
         <script type="text/javascript">
             $(document).ready(function() {
                 var owl = $("#owl-demo");

@@ -4,9 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PeoplesType extends AbstractType
 {
@@ -19,14 +17,14 @@ class PeoplesType extends AbstractType
         $builder
             ->add('name')
             ->add('position')
-            ->add('story', TextareaType::class, array(
+            ->add('story', 'textarea', array(
                 'required' => false,
                 'attr' => array(
                   'class' => 'tinymce',
                   'rows' => '20'
                 ),
             ))
-            ->add('largeImage', FileType::class, array(
+            ->add('largeImage', 'file', array(
               'label' => 'Foto (image file, best fit width 800px x height 600px)',
                'data' => null,
                'required' => false,
@@ -37,10 +35,18 @@ class PeoplesType extends AbstractType
     /**
      * @param OptionsResolver $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Peoples'
         ));
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'peoples';
     }
 }

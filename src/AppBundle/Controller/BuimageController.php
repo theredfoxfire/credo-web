@@ -51,14 +51,14 @@ class BuimageController extends Controller
      public function newAction(Request $request)
      {
          $buimage = new Buimage();
-         $form = $this->createForm('AppBundle\Form\BuimageType', $buimage);
+         $form = $this->createForm(new BuimageType(), $buimage);
          $form->handleRequest($request);
 
          if ($form->isSubmitted() && $form->isValid()) {
              $file = $buimage->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('buimage_directory'),
+                 $this->container->getParameter('buimage_directory'),
                  $fileName
              );
              $buimage->setCreatedAt(new \DateTime());
@@ -68,7 +68,7 @@ class BuimageController extends Controller
              $em->persist($buimage);
              $em->flush();
 
-             return $this->redirectToRoute('buimage_show', array('id' => $buimage->getId()));
+             return $this->redirect($this->generateUrl('buimage_show', array('id' => $buimage->getId())));
          }
 
          return $this->render('buimage/new.html.twig', array(
@@ -98,27 +98,27 @@ class BuimageController extends Controller
      public function editAction(Request $request, Buimage $buimage)
      {
          $deleteForm = $this->createDeleteForm( $buimage);
-         $editForm = $this->createForm('AppBundle\Form\BuimageType',  $buimage);
+         $editForm = $this->createForm(new BuimageType(),  $buimage);
          $oldFile =  $buimage->getLargeImage();
 
          $editForm->handleRequest($request);
 
          if ($editForm->isSubmitted() && $editForm->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('buimage_directory').'/'.$oldFile)) {
-                 unlink($this->getParameter('buimage_directory').'/'.$oldFile);
+             if (file_exists($this->container->getParameter('buimage_directory').'/'.$oldFile)) {
+                 unlink($this->container->getParameter('buimage_directory').'/'.$oldFile);
              }
              $file =  $buimage->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('buimage_directory'),
+                 $this->container->getParameter('buimage_directory'),
                  $fileName
              );
              $buimage->setLargeImage($fileName);
              $em->persist( $buimage);
              $em->flush();
 
-             return $this->redirectToRoute('buimage_edit', array('id' =>  $buimage->getId()));
+             return $this->redirect($this->generateUrl('buimage_edit', array('id' =>  $buimage->getId())));
          }
 
          return $this->render('buimage/edit.html.twig', array(
@@ -139,14 +139,14 @@ class BuimageController extends Controller
 
          if ($form->isSubmitted() && $form->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('buimage_directory').'/'.$buimage->getLargeImage())) {
-                 unlink($this->getParameter('buimage_directory').'/'.$buimage->getLargeImage());
+             if (file_exists($this->container->getParameter('buimage_directory').'/'.$buimage->getLargeImage())) {
+                 unlink($this->container->getParameter('buimage_directory').'/'.$buimage->getLargeImage());
              }
              $em->remove($buimage);
              $em->flush();
          }
 
-         return $this->redirectToRoute('buimage_index');
+         return $this->redirect($this->generateUrl('buimage_index'));
      }
 
     /**

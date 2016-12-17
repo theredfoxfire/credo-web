@@ -10,6 +10,7 @@ use AppBundle\Entity\Slide;
 use AppBundle\Entity\News;
 use AppBundle\Entity\Logo;
 use AppBundle\Entity\Quote;
+use AppBundle\Entity\Video;
 
 class DefaultController extends Controller
 {
@@ -19,12 +20,22 @@ class DefaultController extends Controller
     public function adminAction(Request $request)
     {
         // replace this example code with whatever you need
-        return $this->render('default/indexAdmin.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
+        return $this->render('default/indexAdmin.html.twig');
     }
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="landingPage")
+     */
+    public function landingAction(Request $request)
+    {
+        // replace this example code with whatever you need
+        $em = $this->getDoctrine()->getManager();
+        $videos = $em->getRepository('AppBundle:Video')->findAll();
+        return $this->render('default/landing.html.twig', array(
+            'videos' => $videos,
+        ));
+    }
+    /**
+     * @Route("/home", name="homepage")
      */
      public function indexAction(Request $request)
      {

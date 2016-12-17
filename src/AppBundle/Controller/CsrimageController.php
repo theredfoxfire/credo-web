@@ -51,14 +51,14 @@ class CsrimageController extends Controller
      public function newAction(Request $request)
      {
          $csrimage = new Csrimage();
-         $form = $this->createForm('AppBundle\Form\CsrimageType', $csrimage);
+         $form = $this->createForm(new CsrimageType(), $csrimage);
          $form->handleRequest($request);
 
          if ($form->isSubmitted() && $form->isValid()) {
              $file = $csrimage->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('csrimage_directory'),
+                 $this->container->getParameter('csrimage_directory'),
                  $fileName
              );
              $csrimage->setCreatedAt(new \DateTime());
@@ -68,7 +68,7 @@ class CsrimageController extends Controller
              $em->persist($csrimage);
              $em->flush();
 
-             return $this->redirectToRoute('csrimage_show', array('id' => $csrimage->getId()));
+             return $this->redirect($this->generateUrl('csrimage_show', array('id' => $csrimage->getId())));
          }
 
          return $this->render('csrimage/new.html.twig', array(
@@ -98,27 +98,27 @@ class CsrimageController extends Controller
      public function editAction(Request $request, Csrimage $csrimage)
      {
          $deleteForm = $this->createDeleteForm( $csrimage);
-         $editForm = $this->createForm('AppBundle\Form\CsrimageType',  $csrimage);
+         $editForm = $this->createForm(new CsrimageType(),  $csrimage);
          $oldFile =  $csrimage->getLargeImage();
 
          $editForm->handleRequest($request);
 
          if ($editForm->isSubmitted() && $editForm->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('csrimage_directory').'/'.$oldFile)) {
-                 unlink($this->getParameter('csrimage_directory').'/'.$oldFile);
+             if (file_exists($this->container->getParameter('csrimage_directory').'/'.$oldFile)) {
+                 unlink($this->container->getParameter('csrimage_directory').'/'.$oldFile);
              }
              $file =  $csrimage->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('csrimage_directory'),
+                 $this->container->getParameter('csrimage_directory'),
                  $fileName
              );
              $csrimage->setLargeImage($fileName);
              $em->persist( $csrimage);
              $em->flush();
 
-             return $this->redirectToRoute('csrimage_edit', array('id' =>  $csrimage->getId()));
+             return $this->redirect($this->generateUrl('csrimage_edit', array('id' =>  $csrimage->getId())));
          }
 
          return $this->render('csrimage/edit.html.twig', array(
@@ -139,14 +139,14 @@ class CsrimageController extends Controller
 
          if ($form->isSubmitted() && $form->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('csrimage_directory').'/'.$csrimage->getLargeImage())) {
-                 unlink($this->getParameter('csrimage_directory').'/'.$csrimage->getLargeImage());
+             if (file_exists($this->container->getParameter('csrimage_directory').'/'.$csrimage->getLargeImage())) {
+                 unlink($this->container->getParameter('csrimage_directory').'/'.$csrimage->getLargeImage());
              }
              $em->remove($csrimage);
              $em->flush();
          }
 
-         return $this->redirectToRoute('csrimage_index');
+         return $this->redirect($this->generateUrl('csrimage_index'));
      }
 
     /**

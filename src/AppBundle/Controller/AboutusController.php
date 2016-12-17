@@ -52,7 +52,7 @@ class AboutusController extends Controller
     public function newAction(Request $request)
     {
         $aboutus = new Aboutus();
-        $form = $this->createForm('AppBundle\Form\AboutusType', $aboutus);
+        $form = $this->createForm(new AboutusType(), $aboutus);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -60,18 +60,19 @@ class AboutusController extends Controller
             $file = $aboutus->getLargeImage();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
-                $this->getParameter('aboutus_directory'),
+                $this->container->getParameter('aboutus_directory'),
                 $fileName
             );
             $aboutus->setLargeImage($fileName);
-            $count = $request->request->get('aboutus')['fileCount'];
-            for ($i = 1; $i <= $count; $i++) {
+            $data = $request->request->get('aboutus');
+            $dataF = $request->files->get('aboutus');
+            for ($i = 1; $i <= $data['fileCount']; $i++) {
               $abimage = new Aboutusimage();
-              $file =  $request->files->get('aboutus')['anotherImage'.$i];
+              $file =  $dataF['anotherImage'.$i];
               if (!empty($file)) {
                   $fileName = md5(uniqid()).'.'.$file->guessExtension();
                   $file->move(
-                      $this->getParameter('aboutusimage_directory'),
+                      $this->container->getParameter('aboutusimage_directory'),
                       $fileName
                   );
                   $abimage->setCreatedAt(new \DateTime());
@@ -83,7 +84,7 @@ class AboutusController extends Controller
             $em->persist($aboutus);
             $em->flush();
 
-            return $this->redirectToRoute('aboutus_index');
+            return $this->redirect($this->generateUrl('aboutus_index'));
         }
 
         return $this->render('aboutus/new.html.twig', array(
@@ -127,28 +128,31 @@ class AboutusController extends Controller
     {
         $deleteForm = $this->createDeleteForm($aboutus);
         $images = $aboutus->getAboutusImage();
-        $editForm = $this->createForm('AppBundle\Form\AboutusType', $aboutus);
+        $editForm = $this->createForm(new AboutusType(), $aboutus);
         $oldFile = $aboutus->getLargeImage();
 
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $count = $request->request->get('aboutus')['fileCount'];
-            for ($i = 1; $i <= $count; $i++) {
+            $data = $request->request->get('aboutus');
+            $dataF = $request->files->get('aboutus');
+            for ($i = 1; $i <= $data['fileCount']; $i++) {
               $abimage = new Aboutusimage();
-              $file =  $request->files->get('aboutus')['anotherImage'.$i];
+              $file =  $dataF['anotherImage'.$i];
                 if (!empty($file)) {
                     foreach ($images as $image) {
-                        if (file_exists($this->getParameter('aboutusimage_directory').'/'.$image->getLargeImage()) && !empty($image->getLargeImage())) {
-                            unlink($this->getParameter('aboutusimage_directory').'/'.$image->getLargeImage());
+                        $fileName = $image->getLargeImage();
+                        $filePath = $this->container->getParameter('aboutusimage_directory').'/'.$fileName;
+                        if (file_exists($filePath) && !empty($fileName)) {
+                            unlink($this->container->getParameter('aboutusimage_directory').'/'.$image->getLargeImage());
                             $em->remove($image);
                             $em->flush();
                         }
                     }
                     $fileName = md5(uniqid()).'.'.$file->guessExtension();
                     $file->move(
-                        $this->getParameter('aboutusimage_directory'),
+                        $this->container->getParameter('aboutusimage_directory'),
                         $fileName
                     );
                     $abimage->setCreatedAt(new \DateTime());
@@ -158,12 +162,14 @@ class AboutusController extends Controller
                     $em->flush();
                 }
             }
-            if (file_exists($this->getParameter('aboutus_directory').'/'.$oldFile) && !empty($aboutus->getLargeImage())) {
-                unlink($this->getParameter('aboutus_directory').'/'.$oldFile);
+            $filePath = $this->container->getParameter('aboutus_directory').'/'.$oldFile;
+            $fileName = $aboutus->getLargeImage();
+            if (file_exists($filePath) && !empty($fileName)) {
+                unlink($this->container->getParameter('aboutus_directory').'/'.$oldFile);
                 $file = $aboutus->getLargeImage();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
-                    $this->getParameter('aboutus_directory'),
+                    $this->container->getParameter('aboutus_directory'),
                     $fileName
                 );
                 $aboutus->setLargeImage($fileName);
@@ -173,7 +179,7 @@ class AboutusController extends Controller
             $em->persist($aboutus);
             $em->flush();
 
-            return $this->redirectToRoute('aboutus_index');
+            return $this->redirect($this->generateUrl('aboutus_index'));
         }
 
         return $this->render('aboutus/edit.html.twig', array(
@@ -198,7 +204,7 @@ class AboutusController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('aboutus_index');
+        return $this->redirect($this->generateUrl('aboutus_index'));
     }
 
     /**

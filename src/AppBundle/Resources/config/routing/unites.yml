@@ -8,6 +8,11 @@ unites_show:
     defaults: { _controller: "AppBundle:Unites:show" }
     methods:  GET
 
+unites_search:
+    path:     /unites/search
+    defaults: { _controller: "AppBundle:Unites:search" }
+    methods:  GET
+
 unites_show_public:
     path:     /unites/{id}/show
     defaults: { _controller: "AppBundle:Unites:showPublic" }

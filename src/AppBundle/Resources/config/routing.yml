@@ -1,3 +1,7 @@
+app_year:
+    resource: "@AppBundle/Resources/config/routing/year.yml"
+    prefix:   /year
+
 app_career:
     resource: "@AppBundle/Resources/config/routing/career.yml"
     prefix:   /
@@ -51,4 +55,7 @@ app_month:
     prefix:   /
 app_month_news:
     resource: "@AppBundle/Resources/config/routing/monthnews.yml"
+    prefix:   /
+app_video:
+    resource: "@AppBundle/Resources/config/routing/video.yml"
     prefix:   /

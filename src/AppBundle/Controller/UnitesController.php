@@ -52,27 +52,27 @@ class UnitesController extends Controller
     public function newAction(Request $request)
     {
         $unite = new Unites();
-        $form = $this->createForm('AppBundle\Form\UnitesType', $unite);
+        $form = $this->createForm(new UnitesType(), $unite);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $unite->getLargeImage();
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
             $file->move(
-                $this->getParameter('unites_directory'),
+                $this->container->getParameter('unites_directory'),
                 $fileName
             );
             $unite->setLargeImage($fileName);
 
             $em = $this->getDoctrine()->getManager();
-            $count = $request->request->get('unites')['fileCount'];
-            for ($i = 1; $i <= $count; $i++) {
+            $count = $request->request->get('unites');
+            for ($i = 1; $i <= $count['fileCount']; $i++) {
               $buimage = new Buimage();
-              $file =  $request->files->get('unites')['anotherImage'.$i];
-              if (!empty($file)) {
-                  $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                  $file->move(
-                      $this->getParameter('buimage_directory'),
+              $file =  $request->files->get('unites');
+              if (!empty($file['anotherImage'.$i])) {
+                  $fileName = md5(uniqid()).'.'.$file['anotherImage'.$i]->guessExtension();
+                  $file['anotherImage'.$i]->move(
+                      $this->container->getParameter('buimage_directory'),
                       $fileName
                   );
                   $buimage->setCreatedAt(new \DateTime());
@@ -81,7 +81,8 @@ class UnitesController extends Controller
                   $em->persist($buimage);
               }
             }
-            if (!empty($unite->getWebUrl())) {
+            $url = $unite->getWebUrl();
+            if (!empty($url)) {
               if (strtolower(substr($unite->getWebUrl(),0,4)) != 'http') {
                   $url = 'http://'.$unite->getWebUrl();
                   $unite->setWebUrl($url);
@@ -90,7 +91,7 @@ class UnitesController extends Controller
             $em->persist($unite);
             $em->flush();
 
-            return $this->redirectToRoute('unites_index');
+            return $this->redirect($this->generateUrl('unites_index'));
         }
 
         return $this->render('unites/new.html.twig', array(
@@ -134,28 +135,30 @@ class UnitesController extends Controller
     {
         $deleteForm = $this->createDeleteForm($unite);
         $images = $unite->getUnitesImage();
-        $editForm = $this->createForm('AppBundle\Form\UnitesType', $unite);
+        $editForm = $this->createForm(new UnitesType(), $unite);
         $oldFile = $unite->getLargeImage();
 
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $count = $request->request->get('unites')['fileCount'];
-            for ($i = 1; $i <= $count; $i++) {
+            $count = $request->request->get('unites');
+            for ($i = 1; $i <= $count['fileCount']; $i++) {
               $buimage = new Buimage();
-              $file =  $request->files->get('unites')['anotherImage'.$i];
-                if (!empty($file)) {
+              $file =  $request->files->get('unites');
+                if (!empty($file['anotherImage'.$i])) {
                     foreach ($images as $image) {
-                        if (file_exists($this->getParameter('buimage_directory').'/'.$image->getLargeImage()) && !empty($image->getLargeImage())) {
-                            unlink($this->getParameter('buimage_directory').'/'.$image->getLargeImage());
+                        $fileName = $image->getLargeImage();
+                        $filePath = $this->container->getParameter('buimage_directory').'/'.$fileName;
+                        if (file_exists($filePath) && !empty($fileName)) {
+                            unlink($this->container->getParameter('buimage_directory').'/'.$image->getLargeImage());
                             $em->remove($image);
                             $em->flush();
                         }
                     }
-                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move(
-                        $this->getParameter('buimage_directory'),
+                    $fileName = md5(uniqid()).'.'.$file['anotherImage'.$i]->guessExtension();
+                    $file['anotherImage'.$i]->move(
+                        $this->container->getParameter('buimage_directory'),
                         $fileName
                     );
                     $buimage->setCreatedAt(new \DateTime());
@@ -165,19 +168,22 @@ class UnitesController extends Controller
                     $em->flush();
                 }
             }
-            if (file_exists($this->getParameter('unites_directory').'/'.$oldFile) && !empty($unite->getLargeImage())) {
-                unlink($this->getParameter('unites_directory').'/'.$oldFile);
+            $filePath = $this->container->getParameter('unites_directory').'/'.$oldFile;
+            $fileName = $unite->getLargeImage();
+            if (file_exists($filePath) && !empty($fileName)) {
+                unlink($this->container->getParameter('unites_directory').'/'.$oldFile);
                 $file = $unite->getLargeImage();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
-                    $this->getParameter('unites_directory'),
+                    $this->container->getParameter('unites_directory'),
                     $fileName
                 );
                 $unite->setLargeImage($fileName);
             } else {
               $unite->setLargeImage($oldFile);
             }
-            if (!empty($unite->getWebUrl())) {
+            $url = $unite->getWebUrl();
+            if (!empty($url)) {
               if (strtolower(substr($unite->getWebUrl(),0,4)) != 'http') {
                   $url = 'http://'.$unite->getWebUrl();
                   $unite->setWebUrl($url);
@@ -186,7 +192,7 @@ class UnitesController extends Controller
             $em->persist($unite);
             $em->flush();
 
-            return $this->redirectToRoute('unites_index');
+            return $this->redirect($this->generateUrl('unites_index'));
         }
 
         return $this->render('unites/edit.html.twig', array(
@@ -209,21 +215,25 @@ class UnitesController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($images as $image) {
-                if (file_exists($this->getParameter('buimage_directory').'/'.$image->getLargeImage()) && !empty($image->getLargeImage())) {
-                    unlink($this->getParameter('buimage_directory').'/'.$image->getLargeImage());
+                $fileName = $image->getLargeImage();
+                $filePath = $this->container->getParameter('buimage_directory').'/'.$fileName;
+                if (file_exists($filePath) && !empty($fileName)) {
+                    unlink($this->container->getParameter('buimage_directory').'/'.$image->getLargeImage());
                     $em->remove($image);
                     $em->flush();
                 }
             }
             $em = $this->getDoctrine()->getManager();
-            if (file_exists($this->getParameter('unites_directory').'/'.$unite->getLargeImage()) && !empty($unite->getLargeImage())) {
-                unlink($this->getParameter('unites_directory').'/'.$unite->getLargeImage());
+            $fileName = $unite->getLargeImage();
+            $filePath = $this->container->getParameter('unites_directory').'/'.$unite->getLargeImage();
+            if (file_exists($filePath) && !empty($fileName)) {
+                unlink($this->container->getParameter('unites_directory').'/'.$unite->getLargeImage());
             }
             $em->remove($unite);
             $em->flush();
         }
 
-        return $this->redirectToRoute('unites_index');
+        return $this->redirect($this->generateUrl('unites_index'));
     }
 
     /**
@@ -240,5 +250,31 @@ class UnitesController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+    * Search Unites Action
+    * @param string
+    */
+    public function searchAction(Request $request)
+    {
+        $searchTerm = $request->query->get('search');
+
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Unites a where a.story like '%{$searchTerm}%'";
+        $query = $em->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
+
+        return $this->render('unites/search.html.twig', array(
+            'pagination' => $pagination,
+            'categories' => $this->get('app.services.getCategories')->getCategories(),
+        ));
     }
 }

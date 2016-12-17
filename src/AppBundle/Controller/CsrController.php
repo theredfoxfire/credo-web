@@ -52,7 +52,7 @@ class CsrController extends Controller
     public function newAction(Request $request)
     {
         $csr = new Csr();
-        $form = $this->createForm('AppBundle\Form\CsrType', $csr);
+        $form = $this->createForm(new CsrType(), $csr);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -60,21 +60,21 @@ class CsrController extends Controller
             if (!empty($file)) {
               $fileName = md5(uniqid()).'.'.$file->guessExtension();
               $file->move(
-                  $this->getParameter('csr_directory'),
+                  $this->container->getParameter('csr_directory'),
                   $fileName
               );
               $csr->setLargeImage($fileName);
             }
 
             $em = $this->getDoctrine()->getManager();
-            $count = $request->request->get('csr')['fileCount'];
-            for ($i = 1; $i <= $count; $i++) {
+            $count = $request->request->get('csr');
+            for ($i = 1; $i <= $count['fileCount']; $i++) {
               $csrimage = new Csrimage();
-              $file =  $request->files->get('csr')['anotherImage'.$i];
-              if (!empty($file)) {
-                  $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                  $file->move(
-                      $this->getParameter('csrimage_directory'),
+              $file =  $request->files->get('csr');
+              if (!empty($file['anotherImage'.$i])) {
+                  $fileName = md5(uniqid()).'.'.$file['anotherImage'.$i]->guessExtension();
+                  $file['anotherImage'.$i]->move(
+                      $this->container->getParameter('csrimage_directory'),
                       $fileName
                   );
                   $csrimage->setCreatedAt(new \DateTime());
@@ -86,7 +86,7 @@ class CsrController extends Controller
             $em->persist($csr);
             $em->flush();
 
-            return $this->redirectToRoute('csr_index');
+            return $this->redirect($this->generateUrl('csr_index'));
         }
 
         return $this->render('csr/new.html.twig', array(
@@ -130,28 +130,30 @@ class CsrController extends Controller
     {
         $deleteForm = $this->createDeleteForm($csr);
         $images = $csr->getCsrImage();
-        $editForm = $this->createForm('AppBundle\Form\CsrType', $csr);
+        $editForm = $this->createForm(new CsrType(), $csr);
         $oldFile = $csr->getLargeImage();
 
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $count = $request->request->get('csr')['fileCount'];
-            for ($i = 1; $i <= $count; $i++) {
+            $count = $request->request->get('csr');
+            for ($i = 1; $i <= $count['fileCount']; $i++) {
               $csrimage = new Csrimage();
-              $file =  $request->files->get('csr')['anotherImage'.$i];
-                if (!empty($file)) {
+              $file =  $request->files->get('csr');
+                if (!empty($file['anotherImage'.$i])) {
                     foreach ($images as $image) {
-                        if (file_exists($this->getParameter('csrimage_directory').'/'.$image->getLargeImage()) && !empty($image->getLargeImage())) {
-                            unlink($this->getParameter('csrimage_directory').'/'.$image->getLargeImage());
+                        $fileName = $image->getLargeImage();
+                        $filePath = $this->container->getParameter('csrimage_directory').'/'.$file;
+                        if (file_exists($filePath) && !empty($fileName)) {
+                            unlink($this->container->getParameter('csrimage_directory').'/'.$image->getLargeImage());
                             $em->remove($image);
                             $em->flush();
                         }
                     }
-                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move(
-                        $this->getParameter('csrimage_directory'),
+                    $fileName = md5(uniqid()).'.'.$file['anotherImage'.$i]->guessExtension();
+                    $file['anotherImage'.$i]->move(
+                        $this->container->getParameter('csrimage_directory'),
                         $fileName
                     );
                     $csrimage->setCreatedAt(new \DateTime());
@@ -161,14 +163,14 @@ class CsrController extends Controller
                     $em->flush();
                 }
             }
-            $file =  $request->files->get('csr')['largeImage'];
-
-            if (file_exists($this->getParameter('csr_directory').'/'.$oldFile) && !empty($file)) {
-                unlink($this->getParameter('csr_directory').'/'.$oldFile);
+            $file =  $request->files->get('csr');
+            $filePath = $this->container->getParameter('csr_directory').'/'.$oldFile;
+            if (file_exists($filePath) && !empty($file['largeImage'])) {
+                unlink($this->container->getParameter('csr_directory').'/'.$oldFile);
                 $file = $csr->getLargeImage();
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
                 $file->move(
-                    $this->getParameter('csr_directory'),
+                    $this->container->getParameter('csr_directory'),
                     $fileName
                 );
                 $csr->setLargeImage($fileName);
@@ -178,7 +180,7 @@ class CsrController extends Controller
             $em->persist($csr);
             $em->flush();
 
-            return $this->redirectToRoute('csr_index');
+            return $this->redirect($this->generateUrl('csr_index'));
         }
 
         return $this->render('csr/edit.html.twig', array(
@@ -201,21 +203,25 @@ class CsrController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($images as $image) {
-                if (file_exists($this->getParameter('csrimage_directory').'/'.$image->getLargeImage()) && !empty($image->getLargeImage())) {
-                    unlink($this->getParameter('csrimage_directory').'/'.$image->getLargeImage());
+                $fileName = $image->getLargeImage();
+                $filePath = $this->container->getParameter('csrimage_directory').'/'.$fileName;
+                if (file_exists($filePath) && !empty($fileName)) {
+                    unlink($this->container->getParameter('csrimage_directory').'/'.$image->getLargeImage());
                     $em->remove($image);
                     $em->flush();
                 }
             }
             $em = $this->getDoctrine()->getManager();
-            if (file_exists($this->getParameter('csr_directory').'/'.$csr->getLargeImage()) && !empty($csr->getLargeImage())) {
-                unlink($this->getParameter('csr_directory').'/'.$csr->getLargeImage());
+            $fileName = $csr->getLargeImage();
+            $filePath = $this->container->getParameter('csr_directory').'/'.$fileName;
+            if (file_exists($filePath) && !empty($fileName)) {
+                unlink($this->container->getParameter('csr_directory').'/'.$csr->getLargeImage());
             }
             $em->remove($csr);
             $em->flush();
         }
 
-        return $this->redirectToRoute('csr_index');
+        return $this->redirect($this->generateUrl('csr_index'));
     }
 
     /**

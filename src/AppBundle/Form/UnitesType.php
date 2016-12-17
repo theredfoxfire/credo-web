@@ -4,11 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use AppBundle\Entity\Category;
-use Doctrine\ORM\EntityManager;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UnitesType extends AbstractType
 {
@@ -21,25 +17,33 @@ class UnitesType extends AbstractType
         $builder
             ->add('title', null, array('label' => 'Name'))
             ->add('subtitle', null, array('label' => 'Sub name'))
-            ->add('category', null, array('empty_data' => '-- Please select business category --', 'placeholder' => 'Please select business category'))
-            ->add('story', TextareaType::class, array(
+            ->add('category', null, array('empty_data' => '-- Please select business category --', 'attr' => array('placeholder' => 'Please select business category')))
+            ->add('story', 'textarea', array(
                 'label' => 'Short Story',
                 'required' => false,
                 'attr' => array('class' => 'tinymce', 'rows' => '15'),
             ))
-            ->add('largeImage', FileType::class, array('required' => false, 'label' => 'Foto (image file, best fit width 1280px x height 793px Max size 2MB) ', 'data' => null))
+            ->add('largeImage', 'file', array('required' => false, 'label' => 'Foto (image file, best fit width 1280px x height 793px Max size 2MB) ', 'data' => null))
             ->add('webUrl', null, array('required' => false, 'label' => 'Website Address'))
         ;
     }
 
+
     /**
-     * @param OptionsResolver $resolver
+     * @param OptionsResolverInterface $resolver
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Unites',
-            'allow_extra_fields' => true
+            'allow_extra_fields' => true,
         ));
+    }
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'unites';
     }
 }

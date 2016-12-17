@@ -12,11 +12,15 @@
                         <div class="row pt-md">
                             <div class="col-lg-3 col-md-3 profile judith">
                                 <div class="img-box">
-                                    <img src="{{ asset('uploads/peoples/') }}{{ judit.largeImage }}" class="img-responsive">
+                                    {% if judit != null %}
+                                        <img src="{{ asset('uploads/peoples/') }}{{ judit.largeImage }}" class="img-responsive">
+                                    {% endif %}
                                     <div class="stripe"></div>
-                                </div>
+                                </div><br />
+                                {% if judit != null %}
                                 <h1><a href="{{ path('peoples_show_public', {'id': judit.id}) }}">{{ judit.name | upper }}</a></h1>
                                 <h2>{{ judit.position | upper }}</h2>
+                                {% endif %}
                             </div>
 
                         </div>
@@ -32,7 +36,7 @@
                                 <div class="img-box">
                                   <img src="{{ asset('uploads/peoples/') }}{{ peoples.largeImage }}" class="img-responsive">
                                   <div class="stripe"></div>
-                                </div>
+                                </div><br />
                                 <h1><a href="{{ path('peoples_show_public', {'id': peoples.id}) }}">{{ peoples.name | upper }}</a></h1>
                                 <h2>{{ peoples.position | upper }}</h2>
                             </div>

@@ -51,14 +51,14 @@ class SlideController extends Controller
      public function newAction(Request $request)
      {
          $slide = new Slide();
-         $form = $this->createForm('AppBundle\Form\SlideType', $slide);
+         $form = $this->createForm(new SlideType(), $slide);
          $form->handleRequest($request);
 
          if ($form->isSubmitted() && $form->isValid()) {
              $file = $slide->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('slide_directory'),
+                 $this->container->getParameter('slide_directory'),
                  $fileName
              );
              $slide->setCreatedAt(new \DateTime());
@@ -68,7 +68,7 @@ class SlideController extends Controller
              $em->persist($slide);
              $em->flush();
 
-             return $this->redirectToRoute('slide_show', array('id' => $slide->getId()));
+             return $this->redirect($this->generateUrl('slide_show', array('id' => $slide->getId())));
          }
 
          return $this->render('slide/new.html.twig', array(
@@ -98,27 +98,27 @@ class SlideController extends Controller
      public function editAction(Request $request, Slide $slide)
      {
          $deleteForm = $this->createDeleteForm( $slide);
-         $editForm = $this->createForm('AppBundle\Form\SlideType',  $slide);
+         $editForm = $this->createForm(new SlideType(),  $slide);
          $oldFile =  $slide->getLargeImage();
 
          $editForm->handleRequest($request);
 
          if ($editForm->isSubmitted() && $editForm->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('slide_directory').'/'.$oldFile)) {
-                 unlink($this->getParameter('slide_directory').'/'.$oldFile);
+             if (file_exists($this->container->getParameter('slide_directory').'/'.$oldFile)) {
+                 unlink($this->container->getParameter('slide_directory').'/'.$oldFile);
              }
              $file =  $slide->getLargeImage();
              $fileName = md5(uniqid()).'.'.$file->guessExtension();
              $file->move(
-                 $this->getParameter('slide_directory'),
+                 $this->container->getParameter('slide_directory'),
                  $fileName
              );
              $slide->setLargeImage($fileName);
              $em->persist( $slide);
              $em->flush();
 
-             return $this->redirectToRoute('slide_edit', array('id' =>  $slide->getId()));
+             return $this->redirect($this->generateUrl('slide_edit', array('id' =>  $slide->getId())));
          }
 
          return $this->render('slide/edit.html.twig', array(
@@ -139,14 +139,14 @@ class SlideController extends Controller
 
          if ($form->isSubmitted() && $form->isValid()) {
              $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->getParameter('slide_directory').'/'.$slide->getLargeImage())) {
-                 unlink($this->getParameter('slide_directory').'/'.$slide->getLargeImage());
+             if (file_exists($this->container->getParameter('slide_directory').'/'.$slide->getLargeImage())) {
+                 unlink($this->container->getParameter('slide_directory').'/'.$slide->getLargeImage());
              }
              $em->remove($slide);
              $em->flush();
          }
 
-         return $this->redirectToRoute('slide_index');
+         return $this->redirect($this->generateUrl('slide_index'));
      }
 
     /**
