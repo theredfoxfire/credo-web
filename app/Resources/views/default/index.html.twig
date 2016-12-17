@@ -16,15 +16,11 @@
     </ol>#}
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
-        {% for slide in slides %}
-          {% if loop.index == 1 %}
-              <div class="item active">
-          {% else %}
-              <div class="item">
-          {% endif %}
-              <img src="{{ asset('uploads/slide/') }}{{slide.largeImage}}" alt="...">
-          </div>
-        {% endfor %}
+      {% for slide in slides %}
+        <div>
+          <img src="{{ asset('uploads/slide/') }}{{slide.largeImage}}" class="img-responsive" style="margin: 0 auto;" />
+        </div>
+      {% endfor %}
     </div>
     {#<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -37,13 +33,5 @@
 </div>
 <!-- /.container -->
     <section id="career-home">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="career-button-wrapper">
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 {% endblock %}

@@ -178,6 +178,10 @@ input.txtsearch {
     margin-top: 12px;
 }
 
+.footer-container {
+  height: 50px;
+}
+
 #site-header .navbar-default .navbar-collapse {
     border-color: #D9D9DE;
     background: #fff;
@@ -667,6 +671,7 @@ h4 {
 #career-home {
     background: #d5ae5f;
     margin-top: -35px;
+    margin-bottom: -5px;
     height: 20px;
 }
 
@@ -719,9 +724,13 @@ h4 {
     background: #ce0027;
 }
 
+.image-home {
+  margin: 0 auto !important;
+}
+
 #footer {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    margin-top: 2px;
+    padding-top: 10px;
     background: #bb2527;
 }
 
