@@ -1,2 +1,3 @@
 <?php
-header('Location: http://localhost/credo/web/app_dev.php');
+// phpinfo();
+header('Location: http://localhost/~Me/credo/web/app_dev.php');
