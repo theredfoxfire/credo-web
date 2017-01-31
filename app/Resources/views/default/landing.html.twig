@@ -26,7 +26,7 @@
       <div class="landing">
           {% for video in videos %}
             <a href="{{ path('homepage') }}">
-              <img src="{{ asset('uploads/video/') }}{{ video.largeImage }}" class="img-responsive" style="margin: 0 auto;" />
+              <img src="{{ asset('uploads/video/') }}{{ video.largeImage }}" class="img-responsive" style="margin: 0 auto; min-height: 550px; max-height: 550px;" />
             </a>
           {% endfor %}
           <div class="text-center"><a class="landing-link" href="{{ path('homepage') }}">OPEN</a></div>
