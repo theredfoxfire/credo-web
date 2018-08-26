@@ -57,11 +57,15 @@ class UnitesController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $unite->getLargeImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
-                $this->container->getParameter('unites_directory'),
-                $fileName
-            );
+            if (!empty($file)) {
+              $fileName = md5(uniqid()).'.'.$file->guessExtension();
+              $file->move(
+                  $this->container->getParameter('unites_directory'),
+                  $fileName
+              );
+            } else {
+              $fileName = 'media-img.png';
+            }
             $unite->setLargeImage($fileName);
 
             $em = $this->getDoctrine()->getManager();
