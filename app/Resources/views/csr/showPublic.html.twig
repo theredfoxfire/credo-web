@@ -12,11 +12,11 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-              <img src="{{ asset('uploads/csr/') }}{{ csr.largeImage }}" class="img-slider" alt="...">
+              <img src="{{ asset('web/uploads/csr/') }}{{ csr.largeImage }}" class="img-slider" alt="...">
           </div>
           {% for image in csr.csrimage %}
               <div class="item">
-                  <img src="{{ asset('uploads/csrimage/') }}{{ image.largeImage }}" class="img-slider" alt="...">
+                  <img src="{{ asset('web/uploads/csrimage/') }}{{ image.largeImage }}" class="img-slider" alt="...">
               </div>
           {% endfor %}
         </div>

@@ -20,25 +20,25 @@ class ContactusController extends Controller
      */
     public function indexAction(Request $request)
     {
-      $em = $this->getDoctrine()->getManager();
-      $dql   = "SELECT a FROM AppBundle:Contactus a";
-      $query = $em->createQuery($dql);
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Contactus a";
+        $query = $em->createQuery($dql);
 
-      $paginator  = $this->get('knp_paginator');
-      $pagination = $paginator->paginate(
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
           $query, /* query NOT result */
           $request->query->getInt('page', 1)/*page number*/,
           10/*limit per page*/
       );
 
-      $contactus = $em->getRepository('AppBundle:Contactus')->findAll();
-      $deleteForms = array();
+        $contactus = $em->getRepository('AppBundle:Contactus')->findAll();
+        $deleteForms = array();
 
-      foreach ($contactus as $entity) {
-          $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
-      }
+        foreach ($contactus as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
-      return $this->render('contactus/index.html.twig', array(
+        return $this->render('contactus/index.html.twig', array(
           'contactuss' => $pagination,
           'deleteForms' => $deleteForms,
       ));
@@ -52,7 +52,7 @@ class ContactusController extends Controller
     {
         $contactus = new Contactus();
         $em = $this->getDoctrine()->getRepository('AppBundle:Overview');
-        $overview = $em->findOneById(2);
+        $overview = $em->findOneById(1);
         $form = $this->createForm(new ContactusType(), $contactus);
         $form->handleRequest($request);
 

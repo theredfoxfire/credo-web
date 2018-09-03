@@ -2,7 +2,7 @@
 
 {% block body %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
-<img src="{{ asset('uploads/overview/') }}{{ overview.largeImage }}" class="img-responsive">
+<img src="{{ asset('web/uploads/overview/') }}{{ overview.largeImage }}" class="img-responsive">
 <div class="container">
         <div class="contact-us">
             <div class="row">
@@ -44,7 +44,7 @@
             var marker = new google.maps.Marker({
                 position: {lat: {{ overview.latitude }}, lng: {{ overview.longitude }} },
                 map: map,
-                title: 'CREDO GROUP'
+                title: 'GLOBAL GROUP'
             });
           }
         </script>

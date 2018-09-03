@@ -22,7 +22,7 @@
                 <td><a href="{{ path('download_show', { 'id': download.id }) }}">{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
                 <td><a href="{{ path('download_show', { 'id': download.id }) }}">{{ download.title | raw }}</a></td>
                 <td>{{ download.overview | raw }}</td>
-                <td><a href="{{ asset('uploads/download/') }}{{ download.file }}" target="_blank" download>{{ download.title }}</a></td>
+                <td><a href="{{ asset('web/uploads/download/') }}{{ download.file }}" target="_blank" download>{{ download.title }}</a></td>
                 <td>{% if download.dateTime %}{{ download.dateTime|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ download.postedBy | capitalize }}</td>
                 <td>

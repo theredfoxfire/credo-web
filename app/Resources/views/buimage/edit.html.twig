@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Business Units Image  edit</h1>
     <a href="{{ path('buimage_index') }}">Back to the list</a> <br /><br />
-    <img src="{{ asset('uploads/buimage/') }}{{ buimage.largeImage }}" height="100" width="100">
+    <img src="{{ asset('web/uploads/buimage/') }}{{ buimage.largeImage }}" height="100" width="100">
 
 
     {{ form_start(edit_form) }}

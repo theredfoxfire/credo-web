@@ -58,28 +58,32 @@ class AboutusController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $file = $aboutus->getLargeImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
-                $this->container->getParameter('aboutus_directory'),
-                $fileName
-            );
+            if (!empty($file)) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->container->getParameter('aboutus_directory'),
+                    $fileName
+                );
+            } else {
+                $fileName = 'media-img.png';
+            }
             $aboutus->setLargeImage($fileName);
             $data = $request->request->get('aboutus');
             $dataF = $request->files->get('aboutus');
             for ($i = 1; $i <= $data['fileCount']; $i++) {
-              $abimage = new Aboutusimage();
-              $file =  $dataF['anotherImage'.$i];
-              if (!empty($file)) {
-                  $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                  $file->move(
+                $abimage = new Aboutusimage();
+                $file =  $dataF['anotherImage'.$i];
+                if (!empty($file)) {
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move(
                       $this->container->getParameter('aboutusimage_directory'),
                       $fileName
                   );
-                  $abimage->setCreatedAt(new \DateTime());
-                  $abimage->setLargeImage($fileName);
-                  $abimage->setAboutus($aboutus);
-                  $em->persist($abimage);
-              }
+                    $abimage->setCreatedAt(new \DateTime());
+                    $abimage->setLargeImage($fileName);
+                    $abimage->setAboutus($aboutus);
+                    $em->persist($abimage);
+                }
             }
             $em->persist($aboutus);
             $em->flush();
@@ -113,7 +117,6 @@ class AboutusController extends Controller
      */
     public function showPublicAction(Aboutus $aboutus)
     {
-
         return $this->render('aboutus/showPublic.html.twig', array(
             'aboutus' => $aboutus,
             'categories' => $this->get('app.services.getCategories')->getCategories(),
@@ -138,8 +141,8 @@ class AboutusController extends Controller
             $data = $request->request->get('aboutus');
             $dataF = $request->files->get('aboutus');
             for ($i = 1; $i <= $data['fileCount']; $i++) {
-              $abimage = new Aboutusimage();
-              $file =  $dataF['anotherImage'.$i];
+                $abimage = new Aboutusimage();
+                $file =  $dataF['anotherImage'.$i];
                 if (!empty($file)) {
                     foreach ($images as $image) {
                         $fileName = $image->getLargeImage();
@@ -174,7 +177,7 @@ class AboutusController extends Controller
                 );
                 $aboutus->setLargeImage($fileName);
             } else {
-              $aboutus->setLargeImage($oldFile);
+                $aboutus->setLargeImage($oldFile);
             }
             $em->persist($aboutus);
             $em->flush();

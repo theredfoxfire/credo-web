@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -26,7 +27,7 @@ class Download
     /**
      * @var string
      * @Assert\File(
-     *  maxSize = "2024k"
+     *  maxSize = "4024k"
      *)
      */
     private $file;

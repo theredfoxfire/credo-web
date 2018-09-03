@@ -20,64 +20,64 @@ class NewsController extends Controller
      * Lists all News entities.
      *
      */
-     public function indexAction(Request $request)
-     {
-         $em = $this->getDoctrine()->getManager();
-         $dql   = "SELECT a FROM AppBundle:News a";
-         $query = $em->createQuery($dql);
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:News a";
+        $query = $em->createQuery($dql);
 
-         $paginator  = $this->get('knp_paginator');
-         $pagination = $paginator->paginate(
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
              $query, /* query NOT result */
              $request->query->getInt('page', 1)/*page number*/,
              10/*limit per page*/
          );
 
-         $news = $em->getRepository('AppBundle:News')->findAll();
-         $deleteForms = array();
+        $news = $em->getRepository('AppBundle:News')->findAll();
+        $deleteForms = array();
 
-         foreach ($news as $entity) {
-             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
-         }
+        foreach ($news as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
-         return $this->render('news/index.html.twig', array(
+        return $this->render('news/index.html.twig', array(
              'pagination' => $pagination,
              'deleteForms' => $deleteForms,
          ));
-     }
+    }
 
-     /**
-      * Lists all News entities.
-      *
-      */
-      public function indexPublicAction(Request $request)
-      {
-          $em = $this->getDoctrine()->getManager();
-          $dql   = "SELECT a FROM AppBundle:News a";
-          $query = $em->createQuery($dql);
+    /**
+     * Lists all News entities.
+     *
+     */
+    public function indexPublicAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:News a";
+        $query = $em->createQuery($dql);
 
-          $paginator  = $this->get('knp_paginator');
-          $pagination = $paginator->paginate(
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
               $query, /* query NOT result */
               $request->query->getInt('page', 1)/*page number*/,
               6/*limit per page*/
           );
 
-          $news = $em->getRepository('AppBundle:News')->findAll();
-          $year = $em->getRepository('AppBundle:Yearnews')->findAll();
-          $deleteForms = array();
+        $news = $em->getRepository('AppBundle:News')->findAll();
+        $year = $em->getRepository('AppBundle:Yearnews')->findAll();
+        $deleteForms = array();
 
-          foreach ($news as $entity) {
-              $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
-          }
+        foreach ($news as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
-          return $this->render('news/indexPublic.html.twig', array(
+        return $this->render('news/indexPublic.html.twig', array(
               'pagination' => $pagination,
               'deleteForms' => $deleteForms,
               'categories' => $this->get('app.services.getCategories')->getCategories(),
               'year' => $year,
           ));
-      }
+    }
 
     /**
      * Creates a new News entity.
@@ -92,11 +92,15 @@ class NewsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $file = $news->getLargeImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
+            if (!empty($file)) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
                 $this->container->getParameter('news_directory'),
                 $fileName
             );
+            } else {
+                $fileName = 'media-img.png';
+            }
             $news->setLargeImage($fileName);
             $news->setDateTime(new \DateTime());
             $year = $em->getRepository('AppBundle:Yearnews')->findOneByYear(date('Y'));
@@ -151,7 +155,6 @@ class NewsController extends Controller
      */
     public function showPublicAction(News $news)
     {
-
         return $this->render('news/showPublic.html.twig', array(
             'news' => $news,
             'categories' => $this->get('app.services.getCategories')->getCategories(),
@@ -183,7 +186,7 @@ class NewsController extends Controller
                 );
                 $news->setLargeImage($fileName);
             } else {
-              $news->setLargeImage($oldFile);
+                $news->setLargeImage($oldFile);
             }
 
             $em->persist($news);

@@ -24,7 +24,7 @@ class DownloadType extends AbstractType
                 ),
             ))
             ->add('file', 'file', array(
-              'label' => 'Foto (image file)',
+              'label' => 'File ',
                'data' => null,
                'required' => false,
              ))

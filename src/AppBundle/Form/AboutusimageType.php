@@ -15,7 +15,7 @@ class AboutusimageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('largeImage', 'file', array('label' => 'Foto (image file, best fit width 400px x height 400px)', 'data' => null))
+            ->add('largeImage', 'file', array('label' => 'Foto (image file, best fit width 1280px x height 793px) ', 'data' => null))
         ;
     }
 

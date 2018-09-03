@@ -18,60 +18,60 @@ class PeoplesController extends Controller
      * Lists all Peoples entities.
      *
      */
-     public function indexAction(Request $request)
-     {
-         $em = $this->getDoctrine()->getManager();
-         $dql   = "SELECT a FROM AppBundle:Peoples a";
-         $query = $em->createQuery($dql);
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Peoples a";
+        $query = $em->createQuery($dql);
 
-         $paginator  = $this->get('knp_paginator');
-         $pagination = $paginator->paginate(
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
              $query, /* query NOT result */
              $request->query->getInt('page', 1)/*page number*/,
              10/*limit per page*/
          );
 
-         $peoples = $em->getRepository('AppBundle:Peoples')->findAll();
-         $deleteForms = array();
+        $peoples = $em->getRepository('AppBundle:Peoples')->findAll();
+        $deleteForms = array();
 
-         foreach ($peoples as $entity) {
-             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
-         }
+        foreach ($peoples as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
-         return $this->render('peoples/index.html.twig', array(
+        return $this->render('peoples/index.html.twig', array(
              'pagination' => $pagination,
              'deleteForms' => $deleteForms,
          ));
-     }
+    }
 
     /**
      * Lists all Peoples entities.
      *
      */
-     public function indexPublicAction(Request $request)
-     {
-         $em = $this->getDoctrine()->getManager();
-         $dql   = "SELECT a FROM AppBundle:Peoples a where a.id != 1";
-         $query = $em->createQuery($dql);
+    public function indexPublicAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Peoples a where a.id != 1";
+        $query = $em->createQuery($dql);
 
-         $paginator  = $this->get('knp_paginator');
-         $pagination = $paginator->paginate(
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
              $query, /* query NOT result */
              $request->query->getInt('page', 1)/*page number*/,
              10/*limit per page*/
          );
 
-         $peoples = $em->getRepository('AppBundle:Peoples')->findAll();
-         $judit = $em->getRepository('AppBundle:Peoples')->findOneById(1);
-         $numRow = $em->getRepository('AppBundle:Peoples')->getRows();
+        $peoples = $em->getRepository('AppBundle:Peoples')->findAll();
+        $judit = $em->getRepository('AppBundle:Peoples')->findOneById(1);
+        $numRow = $em->getRepository('AppBundle:Peoples')->getRows();
 
-         return $this->render('peoples/indexPublic.html.twig', array(
+        return $this->render('peoples/indexPublic.html.twig', array(
              'pagination' => $pagination,
              'judit' => $judit,
              'numRow' => $numRow,
              'categories' => $this->get('app.services.getCategories')->getCategories(),
          ));
-     }
+    }
 
     /**
      * Creates a new Peoples entity.
@@ -86,11 +86,15 @@ class PeoplesController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $file = $peoples->getLargeImage();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
+            if (!empty($file)) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
                 $this->container->getParameter('peoples_directory'),
                 $fileName
             );
+            } else {
+                $fileName = 'media-img.png';
+            }
             $peoples->setLargeImage($fileName);
             $em->persist($peoples);
             $em->flush();
@@ -124,7 +128,6 @@ class PeoplesController extends Controller
      */
     public function showPublicAction(Peoples $peoples)
     {
-
         return $this->render('peoples/showPublic.html.twig', array(
             'peoples' => $peoples,
             'categories' => $this->get('app.services.getCategories')->getCategories(),
@@ -156,7 +159,7 @@ class PeoplesController extends Controller
                 );
                 $peoples->setLargeImage($fileName);
             } else {
-              $peoples->setLargeImage($oldFile);
+                $peoples->setLargeImage($oldFile);
             }
 
             $em->persist($peoples);

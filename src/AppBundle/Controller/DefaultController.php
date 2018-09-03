@@ -19,15 +19,13 @@ class DefaultController extends Controller
      */
     public function adminAction(Request $request)
     {
-        // replace this example code with whatever you need
         return $this->render('default/indexAdmin.html.twig');
     }
     /**
-     * @Route("/", name="landingPage")
+     * @Route("/start", name="landingPage")
      */
     public function landingAction(Request $request)
     {
-        // replace this example code with whatever you need
         $em = $this->getDoctrine()->getManager();
         $videos = $em->getRepository('AppBundle:Video')->findAll();
         return $this->render('default/landing.html.twig', array(
@@ -35,28 +33,28 @@ class DefaultController extends Controller
         ));
     }
     /**
-     * @Route("/home", name="homepage")
+     * @Route("/", name="homepage")
      */
-     public function indexAction(Request $request)
-     {
-         $em = $this->getDoctrine()->getManager();
-         $dqlNews   = "SELECT a FROM AppBundle:News a";
-         $newsQuery = $em->createQuery($dqlNews);
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dqlNews   = "SELECT a FROM AppBundle:News a";
+        $newsQuery = $em->createQuery($dqlNews);
 
-         $newsPaginator  = $this->get('knp_paginator');
-         $news = $newsPaginator->paginate(
+        $newsPaginator  = $this->get('knp_paginator');
+        $news = $newsPaginator->paginate(
              $newsQuery, /* query NOT result */
              $request->query->getInt('page', 1)/*page number*/,
              3/*limit per page*/
          );
 
 
-         $slides = $em->getRepository('AppBundle:Slide')->findAll();
-         $logos = $em->getRepository('AppBundle:Logo')->findAll();
-         $quotes = $em->getRepository('AppBundle:Quote')->findAll();
-         $abouts = $em->getRepository('AppBundle:Aboutus')->findAll();
+        $slides = $em->getRepository('AppBundle:Slide')->findAll();
+        $logos = $em->getRepository('AppBundle:Logo')->findAll();
+        $quotes = $em->getRepository('AppBundle:Quote')->findAll();
+        $abouts = $em->getRepository('AppBundle:Aboutus')->findAll();
 
-         return $this->render('default/index.html.twig', array(
+        return $this->render('default/index.html.twig', array(
              'slides' => $slides,
              'logos' => $logos,
              'quotes' => $quotes,
@@ -64,5 +62,5 @@ class DefaultController extends Controller
              'news' => $news,
              'categories' => $this->get('app.services.getCategories')->getCategories(),
          ));
-     }
+    }
 }

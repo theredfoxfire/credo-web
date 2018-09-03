@@ -18,64 +18,68 @@ class SlideController extends Controller
      * Lists all Slide entities.
      *
      */
-     public function indexAction(Request $request)
-     {
-         $em = $this->getDoctrine()->getManager();
-         $dql   = "SELECT a FROM AppBundle:Slide a";
-         $query = $em->createQuery($dql);
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Slide a";
+        $query = $em->createQuery($dql);
 
-         $paginator  = $this->get('knp_paginator');
-         $pagination = $paginator->paginate(
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
              $query, /* query NOT result */
              $request->query->getInt('page', 1)/*page number*/,
              10/*limit per page*/
          );
 
-         $slide = $em->getRepository('AppBundle:Slide')->findAll();
-         $deleteForms = array();
+        $slide = $em->getRepository('AppBundle:Slide')->findAll();
+        $deleteForms = array();
 
-         foreach ($slide as $entity) {
-             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
-         }
+        foreach ($slide as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
-         return $this->render('slide/index.html.twig', array(
+        return $this->render('slide/index.html.twig', array(
              'pagination' => $pagination,
              'deleteForms' => $deleteForms,
          ));
-     }
+    }
 
     /**
      * Creates a new Slide entity.
      *
      */
-     public function newAction(Request $request)
-     {
-         $slide = new Slide();
-         $form = $this->createForm(new SlideType(), $slide);
-         $form->handleRequest($request);
+    public function newAction(Request $request)
+    {
+        $slide = new Slide();
+        $form = $this->createForm(new SlideType(), $slide);
+        $form->handleRequest($request);
 
-         if ($form->isSubmitted() && $form->isValid()) {
-             $file = $slide->getLargeImage();
-             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-             $file->move(
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $slide->getLargeImage();
+            if (!empty($file)) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
                  $this->container->getParameter('slide_directory'),
                  $fileName
              );
-             $slide->setCreatedAt(new \DateTime());
-             $slide->setLargeImage($fileName);
+            } else {
+                $fileName = 'media-img.png';
+            }
+            $slide->setCreatedAt(new \DateTime());
+            $slide->setLargeImage($fileName);
 
-             $em = $this->getDoctrine()->getManager();
-             $em->persist($slide);
-             $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($slide);
+            $em->flush();
 
-             return $this->redirect($this->generateUrl('slide_show', array('id' => $slide->getId())));
-         }
+            return $this->redirect($this->generateUrl('slide_show', array('id' => $slide->getId())));
+        }
 
-         return $this->render('slide/new.html.twig', array(
+        return $this->render('slide/new.html.twig', array(
              'slide' => $slide,
              'form' => $form->createView(),
          ));
-     }
+    }
 
     /**
      * Finds and displays a Slide entity.
@@ -95,59 +99,59 @@ class SlideController extends Controller
      * Displays a form to edit an existing Slide entity.
      *
      */
-     public function editAction(Request $request, Slide $slide)
-     {
-         $deleteForm = $this->createDeleteForm( $slide);
-         $editForm = $this->createForm(new SlideType(),  $slide);
-         $oldFile =  $slide->getLargeImage();
+    public function editAction(Request $request, Slide $slide)
+    {
+        $deleteForm = $this->createDeleteForm($slide);
+        $editForm = $this->createForm(new SlideType(), $slide);
+        $oldFile =  $slide->getLargeImage();
 
-         $editForm->handleRequest($request);
+        $editForm->handleRequest($request);
 
-         if ($editForm->isSubmitted() && $editForm->isValid()) {
-             $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->container->getParameter('slide_directory').'/'.$oldFile)) {
-                 unlink($this->container->getParameter('slide_directory').'/'.$oldFile);
-             }
-             $file =  $slide->getLargeImage();
-             $fileName = md5(uniqid()).'.'.$file->guessExtension();
-             $file->move(
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            if (file_exists($this->container->getParameter('slide_directory').'/'.$oldFile)) {
+                unlink($this->container->getParameter('slide_directory').'/'.$oldFile);
+            }
+            $file =  $slide->getLargeImage();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move(
                  $this->container->getParameter('slide_directory'),
                  $fileName
              );
-             $slide->setLargeImage($fileName);
-             $em->persist( $slide);
-             $em->flush();
+            $slide->setLargeImage($fileName);
+            $em->persist($slide);
+            $em->flush();
 
-             return $this->redirect($this->generateUrl('slide_edit', array('id' =>  $slide->getId())));
-         }
+            return $this->redirect($this->generateUrl('slide_edit', array('id' =>  $slide->getId())));
+        }
 
-         return $this->render('slide/edit.html.twig', array(
+        return $this->render('slide/edit.html.twig', array(
              'slide' => $slide,
              'edit_form' => $editForm->createView(),
              'delete_form' => $deleteForm->createView(),
          ));
-     }
+    }
 
     /**
      * Deletes a Slide entity.
      *
      */
-     public function deleteAction(Request $request, Slide $slide)
-     {
-         $form = $this->createDeleteForm($slide);
-         $form->handleRequest($request);
+    public function deleteAction(Request $request, Slide $slide)
+    {
+        $form = $this->createDeleteForm($slide);
+        $form->handleRequest($request);
 
-         if ($form->isSubmitted() && $form->isValid()) {
-             $em = $this->getDoctrine()->getManager();
-             if (file_exists($this->container->getParameter('slide_directory').'/'.$slide->getLargeImage())) {
-                 unlink($this->container->getParameter('slide_directory').'/'.$slide->getLargeImage());
-             }
-             $em->remove($slide);
-             $em->flush();
-         }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            if (file_exists($this->container->getParameter('slide_directory').'/'.$slide->getLargeImage())) {
+                unlink($this->container->getParameter('slide_directory').'/'.$slide->getLargeImage());
+            }
+            $em->remove($slide);
+            $em->flush();
+        }
 
-         return $this->redirect($this->generateUrl('slide_index'));
-     }
+        return $this->redirect($this->generateUrl('slide_index'));
+    }
 
     /**
      * Creates a form to delete a Slide entity.

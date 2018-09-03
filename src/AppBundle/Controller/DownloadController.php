@@ -20,64 +20,64 @@ class DownloadController extends Controller
      * Lists all Download entities.
      *
      */
-     public function indexAction(Request $request)
-     {
-         $em = $this->getDoctrine()->getManager();
-         $dql   = "SELECT a FROM AppBundle:Download a";
-         $query = $em->createQuery($dql);
+    public function indexAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Download a";
+        $query = $em->createQuery($dql);
 
-         $paginator  = $this->get('knp_paginator');
-         $pagination = $paginator->paginate(
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
              $query, /* query NOT result */
              $request->query->getInt('page', 1)/*page number*/,
              10/*limit per page*/
          );
 
-         $download = $em->getRepository('AppBundle:Download')->findAll();
-         $deleteForms = array();
+        $download = $em->getRepository('AppBundle:Download')->findAll();
+        $deleteForms = array();
 
-         foreach ($download as $entity) {
-             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
-         }
+        foreach ($download as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
-         return $this->render('download/index.html.twig', array(
+        return $this->render('download/index.html.twig', array(
              'pagination' => $pagination,
              'deleteForms' => $deleteForms,
          ));
-     }
+    }
 
     /**
      * Lists all Download entities.
      *
      */
-     public function indexPublicAction(Request $request)
-     {
-         $em = $this->getDoctrine()->getManager();
-         $dql   = "SELECT a FROM AppBundle:Download a";
-         $query = $em->createQuery($dql);
+    public function indexPublicAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $dql   = "SELECT a FROM AppBundle:Download a";
+        $query = $em->createQuery($dql);
 
-         $paginator  = $this->get('knp_paginator');
-         $pagination = $paginator->paginate(
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
              $query, /* query NOT result */
              $request->query->getInt('page', 1)/*page number*/,
              6/*limit per page*/
          );
 
-         $download = $em->getRepository('AppBundle:Download')->findAll();
-         $year = $em->getRepository('AppBundle:Year')->findAll();
-         $deleteForms = array();
+        $download = $em->getRepository('AppBundle:Download')->findAll();
+        $year = $em->getRepository('AppBundle:Year')->findAll();
+        $deleteForms = array();
 
-         foreach ($download as $entity) {
-             $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
-         }
+        foreach ($download as $entity) {
+            $deleteForms[$entity->getId()] = $this->createDeleteForm($entity)->createView();
+        }
 
-         return $this->render('download/indexPublic.html.twig', array(
+        return $this->render('download/indexPublic.html.twig', array(
              'pagination' => $pagination,
              'deleteForms' => $deleteForms,
              'categories' => $this->get('app.services.getCategories')->getCategories(),
              'year' => $year,
          ));
-     }
+    }
 
     /**
      * Creates a new Download entity.
@@ -92,11 +92,15 @@ class DownloadController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $file = $download->getFile();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move(
-                $this->container->getParameter('download_directory'),
-                $fileName
-            );
+            if (!empty($file)) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->container->getParameter('download_directory'),
+                    $fileName
+                );
+            } else {
+                $fileName = 'media-img.png';
+            }
             $download->setFile($fileName);
             $download->setDateTime(new \DateTime());
             $year = $em->getRepository('AppBundle:Year')->findOneByYear(date('Y'));
@@ -184,7 +188,7 @@ class DownloadController extends Controller
                 );
                 $download->setFile($fileName);
             } else {
-              $download->setFile($oldFile);
+                $download->setFile($oldFile);
             }
 
             $em->persist($download);

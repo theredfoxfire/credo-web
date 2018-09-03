@@ -20,7 +20,7 @@
             {% for logo in pagination %}
             <tr>
                 <td><a href="{{ path('logo_show', { 'id': logo.id }) }}">{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
-                <td><img src="{{ asset('uploads/logo/') }}{{ logo.largeImage }}" height="100" width="100"></td>
+                <td><img src="{{ asset('web/uploads/logo/') }}{{ logo.largeImage }}" height="100" style="margin: 0 auto;" width="100"></td>
                 <td>{% if logo.createdAt %}{{ logo.createdAt|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <a class="btn btn-small" href="{{ path('logo_edit', { 'id': logo.id }) }}">

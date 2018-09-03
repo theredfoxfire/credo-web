@@ -13,6 +13,7 @@ AppBundle\Entity\Aboutus:
    type: text
   largeImage:
    type: string
+   nullable: true
  oneToMany:
   aboutus_image:
    targetEntity: Aboutusimage

@@ -13,7 +13,7 @@
                             <div class="col-lg-3 col-md-3 profile judith">
                                 <div class="img-box">
                                     {% if judit != null %}
-                                        <img src="{{ asset('uploads/peoples/') }}{{ judit.largeImage }}" class="img-responsive">
+                                        <img style="margin: 0 auto;"src="{{ asset('web/uploads/peoples/') }}{{ judit.largeImage }}" class="img-responsive">
                                     {% endif %}
                                     <div class="stripe"></div>
                                 </div><br />
@@ -34,7 +34,7 @@
                 {% endif %}
                             <div class="col-lg-3 col-md-3 profile">
                                 <div class="img-box">
-                                  <img src="{{ asset('uploads/peoples/') }}{{ peoples.largeImage }}" class="img-responsive">
+                                  <img src="{{ asset('web/uploads/peoples/') }}{{ peoples.largeImage }}" style="margin: 0 auto;" class="img-responsive">
                                   <div class="stripe"></div>
                                 </div><br />
                                 <h1><a href="{{ path('peoples_show_public', {'id': peoples.id}) }}">{{ peoples.name | upper }}</a></h1>

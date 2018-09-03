@@ -24,7 +24,7 @@
                 <td><a href="{{ path('news_show', { 'id': news.id }) }}">{{ news.title | raw }}</a></td>
                 <td>{{ news.subtitle | raw }}</td>
                 <td>{{ news.story | raw }}</td>
-                <td><img src="{{ asset('uploads/news/') }}{{ news.largeImage }}" height="400" width="400"></td>
+                <td><img src="{{ asset('web/uploads/news/') }}{{ news.largeImage }}" height="400" width="400"></td>
                 <td>{% if news.dateTime %}{{ news.dateTime|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ news.postedBy | capitalize }}</td>
                 <td>

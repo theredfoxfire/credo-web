@@ -3,7 +3,7 @@
 {% block body %}
     <h1>Video edit</h1>
     <a href="{{ path('video_index') }}">Back to the list</a> <br /><br />
-    <img src="{{ asset('uploads/video/') }}{{ video.largeImage }}" height="100" width="100">
+    <img src="{{ asset('web/uploads/video/') }}{{ video.largeImage }}" height="100" width="100">
 
 
     {{ form_start(edit_form) }}

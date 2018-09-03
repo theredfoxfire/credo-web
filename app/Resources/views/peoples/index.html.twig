@@ -22,7 +22,7 @@
                 <td><a href="{{ path('peoples_show', { 'id': peoples.id }) }}">{{ peoples.name | raw }}</a></td>
                 <td>{{ peoples.position | raw }}</td>
                 <td>{{ peoples.story | raw }}</td>
-                <td><img src="{{ asset('uploads/peoples/') }}{{ peoples.largeImage }}" height="400" width="400"></td>
+                <td><img src="{{ asset('web/uploads/peoples/') }}{{ peoples.largeImage }}" height="400" width="400"></td>
                 <td>
                     <a class="btn btn-small" href="{{ path('peoples_edit', { 'id': peoples.id }) }}">
                       <button type="submit" class="btn btn-small">

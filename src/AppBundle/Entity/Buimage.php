@@ -15,7 +15,7 @@ class Buimage
     /**
     * @var string
     * @Assert\Image(
-    * maxSize = "2024k"
+    * maxSize = "7500k"
     * )
      * @var string
      */

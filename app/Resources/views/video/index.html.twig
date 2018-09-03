@@ -20,7 +20,7 @@
             {% for video in pagination %}
             <tr>
                 <td><a href="{{ path('video_show', { 'id': video.id }) }}">{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
-                <td><img src="{{ asset('uploads/video/') }}{{ video.largeImage }}" height="100" width="100"></td>
+                <td><img src="{{ asset('web/uploads/video/') }}{{ video.largeImage }}" height="100" width="100"></td>
                 <td>{% if video.createdAt %}{{ video.createdAt|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <a class="btn btn-small" href="{{ path('video_edit', { 'id': video.id }) }}">

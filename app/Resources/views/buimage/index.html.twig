@@ -20,7 +20,7 @@
             {% for buimage in pagination %}
             <tr>
                 <td><a href="{{ path('buimage_show', { 'id': buimage.id }) }}">{{ pagination.getPaginationData.firstItemNumber + loop.index - 1 }}</a></td>
-                <td><img src="{{ asset('uploads/buimage/') }}{{ buimage.largeImage }}" height="100" width="100"></td>
+                <td><img src="{{ asset('web/uploads/buimage/') }}{{ buimage.largeImage }}" height="100" width="100"></td>
                 <td>{% if buimage.createdAt %}{{ buimage.createdAt|date('Y-m-d') }}{% endif %}</td>
                 <td>
                     <a class="btn btn-small" href="{{ path('buimage_edit', { 'id': buimage.id }) }}">
