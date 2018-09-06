@@ -13,6 +13,7 @@
         <link href="{{ asset('web/credo/css/font-awesome.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('web/credo/css/owl-carousel/owl.carousel.css') }}">
         <link href="{{ asset('web/credo/css/styles.css') }}" rel="stylesheet">
+        <link href="{{ asset('web/credo/css/sticky-footer.css') }}" rel="stylesheet">
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -27,7 +28,7 @@
               <div class="row">
                   <div class="col-md-6">
                       <div class="logo">
-                          <a href="{{ path('homepage') }}"><img src="{{ asset('web/credo/img/logo.png') }}" width="200px" height="auto" class="img-responsive" alt="Logo"></a>
+                          <a href="{{ path('homepage') }}"><img src="{{ asset('web/credo/img/logo.png') }}" width="auto" height="200" class="img-responsive" alt="Logo"></a>
                       </div>
                   </div>
                   <div class="col-md-6">
@@ -100,50 +101,6 @@
           </nav>
       </header>
         {% block body %}{% endblock %}
-        <footer id="footer">
-            <div class="container footer-container">
-                <div class="row">
-                    <div class="col-md-8">
-                      <ul class="nav footer-nav list-unstyled">
-                          <li class=""><a href="{{ path('homepage') }}">HOME</a></li>
-                          <li class="divider-vertical dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
-                            <ul class="dropdown-menu list-ab">
-                              <li><a href="{{ path('aboutus_show_public', {'id': 1}) }}">COMPANY HISTORY</a></li>
-                              <li><a href="{{ path('download_index_public') }}">DOWNLOAD</a></li>
-                            </ul>
-                          </li>
-                          <li class=""><a href="{{ path('peoples_index_public') }}">PEOPLE</a></li>
-                          <li class="dropdown mega-dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">BUSINESS UNITS</a>
-                              <ul class="dropdown-menu mega-dropdown-menu row">
-                                {% for category in categories.categories %}
-                                    {% if loop.index % 4 == 1 or loop.index == 1 %}
-                                        <div class="row col-sm-12">
-                                    {% endif %}
-                                            <li class="col-sm-3">
-                                              <ul class="list-bu-dw">
-                                                  <li class="dropdown-header-dw">{{ category.category | upper }}</li><br />
-                                                      {% for unite in category.unites %}
-                                                          <li><a href="{{ path('unites_show_public', { 'id': unite.id }) }}">{{ unite.title | upper }}</a></li>
-                                                      {% endfor %}
-                                              </ul>
-                                            </li>
-                                    {% if loop.index % 4 == 0  or loop.index == categories.numData %}
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                              </ul>
-                          </li>
-                          <li class=""><a href="{{ path('news_index_public') }}">NEWS AND MEDIA</a></li>
-                          <li class=""><a href="{{ path('csr_show_public', {'id': 1}) }}">CSR</a></li>
-                          <li class=""><a href="{{ path('career_new') }}">CAREER</a></li>
-                          <li class=""><a href="{{ path('contactus_new') }}">CONTACT US</a></li>
-                      </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
         <div class="developer">
             <div class="container">ALL RIGHTS RESERVED - GLOBAL GROUP©{{ "now"|date("Y") }}</div>
         </div>
@@ -177,8 +134,8 @@
                     pagination: false,
                     navigation: true,
                     navigationText: [
-                        "<i class='fa fa-angle-left fa-5x'><\/i>",
-                        "<i class='fa fa-angle-right fa-5x'><\/i>"
+                        "<img src='{{ asset('web/credo/img/left.png') }}' class='arrow-big'>",
+                        "<img src='{{ asset('web/credo/img/right.png') }}' class='arrow-big'>"
                     ],
                     loop: true,
                     autoPlay: true,
