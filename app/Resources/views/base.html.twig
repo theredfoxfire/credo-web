@@ -22,7 +22,20 @@
         <![endif]-->
     </head>
     <body>
-      <div class="stripe"></div>
+      <div class="stripe">
+        <div style="border-left: solid 2px #fff;padding:10px;">
+          <i class="fa fa-instagram" style="font-size: 16px;"></i>
+        </div>
+        <div style="border-left: solid 2px #fff;padding:10px;">
+          <i class="fa fa-facebook" style="font-size: 16px;"></i>
+        </div>
+        <div style="border-left: solid 2px #fff;padding:10px;">
+          <i class="fa fa-twitter" style="font-size: 16px;"></i>
+        </div>
+        <div style="border-left: solid 2px #fff;border-right: solid 2px #fff;padding:10px;">
+          <span style="font-size: 10px;">CONTACT US</span>
+        </div>
+      </div>
       <div class="top-header hidden-xs">
           <div class="container">
               <div class="row">
@@ -102,7 +115,37 @@
       </header>
         {% block body %}{% endblock %}
         <div class="developer">
-            <div class="container">ALL RIGHTS RESERVED - GLOBAL GROUP©{{ "now"|date("Y") }}</div>
+            <div class="container-fluid">
+              <div class="col-md-3">
+                <h5>ABC</h5>
+                <h6>News</h6>
+                <h6>Custom</h6>
+                <h6>Private</h6>
+              </div>
+              <div class="col-md-3">
+                <h5>FOLLOW US</h5>
+                <h6>Instagram</h6>
+                <h6>Facebook</h6>
+                <h6>Twitter</h6>
+              </div>
+              <div class="col-md-3">
+                <h6>CONTACT US</h6>
+                <h6>Live Chat</h6>
+                <h6>Phone: 654-35468-03</h6>
+                <h6>Fax: 654-35267-98</h6>
+                <h6>Email</h6>
+              </div>
+              <div class="col-md-3">
+                <h5>VISIT US</h5>
+                <h6>Monday - Saturday: 10 AM - 5 PM</h6>
+                <h6>(By Appointment)</h6>
+                <h6>Schedule a showroom visit</h6>
+                <h6>8471 Melrose Avenue</h6>
+                <h6>West Hollywood, CA 90069</h6>
+
+              </div>
+            </div>
+            <div class="container" style="margin-top: 20px;">ALL RIGHTS RESERVED - GLOBAL GROUP©{{ "now"|date("Y") }}</div>
         </div>
         <!-- jQuery Version 1.11.1 -->
         <script src="{{ asset('web/credo/js/jquery.js') }}"></script>
