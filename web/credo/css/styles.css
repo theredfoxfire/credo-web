@@ -36,19 +36,50 @@ body {
 
 .about-us-home {
   background-color: #676767;
-  height: 400px;
-  padding-top: 70px;
+  height: 500px;
+  padding-top: 100px;
 }
 .title-about {
   font-size: 34px;
   color: #fff;
   text-align: center;
 }
+.title-business {
+  font-size: 34px;
+  color: #000;
+  text-align: center;
+  margin-bottom: 40px;
+}
 .sub-title-about {
   font-size: 22px;
   color: #fff;
   text-align: center;
   margin-top: 20px;
+}
+.content-about {
+  margin: 0 auto;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+  width: 70%;
+  line-height: 28px;
+}
+.home-business {
+  padding-top: 40px;
+  background-color: #fff;
+}
+.white-business {
+  height: 300px;background-position: center; /* Center the image */
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+.business-row {
+  margin-bottom: 120px;
 }
 .web-link {
   text-decoration: none !important;
@@ -146,6 +177,12 @@ input.txtsearch {
   }
   #career-home p {
     font-size: 20px !important;
+  }
+  .title-about {
+    font-size: 20px !important;
+  }
+  .sub-title-about {
+    font-size: 16px !important;
   }
   .judith {
     margin-left: 0px !important;
@@ -537,148 +574,6 @@ h4 {
 .owl-theme .owl-controls .owl-buttons .owl-next {
     right: -130px;
     top: 65px;
-}
-
-#vision {
-    margin-top: 15px;
-}
-
-#vision .heading {
-    font-family: "din-light";
-    font-weight: 700;
-    font-size: 20px;
-    color: #be1e2d;
-}
-
-#vision .heading a {
-    font-family: "din-light";
-    font-size: 12px;
-    color: #be1e2d;
-}
-
-#vision h2 {
-    font-family: "din-light";
-    font-weight: 700;
-    font-size: 37px;
-}
-
-#vision .lead {
-    font-family: "din-light";
-    font-size: 12px;
-}
-
-#vision .readmore {
-    font-family: "din-light";
-    font-size: 11px;
-
-}
-
-#vision .readmore a {
-    color: #000;
-}
-
-#vision .readmore i {
-    color: #be1e2d;
-}
-
-#about-us {
-    margin-top: 35px;
-    margin-bottom: 50px;
-}
-
-#about-us h1 {
-    font-family: "din-light";
-    font-size: 20px;
-}
-
-#about-us .lead {
-    font-family: "din-light";
-    font-size: 12px;
-}
-
-#about-us .readmore {
-    font-family: "din-light";
-    font-size: 11px;
-
-}
-
-#about-us .readmore a {
-    color: #000;
-}
-
-#about-us .readmore i {
-    color: #be1e2d;
-}
-
-#news {
-    margin-bottom: 100px;
-}
-
-#news .media-top {
-    margin-bottom: 10px;
-}
-
-#news .media-body .media-heading {
-    font-family: "din-light";
-    text-align: center;
-    font-size: 12px;
-}
-
-#news .media-body p {
-    font-family: "din-light";
-    text-align: center;
-    font-size: 12px;
-}
-
-#news h1 {
-    font-family: "din-light";
-    font-size: 20px;
-}
-
-#news .lead {
-    font-family: "din-light";
-    font-size: 12px;
-}
-
-#news .readmore {
-    margin-top: 40px;
-    font-family: "din-light";
-    font-size: 11px;
-
-    text-align: center;
-}
-
-#news .readmore a {
-    color: #000;
-}
-
-#news .readmore i {
-    color: #be1e2d;
-}
-
-/* Shine */
-#news figure {
-    position: relative;
-}
-
-#news figure::before {
-    position: absolute;
-    top: 0;
-    left: -75%;
-    z-index: 2;
-    display: block;
-    content: '';
-    width: 50%;
-    height: 100%;
-    background: -webkit-linear-gradient(left,rgba(255,255,255,0) 0%,rgba(255,255,255,.3) 100%);
-    background: linear-gradient(to right,rgba(255,255,255,0) 0%,rgba(255,255,255,.3) 100%);
-    -webkit-transform: skewX(-25deg);
-    transform: skewX(-25deg);
-}
-
-#news figure:hover::before {
-    -webkit-animation: shine .75s;
-    animation: shine .75s;
 }
 
 @-webkit-keyframes shine {
