@@ -41,7 +41,7 @@
               <div class="row">
                   <div class="col-md-6">
                       <div class="logo">
-                          <a href="{{ path('homepage') }}"><img src="{{ asset('web/credo/img/logo.png') }}" width="auto" height="200" class="img-responsive" alt="Logo"></a>
+                          <a href="{{ path('homepage') }}"><img src="{{ asset('web/credo/img/logo.png') }}" width="auto" height="60" alt="Logo"></a>
                       </div>
                   </div>
                   <div class="col-md-6">
@@ -71,7 +71,7 @@
                   <div id="navbar" class="collapse navbar-collapse">
                       <ul class="nav navbar-nav navbar-right">
                           <li class="divider-vertical"><a href="{{ path('homepage') }}">HOME</a></li>
-                          <li class="divider-vertical dropdown">
+                          <li class="divider-vertical dropdown dropdown-about">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
                             <ul class="dropdown-menu list-ab">
                               <li><a href="{{ path('aboutus_show_public', {'id': 1}) }}">COMPANY HISTORY</a></li>
@@ -153,17 +153,32 @@
         <script src="{{ asset('web/credo/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('web/credo/js/owl-carousel/owl.carousel.js') }}"></script>
         <script type="text/javascript">
-          $('li.divider-vertical.dropdown.mega-dropdown a').on('click', function (event) {
-            $(this).parent().toggleClass("open");
-          });
-          $('body').on('click', function (e) {
-              if (!$('li.divider-vertical.dropdown.mega-dropdown').is(e.target)
-                  && $('li.divider-vertical.dropdown.mega-dropdown').has(e.target).length === 0
-                  && $('.open').has(e.target).length === 0
-              ) {
-                  $('li.divider-vertical.dropdown.mega-dropdown').removeClass('open');
-              }
-          });
+                $('li.divider-vertical.dropdown.mega-dropdown a').hover(function(){
+                    $(this).parent().toggleClass("open");
+                });
+                $('li.divider-vertical.dropdown.mega-dropdown ul').hover(function(){
+                    $(this).parent().toggleClass("open");
+                });
+                $('li.divider-vertical.dropdown.dropdown-about a').hover(function(){
+                    $(this).parent().toggleClass("open");
+                });
+                $('li.divider-vertical.dropdown.dropdown-about ul').hover(function(){
+                    $(this).parent().toggleClass("open");
+                });
+                $('li.divider-vertical.dropdown.dropdown-about ul').on('click', function(event){
+                    $(this).remove();
+                });
+                $('li.divider-vertical.dropdown.mega-dropdown a').on('click', function (event) {
+                    $(this).parent().toggleClass("open");
+                });
+                $('body').on('click', function (e) {
+                  if (!$('li.divider-vertical.dropdown.mega-dropdown').is(e.target)
+                      && $('li.divider-vertical.dropdown.mega-dropdown').has(e.target).length === 0
+                      && $('.open').has(e.target).length === 0
+                  ) {
+                      $('li.divider-vertical.dropdown.mega-dropdown').removeClass('open');
+                  }
+                });
         </script>
         <script type="text/javascript">
             $(document).ready(function() {
