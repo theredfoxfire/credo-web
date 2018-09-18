@@ -33,7 +33,7 @@
           <i class="fa fa-twitter" style="font-size: 16px;"></i>
         </div>
         <div style="border-left: solid 2px #fff;border-right: solid 2px #fff;padding:10px;">
-          <span style="font-size: 10px;">CONTACT US</span>
+          <span style="font-size: 10px;"><a href="{{ path('contactus_new') }}" style="text-decoration: none;color: #fff;">CONTACT US</a></span>
         </div>
       </div>
       <div class="top-header hidden-xs">
@@ -66,12 +66,19 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                       </button>
-                      <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('web/credo/img/logo.png') }}" width="90" height="auto" class="img-responsive" alt="Logo"></a>
+                      <a class="navbar-brand" href="{{ path('homepage') }}"><img src="{{ asset('web/credo/img/logo.png') }}" width="90" height="auto" style="margin-top: -10px;"class="img-responsive" alt="Logo"></a>
                   </div>
                   <div id="navbar" class="collapse navbar-collapse">
                       <ul class="nav navbar-nav navbar-right">
                           <li class="divider-vertical"><a href="{{ path('homepage') }}">HOME</a></li>
-                          <li class="divider-vertical dropdown dropdown-about">
+                          <li class="divider-vertical dropdown dropdown-about hidden-xs">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
+                            <ul class="dropdown-menu list-ab">
+                              <li><a href="{{ path('aboutus_show_public', {'id': 1}) }}">COMPANY HISTORY</a></li>
+                              <li><a href="{{ path('download_index_public') }}">DOWNLOAD</a></li>
+                            </ul>
+                          </li>
+                          <li class="divider-vertical dropdown visible-xs">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">ABOUT US</a>
                             <ul class="dropdown-menu list-ab">
                               <li><a href="{{ path('aboutus_show_public', {'id': 1}) }}">COMPANY HISTORY</a></li>
@@ -105,7 +112,6 @@
                           <li class="divider-vertical"><a href="{{ path('news_index_public') }}">NEWS AND MEDIA</a></li>
                           <li class="divider-vertical"><a href="{{ path('csr_show_public', {'id': 1}) }}">CSR</a></li>
                           <li class="divider-vertical"><a href="{{ path('career_new') }}">CAREER</a></li>
-                          <li class="divider-vertical"><a href="{{ path('contactus_new') }}">CONTACT US</a></li>
                       </ul>
                   </div>
                   <!--/.nav-collapse -->
@@ -116,26 +122,26 @@
         {% block body %}{% endblock %}
         <div class="developer">
             <div class="container-fluid">
-              <div class="col-md-3">
+              <div class="col-md-3" style="padding-bottom:10px;">
                 <h5>ABC</h5>
                 <h6>News</h6>
                 <h6>Custom</h6>
                 <h6>Private</h6>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3" style="padding-bottom:10px;">
                 <h5>FOLLOW US</h5>
                 <h6>Instagram</h6>
                 <h6>Facebook</h6>
                 <h6>Twitter</h6>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3" style="padding-bottom:10px;">
                 <h6>CONTACT US</h6>
                 <h6>Live Chat</h6>
                 <h6>Phone: 654-35468-03</h6>
                 <h6>Fax: 654-35267-98</h6>
                 <h6>Email</h6>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-3" style="padding-bottom:10px;">
                 <h5>VISIT US</h5>
                 <h6>Monday - Saturday: 10 AM - 5 PM</h6>
                 <h6>(By Appointment)</h6>
@@ -153,6 +159,8 @@
         <script src="{{ asset('web/credo/js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('web/credo/js/owl-carousel/owl.carousel.js') }}"></script>
         <script type="text/javascript">
+            window.onresize = function(){ location.reload(); }
+            if (screen.width > 800) {
                 $('li.divider-vertical.dropdown.mega-dropdown a').hover(function(){
                     $(this).parent().toggleClass("open");
                 });
@@ -165,20 +173,21 @@
                 $('li.divider-vertical.dropdown.dropdown-about ul').hover(function(){
                     $(this).parent().toggleClass("open");
                 });
-                $('li.divider-vertical.dropdown.dropdown-about ul').on('click', function(event){
-                    $(this).remove();
-                });
-                $('li.divider-vertical.dropdown.mega-dropdown a').on('click', function (event) {
-                    $(this).parent().toggleClass("open");
-                });
-                $('body').on('click', function (e) {
-                  if (!$('li.divider-vertical.dropdown.mega-dropdown').is(e.target)
-                      && $('li.divider-vertical.dropdown.mega-dropdown').has(e.target).length === 0
-                      && $('.open').has(e.target).length === 0
-                  ) {
-                      $('li.divider-vertical.dropdown.mega-dropdown').removeClass('open');
-                  }
-                });
+            }
+            $('li.divider-vertical.dropdown.dropdown-about ul').on('click', function(event){
+                $(this).remove();
+            });
+            $('li.divider-vertical.dropdown.mega-dropdown a').on('click', function (event) {
+                $(this).parent().toggleClass("open");
+            });
+            $('body').on('click', function (e) {
+              if (!$('li.divider-vertical.dropdown.mega-dropdown').is(e.target)
+                  && $('li.divider-vertical.dropdown.mega-dropdown').has(e.target).length === 0
+                  && $('.open').has(e.target).length === 0
+              ) {
+                  $('li.divider-vertical.dropdown.mega-dropdown').removeClass('open');
+              }
+            });
         </script>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -192,8 +201,8 @@
                     pagination: false,
                     navigation: true,
                     navigationText: [
-                        "<img src='{{ asset('web/credo/img/left.png') }}' class='arrow-big'>",
-                        "<img src='{{ asset('web/credo/img/right.png') }}' class='arrow-big'>"
+                        "<img src='{{ asset('web/credo/img/left.png') }}' style='margin-right: -170px;' class='arrow-big'>",
+                        "<img src='{{ asset('web/credo/img/right.png') }}' style='margin-left: -170px;' class='arrow-big'>"
                     ],
                     loop: true,
                     autoPlay: true,

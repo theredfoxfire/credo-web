@@ -81,6 +81,7 @@ body {
   justify-content: center;
   align-items: center;
   color: #fff;
+  text-align: center;
 }
 #philosphi-home {
   background-color: #000;
@@ -191,6 +192,14 @@ input.txtsearch {
     border-color: #fff;
 }
 @media (max-width: 800px) {
+  .content-about {
+    width: 90%;
+    padding-bottom: 100px;
+  }
+  .content-pilo {
+    width: 95%;
+    font-size: 13px !important;
+  }
   .arrow-big {
     display: none;
   }

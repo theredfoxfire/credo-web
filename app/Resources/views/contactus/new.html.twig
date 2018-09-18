@@ -5,17 +5,9 @@
 <img src="{{ asset('web/uploads/overview/') }}{{ overview.largeImage }}" class="img-responsive">
 <div class="container">
         <div class="contact-us">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>CONTACT US</h1>
-                </div>
-            </div>
             <br />
             <div class="row">
-                <div class="col-md-6">
-                  <div id="googleMap"></div>
-                </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <h2>OVERVIEW</h2>
                     {{ overview.overview | raw }}
                     <h2>CONTACT US</h2>
@@ -35,20 +27,20 @@
     </div>
 
     <script>
-          function initMap() {
-            var mapDiv = document.getElementById('googleMap');
-            var map = new google.maps.Map(mapDiv, {
-                center: {lat: {{ overview.latitude }}, lng: {{ overview.longitude }} },
-                zoom: 16
-            });
-            var marker = new google.maps.Marker({
-                position: {lat: {{ overview.latitude }}, lng: {{ overview.longitude }} },
-                map: map,
-                title: 'GLOBAL GROUP'
-            });
-          }
+          // function initMap() {
+          //   var mapDiv = document.getElementById('googleMap');
+          //   var map = new google.maps.Map(mapDiv, {
+          //       center: {lat: {{ overview.latitude }}, lng: {{ overview.longitude }} },
+          //       zoom: 16
+          //   });
+          //   var marker = new google.maps.Marker({
+          //       position: {lat: {{ overview.latitude }}, lng: {{ overview.longitude }} },
+          //       map: map,
+          //       title: 'GLOBAL GROUP'
+          //   });
+          // }
         </script>
-        <script async defer
+        <!-- <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAz5v7rth0Jz6quGuyaUnaMq6zPW5-Wq5M&callback=initMap">
-        </script>
+        </script> -->
 {% endblock %}
