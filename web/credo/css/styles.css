@@ -19,6 +19,7 @@
 body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #6d6e71;
+    overflow-x: hidden;
 }
 
 /**
@@ -198,6 +199,9 @@ input.txtsearch {
     border-color: #fff;
 }
 @media (max-width: 800px) {
+  .slider-background {
+    height: 250px!important;
+  }
   .content-about {
     width: 90%;
     padding-bottom: 100px;

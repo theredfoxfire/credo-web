@@ -102,7 +102,7 @@ class OverviewController extends Controller
     {
         $deleteForm = $this->createDeleteForm($overview);
         $editForm = $this->createForm(new OverviewType(), $overview);
-        $oldFile =  $overview->getLargeImage();
+        $oldFile =  empty($overview->getLargeImage()) ? 'bla.jpg' : $overview->getLargeImage();
 
         $editForm->handleRequest($request);
 
@@ -110,8 +110,9 @@ class OverviewController extends Controller
             $em = $this->getDoctrine()->getManager();
             $file =  $overview->getLargeImage();
             $overview->setLargeImage($oldFile);
+            $filePath = $this->container->getParameter('overview_directory').'/'.$oldFile;
             if (!empty($file)) {
-                if (file_exists($this->container->getParameter('overview_directory').'/'.$oldFile)) {
+                if (file_exists($filePath)) {
                     unlink($this->container->getParameter('overview_directory').'/'.$oldFile);
                 }
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
@@ -126,7 +127,7 @@ class OverviewController extends Controller
             $em->persist($overview);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('overview_edit', array('id' =>  $overview->getId())));
+            return $this->redirect($this->generateUrl('overview_index'));
         }
 
         return $this->render('overview/edit.html.twig', array(

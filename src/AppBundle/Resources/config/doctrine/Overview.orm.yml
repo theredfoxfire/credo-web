@@ -13,7 +13,3 @@ AppBundle\Entity\Overview:
    type: string
   mainAddress:
    type: text
-  longitude:
-   type: text
-  latitude:
-   type: text

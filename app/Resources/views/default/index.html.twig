@@ -35,11 +35,7 @@
 <section class="home-business unites-container">
   <p class="title-business">BUSINESS</p>
     {% for u in unites %}
-    {% if loop.index < 7 %}
-      <div class="col-sm-4 white-business" style="margin-bottom: 150px;background-image: url({{ asset('web/uploads/unites/') }}{{ u.largeImage }})">
-    {% else %}
-      <div class="col-sm-4 white-business" style="margin-bottom: 50px;background-image: url({{ asset('web/uploads/unites/') }}{{ u.largeImage }})">
-    {% endif %}
+        <div class="col-sm-4 white-business" style="margin-bottom: 50px;background-image: url({{ asset('web/uploads/unites/') }}{{ u.largeImage }})">
         <h4>{{ u.title }}</h4>
       </div>
     {% endfor %}
