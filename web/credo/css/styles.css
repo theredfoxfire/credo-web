@@ -73,6 +73,12 @@ body {
   padding-top: 40px;
   background-color: #fff;
 }
+.slider-background {
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px;
+}
 .white-business {
   height: 300px;background-position: center; /* Center the image */
   background-repeat: no-repeat;
